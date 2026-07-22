@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 export default function IndexPage() {
 
 
-    const [workout, setWorkout] = useState([]);
+    const [newWorkout, setNewWorkout] = useState({});
+
+    const [name, setName] = useState(null);
 
     // useEffect(() => {
     //     fetch(`http://run-club-api.test/api/workouts/${id}`)
@@ -17,14 +19,39 @@ export default function IndexPage() {
 
     // }, [])
 
+    function addNewWorkout(e) {
+
+        e.preventDefault()
+
+        const data = {
+            name: e.target.name.value,
+            description: e.target.description.value
+        }
+
+        setNewWorkout(data)
+
+        console.log(newWorkout)
+
+    }
+
     return (
         <>
             <h1>Aggiungi un allenamento</h1>
-            <form onSubmit={prova => }>
-                <label>Titolo</label>
-                <input type="text" id="" name="" />
-                <button onClick={prova} type="submit">Aggiungi</button>
+            <form onSubmit={addNewWorkout}>
+                <div>
+                    <label htmlFor="name">Nome</label>
+                    <input className="border" type="text" id="name" name="name" />
+                </div>
+                <div>
+                    <label htmlFor="description">Descrizione</label>
+                    <input className="border" type="text" id="description" name="description" />
+                </div>
+                <div>
+                    <button type="submit">Aggiungi</button>
+                </div>
             </form>
+
+            {name}
         </>
     );
 
