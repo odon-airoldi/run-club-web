@@ -1,47 +1,49 @@
 
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function IndexPage() {
 
+    const navigate = useNavigate();
 
-    const [newWorkout, setNewWorkout] = useState({});
-
-    const [name, setName] = useState(null);
-
-    function addNewWorkout(e) {
+    async function addNewWorkout(e) {
 
         e.preventDefault()
 
-        const data = {
-            name: e.target.name.value,
-            description: e.target.description.value,
-            date_time: `${e.target.date.value} ${e.target.time.value}:00`,
-            place_city: e.target.place_city.value,
-            place_address: e.target.place_address.value,
-            buffer_time: e.target.buffer_time.value,
-            distance: e.target.distance.value,
-            pace: Number(e.target.pace_m.value) * 60 + Number(e.target.pace_s.value)
-        }
+        try {
+            const newWorkout = {
+                name: e.target.name.value,
+                description: e.target.description.value,
+                date_time: `${e.target.date.value} ${e.target.time.value}:00`,
+                place_city: e.target.place_city.value,
+                place_address: e.target.place_address.value,
+                buffer_time: e.target.buffer_time.value,
+                distance: e.target.distance.value,
+                pace: Number(e.target.pace_m.value) * 60 + Number(e.target.pace_s.value)
+            }
 
-        // setNewWorkout(data)
-
-        fetch('http://run-club-api.test/api/workouts/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
-
-
-
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
+            const response = await fetch('http://run-club-api.test/api/workouts/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newWorkout)
             })
-            .catch(err => {
-                console.error(err);
-            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                console.error(result);
+                return;
+            }
+
+            navigate(`/workout/${result.id}`);
+            console.log(result);
+
+        } catch (err) {
+
+            console.error('Errore di rete:', err)
+
+        }
 
     }
 
