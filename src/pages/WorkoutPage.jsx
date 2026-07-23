@@ -7,12 +7,12 @@ export default function IndexPage() {
 
     const navigate = useNavigate();
 
-    const [workout, setWorkout] = useState([]);
     const { id } = useParams();
+    const [workout, setWorkout] = useState({});
 
     useEffect(() => {
 
-        async function fetchWorkouts() {
+        async function showWorkout() {
 
             const response = await fetch(`http://run-club-api.test/api/workouts/${id}`);
 
@@ -22,7 +22,7 @@ export default function IndexPage() {
 
         }
 
-        fetchWorkouts();
+        showWorkout();
 
     }, []);
 

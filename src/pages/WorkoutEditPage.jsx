@@ -5,9 +5,26 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function IndexPage() {
 
-    const { id } = useParams();
-
     const navigate = useNavigate();
+
+    const { id } = useParams();
+    const [workout, setWorkout] = useState({});
+
+    useEffect(() => {
+
+        async function showWorkout() {
+
+            const response = await fetch(`http://run-club-api.test/api/workouts/${id}`);
+
+            const data = await response.json();
+
+            setWorkout(data.results);
+
+        }
+
+        showWorkout();
+
+    }, []);
 
     async function editWorkout(e) {
 
@@ -50,46 +67,55 @@ export default function IndexPage() {
 
     }
 
+    function handlerValue(e) {
+
+        setWorkout({
+            ...workout,
+            [e.target.name]: e.target.value,
+        })
+
+    }
+
     return (
         <>
             <h1>Aggiorna l'allenamento</h1>
             <form onSubmit={editWorkout}>
                 <div>
                     <label htmlFor="name">Name</label>
-                    <input className="border" type="text" id="name" name="name" />
+                    <input className="border" type="text" id="name" name="name" value={workout.name} onChange={handlerValue} />
                 </div>
                 <div>
                     <label htmlFor="description">Description</label>
-                    <textarea className="border" type="text" id="description" name="description"></textarea>
+                    <textarea className="border" type="text" id="description" name="description" value={workout.description} onChange={handlerValue} />
                 </div>
                 <div>
                     <label htmlFor="date">Data</label>
-                    <input className="border" type="date" id="date" name="date" />
+                    <input className="border" type="date" id="date" name="date" value={workout.date_time} onChange={handlerValue} />
                 </div>
                 <div>
                     <label htmlFor="time">Ora</label>
-                    <input className="border" type="time" id="time" name="time" />
+                    <input className="border" type="time" id="time" name="time" value={workout.date_time} onChange={handlerValue} />
                 </div>
                 <div>
                     <label htmlFor="place_city">Città</label>
-                    <input className="border" type="text" id="place_city" name="place_city" />
+                    <input className="border" type="text" id="place_city" name="place_city" value={workout.place_city} onChange={handlerValue} />
                 </div>
                 <div>
                     <label htmlFor="place_address">Indirizzo</label>
-                    <input className="border" type="text" id="place_address" name="place_address" />
+                    <input className="border" type="text" id="place_address" name="place_address" value={workout.place_address} onChange={handlerValue} />
                 </div>
                 <div>
                     <label htmlFor="buffer_time">Tempo di attesa</label>
-                    <input className="border" type="number" id="buffer_time" name="buffer_time" /> min
+                    <input className="border" type="number" id="buffer_time" name="buffer_time" value={workout.buffer_time} onChange={handlerValue} /> min
                 </div>
                 <div>
                     <label htmlFor="distance">Distanza</label>
-                    <input className="border" type="number" id="distance" name="distance" /> Km
+                    <input className="border" type="number" id="distance" name="distance" value={workout.distance} onChange={handlerValue} /> Km
                 </div>
                 <div>
                     <label htmlFor="pace_m">Passo</label>
-                    <input className="border" type="number" id="pace_m" name="pace_m" min="0" max="59" /> min
-                    <input className="border" type="number" id="pace_s" name="pace_s" min="0" max="59" /> sec
+                    <input className="border" type="number" id="pace_m" name="pace_m" min="0" max="59" value={workout.pace_m} onChange={handlerValue} /> min
+                    <input className="border" type="number" id="pace_s" name="pace_s" min="0" max="59" value={workout.pace_s} onChange={handlerValue} /> sec
                 </div>
                 <div>
                     <button type="submit">Modifica</button>
