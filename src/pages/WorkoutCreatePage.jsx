@@ -12,6 +12,7 @@ export default function IndexPage() {
         e.preventDefault()
 
         try {
+
             const newWorkout = {
                 name: e.target.name.value,
                 description: e.target.description.value,
@@ -29,15 +30,15 @@ export default function IndexPage() {
                 body: JSON.stringify(newWorkout)
             })
 
-            const result = await response.json();
+            const workout = await response.json();
 
             if (!response.ok) {
-                console.error(result);
+                console.error(workout);
                 return;
             }
 
-            navigate(`/workout/${result.id}`);
-            console.log(result);
+            navigate(`/workout/${workout.id}`);
+            console.log(workout);
 
         } catch (err) {
 
