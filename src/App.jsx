@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import IndexPage from './pages/IndexPage'
 import WorkoutPage from './pages/WorkoutPage'
 import WorkoutCreatePage from './pages/WorkoutCreatePage'
+import WorkoutEditPage from './pages/WorkoutEditPage'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<IndexPage />} />
           <Route path="/workout/:id" element={<WorkoutPage />} />
           <Route path="/workout/create" element={<WorkoutCreatePage />} />
+          <Route path="/workout/:id/edit" element={<WorkoutEditPage />} />
         </Routes>
       </BrowserRouter>
     </>

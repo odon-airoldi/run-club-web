@@ -24,7 +24,6 @@ export default function IndexPage() {
 
         fetchWorkouts();
 
-
     }, []);
 
     async function destroyWorkout() {
@@ -53,7 +52,10 @@ export default function IndexPage() {
         <>
             <h1>{workout.name}</h1>
 
-            <button onClick={() => destroyWorkout()}>Elimina allenamento</button>
+            <div>
+                <button onClick={() => destroyWorkout()}>Elimina allenamento</button>
+            </div>
+            <Link to={`/workout/${id}/edit`}>Modifica l'allenamento</Link>
         </>
     );
 
