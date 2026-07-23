@@ -18,13 +18,21 @@ export default function IndexPage() {
 
             const data = await response.json();
 
-            setWorkout(data.results);
+            setWorkout({
+                ...data.results,
+                pace_m: (data.results.pace - data.results.pace % 60) / 60,
+                pace_s: data.results.pace % 60,
+                date: data.results.date_time.slice(0, 10),
+                time: data.results.date_time.slice(11, 16),
+            });
 
         }
 
         showWorkout();
 
     }, []);
+
+    console.log(workout)
 
     async function editWorkout(e) {
 
@@ -43,7 +51,7 @@ export default function IndexPage() {
                 pace: Number(e.target.pace_m.value) * 60 + Number(e.target.pace_s.value)
             }
 
-            const response = await fetch(`http://run-club-api.test/api/workouts/${id}/edit`, {
+            const response = await fetch(`http://run-club-api.test/api/workouts/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updateWorkout)
@@ -57,7 +65,6 @@ export default function IndexPage() {
             }
 
             navigate(`/workout/${workout.id}`);
-            console.log(workout);
 
         } catch (err) {
 
@@ -90,11 +97,11 @@ export default function IndexPage() {
                 </div>
                 <div>
                     <label htmlFor="date">Data</label>
-                    <input className="border" type="date" id="date" name="date" value={workout.date_time} onChange={handlerValue} />
+                    <input className="border" type="date" id="date" name="date" value={workout.date} onChange={handlerValue} />
                 </div>
                 <div>
                     <label htmlFor="time">Ora</label>
-                    <input className="border" type="time" id="time" name="time" value={workout.date_time} onChange={handlerValue} />
+                    <input className="border" type="time" id="time" name="time" value={workout.time} onChange={handlerValue} />
                 </div>
                 <div>
                     <label htmlFor="place_city">Città</label>

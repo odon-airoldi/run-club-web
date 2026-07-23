@@ -50,7 +50,20 @@ export default function IndexPage() {
 
     return (
         <>
-            <h1>{workout.name}</h1>
+            <h1 className="text-3xl font-bold">{workout.name}</h1>
+
+            <div>
+                {new Date(workout.date_time).toLocaleDateString('it-IT')}
+            </div>
+            <div>
+                {new Date(workout.date_time).toLocaleTimeString('it-IT', {
+                    hour: 'numeric',
+                    minute: 'numeric'
+                })}
+            </div>
+            <div>
+                {workout.pace}
+            </div>
 
             <div>
                 <button onClick={() => destroyWorkout()}>Elimina allenamento</button>
