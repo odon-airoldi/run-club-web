@@ -93,6 +93,8 @@ export default function IndexPage() {
                     <button type="submit">Aggiungi</button>
                 </div>
             </form>
+
+            <Link to="/">Tutti gli allenamenti</Link>
         </>
     );
 

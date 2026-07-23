@@ -10,17 +10,28 @@ export default function IndexPage() {
     const { id } = useParams();
 
     useEffect(() => {
-        fetch(`http://run-club-api.test/api/workouts/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                setWorkout(data.results)
-            })
+
+        async function fetchWorkouts() {
+
+            const response = await fetch(`http://run-club-api.test/api/workouts/${id}`);
+
+            const data = await response.json();
+
+            setWorkout(data.results);
+
+        }
+
+        fetchWorkouts();
+
 
     }, [])
 
     return (
         <>
             <h1>{workout.name}</h1>
+
+
+            <Link>Elimina allenamento</Link>
         </>
     );
 
