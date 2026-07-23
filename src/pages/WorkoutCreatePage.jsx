@@ -42,7 +42,7 @@ export default function IndexPage() {
 
         } catch (err) {
 
-            console.error('Errore di rete:', err)
+            console.error('Errore di rete:', err);
 
         }
 

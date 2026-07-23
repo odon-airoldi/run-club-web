@@ -1,10 +1,11 @@
 
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 
 export default function IndexPage() {
 
+    const navigate = useNavigate();
 
     const [workout, setWorkout] = useState([]);
     const { id } = useParams();
@@ -24,14 +25,35 @@ export default function IndexPage() {
         fetchWorkouts();
 
 
-    }, [])
+    }, []);
+
+    async function destroyWorkout() {
+
+        try {
+
+            const response = await fetch(`http://run-club-api.test/api/workouts/${id}`, {
+                method: 'DELETE',
+            })
+
+            if (!response.ok) {
+                console.error("Errore durante l'eliminazione")
+                return;
+            }
+            navigate(`/`);
+
+        } catch (err) {
+
+            console.log("Errore di rete:", err);
+
+        }
+
+    }
 
     return (
         <>
             <h1>{workout.name}</h1>
 
-
-            <Link>Elimina allenamento</Link>
+            <button onClick={() => destroyWorkout()}>Elimina allenamento</button>
         </>
     );
 
