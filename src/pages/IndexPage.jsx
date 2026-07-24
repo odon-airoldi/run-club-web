@@ -30,7 +30,7 @@ export default function IndexPage() {
 
                 ))
             }
-            <Link to="">Aggiungi un allenamento</Link>
+            <Link to="/workout/create">Aggiungi un allenamento</Link>
 
         </>
     );
