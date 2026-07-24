@@ -19,7 +19,6 @@ export default function IndexPage() {
         distance: '',
         pace_m: '',
         pace_s: '',
-        user_id: ''
     });
 
     useEffect(() => {

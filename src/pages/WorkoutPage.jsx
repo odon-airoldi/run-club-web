@@ -26,6 +26,14 @@ export default function IndexPage() {
 
     }, []);
 
+    const [visibility, setVisibility] = useState(false);
+
+    function handleDestroyWorkout() {
+
+        setVisibility(true)
+
+    }
+
     async function destroyWorkout() {
 
         try {
@@ -65,9 +73,17 @@ export default function IndexPage() {
                 {workout.pace}
             </div>
 
-            <div>
-                <button onClick={() => destroyWorkout()}>Elimina allenamento</button>
-            </div>
+            {!visibility ?
+                (<div>
+                    <button type="button" onClick={handleDestroyWorkout}>Elimina allenamento</button>
+                </div>)
+                :
+                (<div>
+
+                    <button onClick={() => destroyWorkout()}>Vuoi eliminare definitivamente l'allenamento?</button>
+
+                </div >)
+            }
             <Link to={`/workout/${id}/edit`}>Modifica l'allenamento</Link>
         </>
     );
