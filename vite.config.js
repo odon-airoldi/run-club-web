@@ -8,4 +8,8 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  server: {
+    host: 'app.run-club.test',
+    port: 5173,
+  }
 })

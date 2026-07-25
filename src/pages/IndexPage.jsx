@@ -10,7 +10,7 @@ export default function IndexPage() {
     const { id } = useParams();
 
     useEffect(() => {
-        fetch('http://run-club-api.test/api/workouts/')
+        fetch('http://api.run-club.test/api/workouts')
             .then(res => res.json())
             .then(data => {
                 setWorkouts(data.results)

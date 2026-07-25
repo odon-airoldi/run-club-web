@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
 
-export default function IndexPage() {
+export default function WorkoutPage() {
 
     const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ export default function IndexPage() {
 
         async function showWorkout() {
 
-            const response = await fetch(`http://run-club-api.test/api/workouts/${id}`);
+            const response = await fetch(`http://api.run-club.test/api/workouts/${id}`);
 
             const data = await response.json();
 
@@ -38,7 +38,7 @@ export default function IndexPage() {
 
         try {
 
-            const response = await fetch(`http://run-club-api.test/api/workouts/${id}`, {
+            const response = await fetch(`http://api.run-club.test/api/workouts/${id}`, {
                 method: 'DELETE',
             })
 

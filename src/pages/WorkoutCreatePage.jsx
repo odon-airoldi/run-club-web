@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 
-export default function IndexPage() {
+export default function WorkoutCreatePage() {
 
     const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ export default function IndexPage() {
                 pace: Number(e.target.pace_m.value) * 60 + Number(e.target.pace_s.value)
             }
 
-            const response = await fetch('http://run-club-api.test/api/workouts/', {
+            const response = await fetch('http://api.run-club.test/api/workouts', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newWorkout)
@@ -37,7 +37,7 @@ export default function IndexPage() {
                 return;
             }
 
-            navigate(`/workout/${workout.id}`);
+            Navigate(`/workout/${workout.id}`);
             console.log(workout);
 
         } catch (err) {
