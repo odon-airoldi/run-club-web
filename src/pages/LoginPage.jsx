@@ -2,10 +2,13 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoginPage() {
 
     const navigate = useNavigate();
+
+    const { setUser } = useAuth();
 
     async function handleLogin(e) {
 
@@ -38,11 +41,14 @@ export default function LoginPage() {
                 }
             );
 
-            console.log(response.data);
+            console.log(response.data.name);
+
+            setUser(response.data)
 
             navigate('/dashboard')
 
         } catch (error) {
+
             console.log(error.response);
 
         }
