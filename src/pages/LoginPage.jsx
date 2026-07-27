@@ -15,26 +15,31 @@ export default function LoginPage() {
         e.preventDefault();
 
         try {
+            // richiesta a laravel sanctum di genereare un cookie (token CSRF) XSRF-TOKEN e uno di sessione in anonimo
             await axios.get('http://api.run-club.test/sanctum/csrf-cookie',
                 {
+                    // salvataggio nel browser
                     withCredentials: true
                 }
             );
-
+            // invio credenziali al backend, se corrette laravel autentica l'utente e rigenere il cookie di sessione in autenticato
             await axios.post('http://api.run-club.test/login',
                 {
                     email: e.target.email.value,
                     password: e.target.password.value
                 },
                 {
+                    // invia il cookie di sessione generato alla richiesta
                     withCredentials: true,
+                    // axios legge il cookie XSRF-TOKEN e lo aggiunge alla richiesta
                     withXSRFToken: true,
+                    // comunico al backend che mi aspetto una risposta JSON
                     headers: {
                         Accept: 'application/json'
                     }
                 }
             );
-
+            // se la sesisone è autenticata recupero i dati user loggato
             const response = await axios.get('http://api.run-club.test/api/user',
                 {
                     withCredentials: true,
@@ -43,6 +48,7 @@ export default function LoginPage() {
 
             console.log(response.data.name);
 
+            // salvo dati user nello state
             setUser(response.data)
 
             navigate('/dashboard')
