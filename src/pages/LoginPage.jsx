@@ -8,7 +8,7 @@ export default function LoginPage() {
 
     const navigate = useNavigate();
 
-    const { setUser } = useAuth();
+    const { setUser, checkAuth } = useAuth();
 
     async function handleLogin(e) {
 
@@ -18,7 +18,7 @@ export default function LoginPage() {
             // richiesta a laravel sanctum di genereare un cookie (token CSRF) XSRF-TOKEN e uno di sessione in anonimo
             await axios.get('http://api.run-club.test/sanctum/csrf-cookie',
                 {
-                    // salvataggio nel browser
+                    // includi cookie( XSRF-TOKEN, laravel-session) mandati dal server come risposta e salva nel browser
                     withCredentials: true
                 }
             );
@@ -29,9 +29,9 @@ export default function LoginPage() {
                     password: e.target.password.value
                 },
                 {
-                    // invia il cookie di sessione generato alla richiesta
+                    // includi cookie di sessione autenticato
                     withCredentials: true,
-                    // axios legge il cookie XSRF-TOKEN e lo aggiunge alla richiesta
+                    // axios legge il cookie XSRF-TOKEN e lo aggiunge alla richiesta, necessario per le rotte POST/PUT/PATCH/DELETE
                     withXSRFToken: true,
                     // comunico al backend che mi aspetto una risposta JSON
                     headers: {
@@ -39,17 +39,8 @@ export default function LoginPage() {
                     }
                 }
             );
-            // se la sesisone è autenticata recupero i dati user loggato
-            const response = await axios.get('http://api.run-club.test/api/user',
-                {
-                    withCredentials: true,
-                }
-            );
-
-            console.log(response.data.name);
-
-            // salvo dati user nello state
-            setUser(response.data)
+            // utilizzo la funzione offerta dal context per la verifica dell'autenticazione e salvataggio dei dati user nello state
+            await checkAuth();
 
             navigate('/dashboard')
 

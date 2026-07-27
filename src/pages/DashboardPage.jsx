@@ -8,7 +8,7 @@ export default function DashboardPage() {
 
     const navigate = useNavigate();
 
-    const { user, setUser } = useAuth();
+    const { user, setUser, loading } = useAuth();
 
     async function handleLogout() {
 
@@ -46,6 +46,7 @@ export default function DashboardPage() {
         <>
             <h1>Dashboard</h1>
 
+            {loading && 'Sto caricandoooooooooooooo'}
             <p>ciao {user && user.name}</p>
 
             <button onClick={handleLogout}>Logout</button>
