@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function DashboardPage() {
 
@@ -11,8 +11,6 @@ export default function DashboardPage() {
     const { user, setUser, loading } = useAuth();
 
     async function handleLogout() {
-
-        // e.preventDefault();
 
         try {
 
@@ -41,13 +39,16 @@ export default function DashboardPage() {
 
     }
 
-
     return (
         <>
             <h1>Dashboard</h1>
 
             {loading && 'Sto caricandoooooooooooooo'}
             <p>ciao {user && user.name}</p>
+
+            <div>
+
+            </div>
 
             <button onClick={handleLogout}>Logout</button>
 
