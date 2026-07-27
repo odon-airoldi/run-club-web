@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // creazione context
 const AuthContext = createContext();
@@ -7,9 +8,12 @@ const AuthContext = createContext();
 // provider per offrire i dati ai componenti figli
 function AuthProvider({ children }) {
 
+    const navigate = useNavigate();
+
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    // verifica autenticazione salvo dati
     async function checkAuth() {
         try {
             // richiesta se la sessione è autenticata ricevo come risposta i dati user loggato
@@ -35,6 +39,36 @@ function AuthProvider({ children }) {
         checkAuth();
     }, []);
 
+
+    // logout
+    async function logoutAuth() {
+
+        try {
+
+            await axios.post('http://api.run-club.test/logout',
+                {
+                    // data non necessari
+                },
+                {
+                    // necessario, laravel deve ricevere cookie di sessione da invalidare
+                    withCredentials: true,
+                    // logout è POST, quindi richiede token CSRF valido come login
+                    withXSRFToken: true,
+                }
+            );
+
+            setUser(null);
+            navigate('/login');
+
+        } catch (error) {
+            console.log(error.response);
+        } finally {
+            setUser(null);
+            navigate('/login');
+        }
+
+    }
+
     return (
 
         // il provider offre ai componenti figli i valori che gli passo
@@ -44,7 +78,8 @@ function AuthProvider({ children }) {
                 setUser,
                 loading,
                 setLoading,
-                checkAuth
+                checkAuth,
+                logoutAuth
             }}
         >
 

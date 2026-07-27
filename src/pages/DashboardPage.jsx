@@ -8,36 +8,8 @@ export default function DashboardPage() {
 
     const navigate = useNavigate();
 
-    const { user, setUser, loading } = useAuth();
+    const { user, loading, logoutAuth } = useAuth();
 
-    async function handleLogout() {
-
-        try {
-
-            await axios.post('http://api.run-club.test/logout',
-                {
-                    // data non necessari
-                },
-                {
-                    // necessario, laravel deve ricevre cookie di sessione da invalidare
-                    withCredentials: true,
-                    // logout è POST, quindi richiede token CSRF valido come login
-                    withXSRFToken: true,
-                }
-            );
-
-            console.log(user);
-
-            navigate('/login');
-
-        } catch (error) {
-
-            console.log('error');
-            console.log(error.response);
-
-        }
-
-    }
 
     return (
         <>
@@ -50,7 +22,7 @@ export default function DashboardPage() {
 
             </div>
 
-            <button onClick={handleLogout}>Logout</button>
+            <button onClick={logoutAuth}>Logout</button>
 
         </>
     );

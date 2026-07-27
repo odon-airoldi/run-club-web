@@ -17,8 +17,8 @@ function App() {
 
   return (
     <>
-      <AuthProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
           <Routes>
             <Route element={<AppLayout />}>
               <Route path="/" element={<IndexPage />} />
@@ -29,8 +29,8 @@ function App() {
               <Route path="/dashboard" element={<DashboardPage />} />
             </Route>
           </Routes>
-        </BrowserRouter>
-      </AuthProvider>
+        </AuthProvider>
+      </BrowserRouter>
     </>
   )
 }
