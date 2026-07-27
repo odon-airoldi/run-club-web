@@ -4,7 +4,7 @@ import axios from "axios";
 // creazione context
 const AuthContext = createContext();
 
-
+// provider per offrire i dati ai componenti figli
 function AuthProvider({ children }) {
 
     const [user, setUser] = useState(null);
@@ -55,7 +55,7 @@ function AuthProvider({ children }) {
 
 }
 
-// custom hook invece di scrivere useContext(AuthContext) scrivo useAuth()
+// custom hook per l'utilizzo del context, invece di scrivere useContext(AuthContext) scrivo useAuth()
 function useAuth() {
 
     const context = useContext(AuthContext);
