@@ -1,14 +1,17 @@
 
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 
 export default function WorkoutPage() {
 
     const navigate = useNavigate();
 
+    const { user } = useAuth();
     const { id } = useParams();
     const [workout, setWorkout] = useState({});
+
 
     useEffect(() => {
 
@@ -24,14 +27,12 @@ export default function WorkoutPage() {
 
         showWorkout();
 
-    }, []);
+    }, [id]);
+
 
     const [visibility, setVisibility] = useState(false);
-
     function handleDestroyWorkout() {
-
         setVisibility(true)
-
     }
 
     async function destroyWorkout() {
@@ -59,6 +60,7 @@ export default function WorkoutPage() {
     return (
         <>
             <h1 className="text-3xl font-bold">{workout.name}</h1>
+            <small>{workout.user?.name}</small>
 
             <div>
                 {new Date(workout.date_time).toLocaleDateString('it-IT')}
@@ -73,20 +75,23 @@ export default function WorkoutPage() {
                 {workout.pace}
             </div>
 
-            {!visibility ?
-                (<div>
-                    <button type="button" onClick={handleDestroyWorkout}>Elimina allenamento</button>
-                </div>)
-                :
-                (<div>
+            {workout.user?.id === user?.id && (
+                <div>
+                    <Link to={`/workout/${id}/edit`}>Modifica l'allenamento</Link>
 
-                    <button onClick={() => destroyWorkout()}>Vuoi eliminare definitivamente l'allenamento?</button>
+                    {!visibility ?
+                        (<div>
+                            <button type="button" onClick={handleDestroyWorkout}>Elimina allenamento</button>
+                        </div>)
+                        :
+                        (<div>
+                            <button onClick={() => destroyWorkout()}>Vuoi eliminare definitivamente l'allenamento?</button>
+                        </div >)
+                    }
+                </div>
+            )}
 
-                </div >)
-            }
-            <Link to={`/workout/${id}/edit`}>Modifica l'allenamento</Link>
         </>
     );
-
 
 }

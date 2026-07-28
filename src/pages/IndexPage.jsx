@@ -22,14 +22,18 @@ export default function IndexPage() {
         <>
             <h1>Run Club</h1>
 
-            {
-                workouts.map((workout) => (
-                    <div key={workout.id}>
-                        <div><Link to={`/workout/${workout.id}`}>{workout.name}</Link></div>
-                    </div>
+            <div className="grid grid-cols-4 gap-4">
+                {
+                    workouts.map((workout) => (
+                        <div key={workout.id} className="p-4 border border-gray-200">
+                            <div><Link to={`/workout/${workout.id}`}>{workout.name}</Link></div>
+                            
+                        </div>
 
-                ))
-            }
+                    ))
+                }
+            </div>
+
             <Link to="/workout/create">Aggiungi un allenamento</Link>
 
         </>

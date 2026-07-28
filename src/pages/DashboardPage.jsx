@@ -42,10 +42,10 @@ export default function DashboardPage() {
             {loading && 'Sto caricandoooooooooooooo'}
             <p>ciao {user && user.name}</p>
 
-            <div>
+            <div className="grid grid-cols-4 gap-4">
                 {
                     userWorkouts.map((workout) => (
-                        <div key={workout.id}>
+                        <div key={workout.id} className="p-4 border border-gray-200">
                             {workout.name}
                         </div>
                     ))
