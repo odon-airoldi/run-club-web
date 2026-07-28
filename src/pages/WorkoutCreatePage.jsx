@@ -1,9 +1,13 @@
 
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../contexts/AuthContext";
 
 
 export default function WorkoutCreatePage() {
+
+    const { user } = useAuth();
 
     const navigate = useNavigate();
 
@@ -21,28 +25,31 @@ export default function WorkoutCreatePage() {
                 place_address: e.target.place_address.value,
                 buffer_time: e.target.buffer_time.value,
                 distance: e.target.distance.value,
-                pace: Number(e.target.pace_m.value) * 60 + Number(e.target.pace_s.value)
+                pace: Number(e.target.pace_m.value) * 60 + Number(e.target.pace_s.value),
+                user_id: user.id
             }
 
-            const response = await fetch('http://api.run-club.test/api/workouts', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newWorkout)
-            })
+            const response = await axios.post('http://api.run-club.test/api/workouts',
 
-            const workout = await response.json();
+                newWorkout,
 
-            if (!response.ok) {
-                console.error(workout);
-                return;
-            }
+                {
+                    withCredentials: true,
+                    withXSRFToken: true,
+                    headers: {
+                        Accept: 'application/json'
+                    }
+                }
+            )
 
-            Navigate(`/workout/${workout.id}`);
-            console.log(workout);
+            const workout = response.data;
 
-        } catch (err) {
+            navigate(`/workout/${workout.id}`);
+            console.log(response.data);
 
-            console.error('Errore di rete:', err);
+        } catch (error) {
+
+            console.log(error.response);
 
         }
 
