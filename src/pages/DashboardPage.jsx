@@ -10,6 +10,30 @@ export default function DashboardPage() {
 
     const { user, loading, logoutAuth } = useAuth();
 
+    const [userWorkouts, setUserWorkouts] = useState([]);
+
+
+    useEffect(() => {
+
+        async function getUserWorkouts() {
+
+            try {
+                const response = await axios.get(`http://api.run-club.test/api/user/${user.id}/workouts`, {
+                    withCredentials: true
+                });
+                setUserWorkouts(response.data)
+            } catch (error) {
+                console.log(error.response)
+            } finally {
+            }
+
+        }
+
+        getUserWorkouts();
+
+    }, [user])
+
+
 
     return (
         <>
@@ -19,7 +43,13 @@ export default function DashboardPage() {
             <p>ciao {user && user.name}</p>
 
             <div>
-
+                {
+                    userWorkouts.map((workout) => (
+                        <div key={workout.id}>
+                            {workout.name}
+                        </div>
+                    ))
+                }
             </div>
 
             <button onClick={logoutAuth}>Logout</button>
