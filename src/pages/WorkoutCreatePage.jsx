@@ -26,7 +26,7 @@ export default function WorkoutCreatePage() {
                 buffer_time: e.target.buffer_time.value,
                 distance: e.target.distance.value,
                 pace: Number(e.target.pace_m.value) * 60 + Number(e.target.pace_s.value),
-                user_id: user.id
+                user_id: user?.id
             }
 
             const response = await axios.post('http://api.run-club.test/api/workouts',
@@ -45,7 +45,7 @@ export default function WorkoutCreatePage() {
             const workout = response.data;
 
             navigate(`/workout/${workout.id}`);
-            console.log(response.data);
+            // console.log(response.data);
 
         } catch (error) {
 
