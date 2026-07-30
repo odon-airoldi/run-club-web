@@ -69,6 +69,13 @@ function AuthProvider({ children }) {
 
     }
 
+    // finchè loading è true mostra pagina di caricamento
+    if (loading) {
+
+        return <p>Caricamento</p>
+
+    }
+
     return (
 
         // il provider offre ai componenti figli i valori che gli passo

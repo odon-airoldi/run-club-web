@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import axios from "axios";
 
 
 export default function WorkoutPage() {
@@ -11,24 +12,58 @@ export default function WorkoutPage() {
     const { user } = useAuth();
     const { id } = useParams();
     const [workout, setWorkout] = useState({});
+    const [joinWorkout, setJoinWorkout] = useState(false);
 
+
+
+
+    // show workout
+    async function showWorkout() {
+        try {
+            const response = await axios.get(`http://api.run-club.test/api/workouts/${id}`);
+
+            setWorkout(response.data);
+
+            setJoinWorkout(response.data.users_run?.some(user_run => user_run.id === user?.id) ?? false)
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
 
     useEffect(() => {
-
-        async function showWorkout() {
-
-            const response = await fetch(`http://api.run-club.test/api/workouts/${id}`);
-
-            const data = await response.json();
-
-            setWorkout(data.results);
-
-        }
 
         showWorkout();
 
     }, [id]);
 
+
+
+    // user runs workouts
+    const handleJoinWorkout = async () => {
+        try {
+            const response = await axios.post(`http://api.run-club.test/api/user/runs/workouts/${id}`,
+                {
+                },
+                {
+                    withCredentials: true,
+                    withXSRFToken: true,
+                    headers: {
+                        Accept: 'application/json'
+                    }
+                }
+            )
+            setJoinWorkout(!joinWorkout)
+            console.log(response)
+
+
+        } catch (error) {
+            console.log(error.response)
+        }
+    }
+
+    // delete workout
 
     const [visibility, setVisibility] = useState(false);
     function handleDestroyWorkout() {
@@ -38,7 +73,6 @@ export default function WorkoutPage() {
     async function destroyWorkout() {
 
         try {
-
             const response = await fetch(`http://api.run-club.test/api/workouts/${id}`, {
                 method: 'DELETE',
             })
@@ -50,12 +84,11 @@ export default function WorkoutPage() {
             navigate(`/`);
 
         } catch (err) {
-
             console.log("Errore di rete:", err);
-
         }
 
     }
+
 
     return (
         <>
@@ -74,9 +107,14 @@ export default function WorkoutPage() {
             <div>
                 {workout.pace}
             </div>
+            <div>
+                <button onClick={handleJoinWorkout}>
+                    {joinWorkout ? 'Ti sei unito al workout' : 'Voglio partecipare'}
+                </button>
+            </div>
 
             {workout.user?.id === user?.id && (
-                <div>
+                <div className="p-4">
                     <Link to={`/workout/${id}/edit`}>Modifica l'allenamento</Link>
 
                     {!visibility ?
