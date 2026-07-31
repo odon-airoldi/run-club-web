@@ -41,7 +41,7 @@ export default function WorkoutPage() {
 
 
     // user runs workouts
-    const handleJoinWorkout = async () => {
+    const userJoinWorkout = async () => {
         try {
             const response = await axios.post(`http://api.run-club.test/api/user/runs/workouts/${id}`,
                 {
@@ -66,25 +66,26 @@ export default function WorkoutPage() {
     // delete workout
 
     const [visibility, setVisibility] = useState(false);
-    function handleDestroyWorkout() {
+    function handleDeleteWorkout() {
         setVisibility(true)
     }
 
-    async function destroyWorkout() {
+    async function deleteWorkout() {
 
         try {
-            const response = await fetch(`http://api.run-club.test/api/workouts/${id}`, {
-                method: 'DELETE',
-            })
-
-            if (!response.ok) {
-                console.error("Errore durante l'eliminazione")
-                return;
-            }
+            const response = await axios.delete(`http://api.run-club.test/api/workouts/${id}`,
+                {
+                    withCredentials: true,
+                    withXSRFToken: true,
+                    headers: {
+                        Accept: 'application/json'
+                    }
+                }
+            )
             navigate(`/`);
 
-        } catch (err) {
-            console.log("Errore di rete:", err);
+        } catch (error) {
+            console.log(error.response);
         }
 
     }
@@ -108,7 +109,7 @@ export default function WorkoutPage() {
                 {workout.pace}
             </div>
             <div>
-                <button onClick={handleJoinWorkout}>
+                <button onClick={userJoinWorkout}>
                     {joinWorkout ? 'Ti sei unito al workout' : 'Voglio partecipare'}
                 </button>
             </div>
@@ -119,11 +120,11 @@ export default function WorkoutPage() {
 
                     {!visibility ?
                         (<div>
-                            <button type="button" onClick={handleDestroyWorkout}>Elimina allenamento</button>
+                            <button type="button" onClick={handleDeleteWorkout}>Elimina allenamento</button>
                         </div>)
                         :
                         (<div>
-                            <button onClick={() => destroyWorkout()}>Vuoi eliminare definitivamente l'allenamento?</button>
+                            <button onClick={() => deleteWorkout()}>Vuoi eliminare definitivamente l'allenamento?</button>
                         </div >)
                     }
                 </div>

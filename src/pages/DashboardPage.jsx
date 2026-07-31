@@ -10,28 +10,40 @@ export default function DashboardPage() {
 
     const { user, loading, logoutAuth } = useAuth();
 
-    const [userWorkouts, setUserWorkouts] = useState([]);
+    const [workouts, setWorkouts] = useState([]);
+    const [runsWorkouts, setRunsWorkouts] = useState([]);
+
+    async function userWorkouts() {
+        try {
+            const response = await axios.get(`http://api.run-club.test/api/user/${user.id}/workouts`, {
+                withCredentials: true
+            });
+            setWorkouts(response.data)
+        } catch (error) {
+            console.log(error.response)
+        }
+    }
+
+    async function userRunsWorkouts() {
+        try {
+            const response = await axios.get('http://api.run-club.test/api/user/runs/workouts', {
+                withCredentials: true
+            });
+            setRunsWorkouts(response.data)
+            console.log(response)
+        } catch (error) {
+            console.log(error.response)
+        }
+    }
 
 
     useEffect(() => {
+        console.log('user al momento della chiamata:', user);
+        userWorkouts();
+        userRunsWorkouts();
 
-        async function getUserWorkouts() {
+    }, [])
 
-            try {
-                const response = await axios.get(`http://api.run-club.test/api/user/${user.id}/workouts`, {
-                    withCredentials: true
-                });
-                setUserWorkouts(response.data)
-            } catch (error) {
-                console.log(error.response)
-            } finally {
-            }
-
-        }
-
-        getUserWorkouts();
-
-    }, [user])
 
 
 
@@ -40,13 +52,15 @@ export default function DashboardPage() {
             <h1>Dashboard</h1>
 
             {loading && 'Sto caricandoooooooooooooo'}
-            <p>ciao {user && user.name}</p><button onClick={logoutAuth}>Logout</button>
+            <p>ciao {user.name}</p><button onClick={logoutAuth}>Logout</button>
 
 
             <h2 className="font-bold text-xl">I miei allenamenti</h2>
+            <Link to="/workout/create">Aggiungi un allenamento</Link>
+
             <div className="grid grid-cols-4 gap-4">
                 {
-                    userWorkouts.map((workout) => (
+                    workouts.map((workout) => (
                         <div key={workout.id} className="p-4 border border-gray-200">
                             <Link to={`/workout/${workout.id}`}>{workout.name}</Link>
                         </div>
@@ -55,6 +69,15 @@ export default function DashboardPage() {
             </div>
 
             <h2 className="font-bold text-xl">Allenamenti a cui hai partecipato</h2>
+            <div className="grid grid-cols-4 gap-4">
+                {
+                    runsWorkouts.map((workout) => (
+                        <div key={workout.id} className="p-4 border border-gray-200">
+                            <Link to={`/workout/${workout.id}`}>{workout.name}</Link>
+                        </div>
+                    ))
+                }
+            </div>
 
         </>
     );

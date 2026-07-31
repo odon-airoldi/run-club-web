@@ -11,7 +11,7 @@ export default function WorkoutCreatePage() {
 
     const navigate = useNavigate();
 
-    async function addNewWorkout(e) {
+    async function addWorkout(e) {
 
         e.preventDefault()
 
@@ -58,7 +58,7 @@ export default function WorkoutCreatePage() {
     return (
         <>
             <h1>Aggiungi un allenamento</h1>
-            <form onSubmit={addNewWorkout}>
+            <form onSubmit={addWorkout}>
                 <div>
                     <label htmlFor="name">Name</label>
                     <input className="border" type="text" id="name" name="name" />

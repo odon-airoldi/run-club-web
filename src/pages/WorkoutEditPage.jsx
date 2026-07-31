@@ -44,7 +44,7 @@ export default function WorkoutEditPage() {
     }, []);
 
 
-    async function hendleEditWorkout(e) {
+    async function editWorkout(e) {
 
         e.preventDefault()
 
@@ -96,7 +96,7 @@ export default function WorkoutEditPage() {
     return (
         <>
             <h1>Aggiorna l'allenamento</h1>
-            <form onSubmit={hendleEditWorkout}>
+            <form onSubmit={editWorkout}>
                 <div>
                     <label htmlFor="name">Name</label>
                     <input className="border" type="text" id="name" name="name" value={workout.name} onChange={handleChange} />
