@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 
 export default function WorkoutEditPage() {
@@ -25,17 +26,19 @@ export default function WorkoutEditPage() {
 
         async function showWorkout() {
 
-            const response = await fetch(`http://api.run-club.test/api/workouts/${id}`);
+            try {
+                const response = await axios.get(`http://api.run-club.test/api/workouts/${id}`);
 
-            const data = await response.json();
-
-            setWorkout({
-                ...data.results,
-                date: data.results.date_time.slice(0, 10),
-                time: data.results.date_time.slice(11, 16),
-                pace_m: (data.results.pace - data.results.pace % 60) / 60,
-                pace_s: data.results.pace % 60,
-            });
+                setWorkout({
+                    ...response.data,
+                    date: response.data.date_time.slice(0, 10),
+                    time: response.data.date_time.slice(11, 16),
+                    pace_m: (response.data.pace - response.data.pace % 60) / 60,
+                    pace_s: response.data.pace % 60,
+                });
+            } catch (error) {
+                console.log(error)
+            }
 
         }
 

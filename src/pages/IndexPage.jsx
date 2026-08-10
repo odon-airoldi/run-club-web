@@ -26,8 +26,13 @@ export default function IndexPage() {
                 {
                     workouts.map((workout) => (
                         <div key={workout.id} className="p-4 border border-gray-200">
-                            <div><Link to={`/workout/${workout.id}`}>{workout.name}</Link></div>
-                            
+                            <Link className="block" to={`/workout/${workout.id}`}>
+                                <div>{new Date(workout.date_time).toLocaleDateString('it-IT')}</div>
+                                <h2 className="font-bold">{workout.name}</h2>
+                                <p>{workout.place_city}</p>
+                                <p>{workout.distance}</p>
+                                <p>{(workout.pace - workout.pace % 60) / 60}:{workout.pace % 60}</p>
+                            </Link>
                         </div>
 
                     ))

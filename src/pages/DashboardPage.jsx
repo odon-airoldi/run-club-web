@@ -51,7 +51,7 @@ export default function DashboardPage() {
         <>
             <h1>Dashboard</h1>
 
-            {loading && 'Sto caricandoooooooooooooo'}
+            {loading && 'Caricamento...'}
             <p>ciao {user.name}</p><button onClick={logoutAuth}>Logout</button>
 
 
