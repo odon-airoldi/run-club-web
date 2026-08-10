@@ -5,16 +5,19 @@ export default function AppHeader() {
 
     const { user, logoutAuth } = useAuth();
 
-    console.log(user ?? 'ciao')
+
+    console.log(!user)
 
     return (
         <header>
             <ul className="flex">
+                <li className="p-4">RunClub</li>
                 <li className="p-4"><Link to="/">Allenamenti</Link></li>
                 <li className="p-4">
-                    {user ? <Link onClick={logoutAuth}>Logout</Link> : <Link to="/login">Login</Link>}
+                    {user ? <div>Ciao {user.name} <Link onClick={logoutAuth}>Logout</Link></div> : <Link to="/login">Login</Link>}
                 </li>
-                <li className="p-4"><Link to="/dashboard">Profilo</Link></li>
+                {user && <li className="p-4"><Link to="/dashboard">Profilo</Link></li>}
+
             </ul>
         </header>
     )
