@@ -1,12 +1,19 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function AppHeader() {
+
+    const { user, logoutAuth } = useAuth();
+
+    console.log(user ?? 'ciao')
 
     return (
         <header>
             <ul className="flex">
                 <li className="p-4"><Link to="/">Allenamenti</Link></li>
-                <li className="p-4"><Link to="/login">Login</Link></li>
+                <li className="p-4">
+                    {user ? <Link onClick={logoutAuth}>Logout</Link> : <Link to="/login">Login</Link>}
+                </li>
                 <li className="p-4"><Link to="/dashboard">Profilo</Link></li>
             </ul>
         </header>

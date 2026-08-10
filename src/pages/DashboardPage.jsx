@@ -52,7 +52,8 @@ export default function DashboardPage() {
             <h1>Dashboard</h1>
 
             {loading && 'Caricamento...'}
-            <p>ciao {user.name}</p><button onClick={logoutAuth}>Logout</button>
+            <p>ciao {user.name}</p>
+            <button onClick={logoutAuth}>Logout</button>
 
 
             <h2 className="font-bold text-xl">I miei allenamenti</h2>
