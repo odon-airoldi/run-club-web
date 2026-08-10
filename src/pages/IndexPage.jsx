@@ -1,22 +1,36 @@
 
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import AppWorkoutCard from "../components/AppWorkoutCard";
 
 
 export default function IndexPage() {
 
 
     const [workouts, setWorkouts] = useState([]);
-    const { id } = useParams();
+
+
+    // index workouts
+    async function indexWorkout() {
+        try {
+            const response = await axios.get(`http://api.run-club.test/api/workouts/`);
+
+            setWorkouts(response.data)
+            console.log(response.data)
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
 
     useEffect(() => {
-        fetch('http://api.run-club.test/api/workouts')
-            .then(res => res.json())
-            .then(data => {
-                setWorkouts(data.results)
-            })
 
-    }, [])
+        indexWorkout();
+
+    }, []);
+
 
     return (
         <>
@@ -25,16 +39,7 @@ export default function IndexPage() {
             <div className="grid grid-cols-4 gap-4">
                 {
                     workouts.map((workout) => (
-                        <div key={workout.id} className="p-4 border border-gray-200">
-                            <Link className="block" to={`/workout/${workout.id}`}>
-                                <div>{new Date(workout.date_time).toLocaleDateString('it-IT')}</div>
-                                <h2 className="font-bold">{workout.name}</h2>
-                                <p>{workout.place_city}</p>
-                                <p>{workout.distance} Km</p>
-                                <p>{(workout.pace - workout.pace % 60) / 60}:{(workout.pace % 60) === 0 ? '00' : workout.pace % 60} min/km</p>
-                            </Link>
-                        </div>
-
+                        <AppWorkoutCard key={workout.id} workout={workout} />
                     ))
                 }
             </div>
