@@ -13,6 +13,7 @@ import WorkoutEditPage from './pages/WorkoutEditPage'
 import LoginPage from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
 import AppLayout from './layouts/AppLayout'
+import UsersPage from './pages/UsersPage'
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
               <Route path="/workout/:id/edit" element={<WorkoutEditPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/users" element={<UsersPage />} />
             </Route>
           </Routes>
         </AuthProvider>

@@ -30,7 +30,6 @@ export default function DashboardPage() {
                 withCredentials: true
             });
             setRunsWorkouts(response.data)
-            console.log(response)
         } catch (error) {
             console.log(error.response)
         }
