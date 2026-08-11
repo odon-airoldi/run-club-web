@@ -27,8 +27,10 @@ export default function UsersPage() {
 
     useEffect(() => {
 
-        if (user.role != 'admin') {
-            navigate('/')
+        // redirect se user è null o user role non è admin
+        if (!user || user.role !== 'admin') {
+            navigate('/');
+            return;
         }
         indexUsers()
 

@@ -10,6 +10,15 @@ export default function AppHeader() {
 
     return (
         <header>
+            {user?.role == 'admin' &&
+                < div className="bg-slate-800">
+                    <ul className="flex">
+                        <li className="p-2 text-white">Ciao Admin</li>
+                        <li className="p-2 text-white"><Link to="/users">Users</Link></li>
+                    </ul>
+                </div>
+            }
+
             <ul className="flex">
                 <li className="p-4"><Link to="/">Home</Link></li>
                 <li className="p-4"><Link to="/workouts">Allenamenti</Link></li>
@@ -19,7 +28,7 @@ export default function AppHeader() {
                 {user && <li className="p-4"><Link to="/dashboard">Profilo</Link></li>}
 
             </ul>
-        </header>
+        </header >
     )
 
 } 
