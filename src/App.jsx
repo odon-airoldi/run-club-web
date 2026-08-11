@@ -6,6 +6,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import IndexPage from './pages/IndexPage'
+import WorkoutsPage from './pages/WorkoutsPage'
 import WorkoutPage from './pages/WorkoutPage'
 import WorkoutCreatePage from './pages/WorkoutCreatePage'
 import WorkoutEditPage from './pages/WorkoutEditPage'
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route element={<AppLayout />}>
               <Route path="/" element={<IndexPage />} />
+              <Route path="/workouts" element={<WorkoutsPage />} />
               <Route path="/workout/:id" element={<WorkoutPage />} />
               <Route path="/workout/create" element={<WorkoutCreatePage />} />
               <Route path="/workout/:id/edit" element={<WorkoutEditPage />} />

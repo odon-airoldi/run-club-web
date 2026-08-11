@@ -11,8 +11,8 @@ export default function AppHeader() {
     return (
         <header>
             <ul className="flex">
-                <li className="p-4">RunClub</li>
-                <li className="p-4"><Link to="/">Allenamenti</Link></li>
+                <li className="p-4"><Link to="/">Home</Link></li>
+                <li className="p-4"><Link to="/workouts">Allenamenti</Link></li>
                 <li className="p-4">
                     {user ? <div>Ciao {user.name} <Link onClick={logoutAuth}>Logout</Link></div> : <Link to="/login">Login</Link>}
                 </li>
