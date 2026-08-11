@@ -45,9 +45,23 @@ export default function UsersPage() {
             <div>
                 {
                     users.map((user) => (
-                        <div key={user.id}>{user.name}</div>
+                        <div className="p-4" key={user.id}>
+                            {user.name}
+                            <div>Allenamenti creati:
+                                {user.workouts.map((workout) => (
+                                    <span key={workout.id}>{workout.id}</span>
+                                ))}
+                            </div>
+                            <div>Allenamenti a cui parteciperà:
+                                {user.runs_workouts.map((workout) => (
+                                    <span key={workout.id}>{workout.id}</span>
+                                ))}
+                            </div>
+                        </div>
                     ))
                 }
+
+
             </div>
         </>
     );

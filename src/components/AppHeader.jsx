@@ -5,8 +5,7 @@ export default function AppHeader() {
 
     const { user, logoutAuth } = useAuth();
 
-
-    console.log(user)
+    // console.log(user)
 
     return (
         <header>
