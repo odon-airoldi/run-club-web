@@ -10,7 +10,7 @@ export default function AppHeader() {
     return (
         <header>
             {user?.role == 'admin' &&
-                < div className="bg-slate-800">
+                < div className="bg-indigo-900">
                     <ul className="flex">
                         <li className="p-2 text-white">Ciao Admin</li>
                         <li className="p-2 text-white"><Link to="/users">Users</Link></li>

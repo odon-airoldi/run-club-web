@@ -39,6 +39,20 @@ export default function WorkoutPage() {
     }, [id]);
 
 
+    function getWorkoutDuration(distance, pace) {
+
+        if (!distance || !pace) return;
+
+        const results = distance * pace
+
+        const hours = Math.floor(results / 3600)
+        const minutes = String(Math.floor((results % 3600) / 60)).padStart(2, '0')
+        const seconds = String(Math.floor(results % 60)).padStart(2, '0')
+
+        return `${hours}:${minutes}:${seconds}`
+
+    }
+
 
     // user runs workouts
     const userJoinWorkout = async () => {
@@ -92,45 +106,78 @@ export default function WorkoutPage() {
 
 
     return (
-        <>
-            <h1 className="text-3xl font-bold">{workout.name}</h1>
-            <small>{workout.user?.name}</small>
+        <div className="p-4">
+            <div className="grid grid-cols-3 gap-4">
+                <div className="col-span-1">
+                    <h1 className="text-3xl font-bold text-indigo-800">{workout.name}</h1>
+                    <p className="">{workout.description}</p>
+                    <small>{workout.user?.name}</small>
 
-            <div>
-                {new Date(workout.date_time).toLocaleDateString('it-IT')}
-            </div>
-            <div>
-                {new Date(workout.date_time).toLocaleTimeString('it-IT', {
-                    hour: 'numeric',
-                    minute: 'numeric'
-                })}
-            </div>
-            <div>
-                {workout.pace}
-            </div>
-            <div>
-                <button onClick={userJoinWorkout}>
-                    {joinWorkout ? 'Ti sei unito al workout' : 'Voglio partecipare'}
-                </button>
-            </div>
+                    <div>
+                        <button onClick={userJoinWorkout} className="bg-indigo-800 hover:bg-indigo-700 px-6 py-4 text-white text-sm tracking-wider cursor-pointer uppercase duration-400 ease-in-out">
+                            {joinWorkout ? 'Ti sei unito al workout' : 'Voglio partecipare'}
+                        </button>
+                    </div>
+                    {workout.user?.id === user?.id && (
+                        <div className="p-4">
+                            <Link to={`/workout/${id}/edit`}>Modifica l'allenamento</Link>
 
-            {workout.user?.id === user?.id && (
-                <div className="p-4">
-                    <Link to={`/workout/${id}/edit`}>Modifica l'allenamento</Link>
-
-                    {!visibility ?
-                        (<div>
-                            <button type="button" onClick={handleDeleteWorkout}>Elimina allenamento</button>
-                        </div>)
-                        :
-                        (<div>
-                            <button onClick={() => deleteWorkout()}>Vuoi eliminare definitivamente l'allenamento?</button>
-                        </div >)
-                    }
+                            {!visibility ?
+                                (<div>
+                                    <button type="button" onClick={handleDeleteWorkout}>Elimina allenamento</button>
+                                </div>)
+                                :
+                                (<div>
+                                    <button onClick={() => deleteWorkout()}>Vuoi eliminare definitivamente l'allenamento?</button>
+                                </div >)
+                            }
+                        </div>
+                    )}
                 </div>
-            )}
+                <div className="col-span-2">
+                    <div className="grid grid-cols-3 gap-4">
+                        <div>
+                            <div>Data</div>
+                            <div className="text-indigo-500">
+                                {new Date(workout.date_time).toLocaleDateString('it-IT')}
+                            </div>
+                        </div>
+                        <div>
+                            <div>Ora</div>
+                            <div className="text-indigo-500">
+                                {new Date(workout.date_time).toLocaleTimeString('it-IT', {
+                                    hour: 'numeric',
+                                    minute: 'numeric'
+                                })}
+                            </div>
+                            <div>Durata ritrovo gruppo</div>
+                            <div className="text-indigo-500">{workout.buffer_time} min</div>
+                        </div>
+                        <div>
+                            <div>Luogo di partenza</div>
+                            <div className="text-indigo-500">
+                                {workout.place_city}<br />
+                                {workout.place_address}
+                            </div>
+                        </div>
+                        <div>
+                            <div>Distanza</div>
+                            <div className="text-indigo-500">{workout.distance} Km</div>
+                        </div>
+                        <div>
+                            <div>Passo</div>
+                            <div className="text-indigo-500">{(workout.pace - workout.pace % 60) / 60}:{workout.pace % 60}</div>
+                        </div>
+                        <div>
+                            <div>Proiezione durata allenamento</div>
+                            <div className="text-indigo-500">{getWorkoutDuration(workout.distance, workout.pace)}</div>
+                        </div>
+                    </div>
+                </div>
 
-        </>
+
+            </div>
+        </div >
     );
 
 }
