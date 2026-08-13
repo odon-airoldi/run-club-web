@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useWorkout } from "../contexts/WorkoutContext";
 import axios from "axios";
 
 
@@ -39,18 +40,28 @@ export default function WorkoutPage() {
     }, [id]);
 
 
-    function getWorkoutDuration(distance, pace) {
+    function getWorkoutDurationTime(distanceKm, paceSeconds) {
 
-        if (!distance || !pace) return;
+        if (!distanceKm || !paceSeconds) return;
 
-        const results = distance * pace
+        const resultsInSeconds = distanceKm * paceSeconds
 
-        const hours = Math.floor(results / 3600)
-        const minutes = String(Math.floor((results % 3600) / 60)).padStart(2, '0')
-        const seconds = String(Math.floor(results % 60)).padStart(2, '0')
+        const hours = Math.floor(resultsInSeconds / 3600)
+        const minutes = String(Math.floor((resultsInSeconds % 3600) / 60)).padStart(2, '0')
+        const seconds = String(Math.floor(resultsInSeconds % 60)).padStart(2, '0')
 
         return `${hours}:${minutes}:${seconds}`
 
+    }
+
+    function getWorkoutPaceTime(paceSeconds) {
+
+        if (!paceSeconds) return;
+
+        const minutes = Math.floor(paceSeconds / 60)
+        const seconds = String(Math.floor(paceSeconds % 60)).padStart(2, '0')
+
+        return `${minutes}:${seconds}`
     }
 
 
@@ -109,13 +120,14 @@ export default function WorkoutPage() {
         <div className="p-4">
             <div className="grid grid-cols-3 gap-4">
                 <div className="col-span-1">
+                    <div className="text-sm">Creato da {workout.user?.name}</div>
+
                     <h1 className="text-3xl font-bold text-indigo-800">{workout.name}</h1>
                     <p className="">{workout.description}</p>
-                    <small>{workout.user?.name}</small>
 
                     <div>
                         <button onClick={userJoinWorkout} className="bg-indigo-800 hover:bg-indigo-700 px-6 py-4 text-white text-sm tracking-wider cursor-pointer uppercase duration-400 ease-in-out">
-                            {joinWorkout ? 'Ti sei unito al workout' : 'Voglio partecipare'}
+                            {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
                         </button>
                     </div>
                     {workout.user?.id === user?.id && (
@@ -137,9 +149,13 @@ export default function WorkoutPage() {
                 <div className="col-span-2">
                     <div className="grid grid-cols-3 gap-4">
                         <div>
-                            <div>Data</div>
-                            <div className="text-indigo-500">
-                                {new Date(workout.date_time).toLocaleDateString('it-IT')}
+                            <div className="text-indigo-500 capitalize">
+                                {new Date(workout.date_time).toLocaleDateString('it-IT', {
+                                    weekday: 'long',
+                                    day: 'numeric',
+                                    month: 'short',
+                                    year: 'numeric'
+                                })}
                             </div>
                         </div>
                         <div>
@@ -166,11 +182,11 @@ export default function WorkoutPage() {
                         </div>
                         <div>
                             <div>Passo</div>
-                            <div className="text-indigo-500">{(workout.pace - workout.pace % 60) / 60}:{workout.pace % 60}</div>
+                            <div className="text-indigo-500">{getWorkoutPaceTime(workout.pace)}</div>
                         </div>
                         <div>
                             <div>Proiezione durata allenamento</div>
-                            <div className="text-indigo-500">{getWorkoutDuration(workout.distance, workout.pace)}</div>
+                            <div className="text-indigo-500">{getWorkoutDurationTime(workout.distance, workout.pace)}</div>
                         </div>
                     </div>
                 </div>
