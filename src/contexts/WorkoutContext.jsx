@@ -10,15 +10,40 @@ function WorkoutProvider({ children }) {
 
     const navigate = useNavigate();
 
+    // converti pace da secondi in minuti:secondi
+    function getWorkoutPaceTime(paceSeconds) {
 
+        if (!paceSeconds) return;
 
+        const minutes = Math.floor(paceSeconds / 60)
+        const seconds = String(Math.floor(paceSeconds % 60)).padStart(2, '0')
+
+        return `${minutes}:${seconds}`
+
+    }
+
+    // calcola durata allenamento su distanza e passo
+    function getWorkoutDurationTime(distanceKm, paceSeconds) {
+
+        if (!distanceKm || !paceSeconds) return;
+
+        const resultsInSeconds = distanceKm * paceSeconds
+
+        const hours = Math.floor(resultsInSeconds / 3600)
+        const minutes = String(Math.floor((resultsInSeconds % 3600) / 60)).padStart(2, '0')
+        const seconds = String(Math.floor(resultsInSeconds % 60)).padStart(2, '0')
+
+        return `${hours}:${minutes}:${seconds}`
+
+    }
 
     return (
 
         // il provider offre ai componenti figli i valori che gli passo
         <WorkoutContext.Provider
             value={{
-
+                getWorkoutPaceTime,
+                getWorkoutDurationTime
             }}
         >
 

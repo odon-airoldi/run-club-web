@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useWorkout } from "../contexts/WorkoutContext";
 
 export default function AppWorkoutCard({ workout }) {
+
+    const { getWorkoutPaceTime } = useWorkout();
 
     return (
         <div className="p-4 border border-gray-200">
@@ -9,7 +12,7 @@ export default function AppWorkoutCard({ workout }) {
                 <h2 className="font-bold">{workout.name}</h2>
                 <p>{workout.place_city}</p>
                 <p>{workout.distance} Km</p>
-                <p>{(workout.pace - workout.pace % 60) / 60}:{(workout.pace % 60) === 0 ? '00' : workout.pace % 60} min/km</p>
+                <p>{getWorkoutPaceTime(workout.pace)} min/km</p>
             </Link>
         </div>
     )
