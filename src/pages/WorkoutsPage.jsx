@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import AppWorkoutCard from "../components/AppWorkoutCard";
+import { useAuth } from "../contexts/AuthContext";
 
 
 export default function WorkoutsPage() {
 
+    const { user } = useAuth();
 
     const [workouts, setWorkouts] = useState([]);
 
@@ -44,7 +46,7 @@ export default function WorkoutsPage() {
                 }
             </div>
 
-            <Link to="/workout/create">Aggiungi un allenamento</Link>
+            {user && <Link to="/workout/create">Aggiungi un allenamento</Link>}
 
         </>
     );
