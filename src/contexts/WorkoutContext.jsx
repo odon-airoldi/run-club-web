@@ -9,6 +9,18 @@ const WorkoutContext = createContext();
 function WorkoutProvider({ children }) {
 
     const navigate = useNavigate();
+    const [workout, setWorkout] = useState({});
+
+    // show workout
+    async function showWorkout(id) {
+        try {
+            const response = await axios.get(`http://api.run-club.test/api/workouts/${id}`);
+            setWorkout(response.data);
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     // converti pace da secondi in minuti:secondi
     function getWorkoutPaceTime(paceSeconds) {
@@ -42,6 +54,8 @@ function WorkoutProvider({ children }) {
         // il provider offre ai componenti figli i valori che gli passo
         <WorkoutContext.Provider
             value={{
+                showWorkout,
+                workout,
                 getWorkoutPaceTime,
                 getWorkoutDurationTime
             }}

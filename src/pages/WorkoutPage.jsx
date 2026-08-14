@@ -10,35 +10,23 @@ export default function WorkoutPage() {
 
     const navigate = useNavigate();
 
-    const { user } = useAuth();
-    const { getWorkoutPaceTime, getWorkoutDurationTime } = useWorkout();
     const { id } = useParams();
-    const [workout, setWorkout] = useState({});
+    const { user } = useAuth();
+    const { workout, showWorkout, getWorkoutPaceTime, getWorkoutDurationTime } = useWorkout();
     const [joinWorkout, setJoinWorkout] = useState(false);
 
 
-
-
-    // show workout
-    async function showWorkout() {
-        try {
-            const response = await axios.get(`http://api.run-club.test/api/workouts/${id}`);
-
-            setWorkout(response.data);
-
-            setJoinWorkout(response.data.users_run?.some(user_run => user_run.id === user?.id) ?? false)
-
-        } catch (error) {
-            console.log(error)
-        }
-
-    }
-
     useEffect(() => {
 
-        showWorkout();
+        // mi servo dal context della funzione per chiamata axios passando come parametro id
+        showWorkout(id);
+
+        // true se fra users che partecipano al workout c'è un user con un id uguale all' id di user autenticato altrimenti false
+        setJoinWorkout(workout.users_run?.some(user_run => user_run.id === user?.id) ?? false)
 
     }, [id]);
+
+    console.log(workout)
 
 
     // user runs workouts
@@ -55,9 +43,8 @@ export default function WorkoutPage() {
                     }
                 }
             )
+            // toggle su valore booleano
             setJoinWorkout(!joinWorkout)
-            console.log(response)
-
 
         } catch (error) {
             console.log(error.response)
@@ -90,9 +77,6 @@ export default function WorkoutPage() {
         }
 
     }
-
-    console.log(workout)
-
 
     return (
         <div className="p-4">

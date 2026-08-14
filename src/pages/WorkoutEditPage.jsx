@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useWorkout } from "../contexts/WorkoutContext";
 import axios from "axios";
 
 
@@ -8,44 +9,47 @@ export default function WorkoutEditPage() {
 
     const navigate = useNavigate();
 
+    const { workout, showWorkout } = useWorkout();
+
     const { id } = useParams();
-    const [workout, setWorkout] = useState({
-        name: '',
-        description: '',
-        date: '',
-        time: '',
-        place_city: '',
-        place_address: '',
-        buffer_time: '',
-        distance: '',
-        pace_m: '',
-        pace_s: '',
-    });
+    // const [workout, setWorkout] = useState({
+    //     name: '',
+    //     description: '',
+    //     date: '',
+    //     time: '',
+    //     place_city: '',
+    //     place_address: '',
+    //     buffer_time: '',
+    //     distance: '',
+    //     pace_m: '',
+    //     pace_s: '',
+    // });
 
     useEffect(() => {
 
-        async function showWorkout() {
+        // async function showWorkout() {
 
-            try {
-                const response = await axios.get(`http://api.run-club.test/api/workouts/${id}`);
+        //     try {
+        //         const response = await axios.get(`http://api.run-club.test/api/workouts/${id}`);
 
-                setWorkout({
-                    ...response.data,
-                    date: response.data.date_time.slice(0, 10),
-                    time: response.data.date_time.slice(11, 16),
-                    pace_m: (response.data.pace - response.data.pace % 60) / 60,
-                    pace_s: response.data.pace % 60,
-                });
-            } catch (error) {
-                console.log(error)
-            }
+        //         setWorkout({
+        //             ...response.data,
+        //             date: response.data.date_time.slice(0, 10),
+        //             time: response.data.date_time.slice(11, 16),
+        //             pace_m: (response.data.pace - response.data.pace % 60) / 60,
+        //             pace_s: response.data.pace % 60,
+        //         });
+        //     } catch (error) {
+        //         console.log(error)
+        //     }
 
-        }
+        // }
 
-        showWorkout();
+        showWorkout(id);
 
-    }, []);
+    }, [id]);
 
+    console.log(workout)
 
     async function editWorkout(e) {
 
