@@ -41,11 +41,6 @@ export default function WorkoutPage() {
     }, [id]);
 
 
-
-
-
-
-
     // user runs workouts
     const userJoinWorkout = async () => {
         try {
@@ -106,11 +101,13 @@ export default function WorkoutPage() {
                     <h1 className="text-3xl font-bold text-indigo-800">{workout.name}</h1>
                     <p className="">{workout.description}</p>
 
-                    <div>
-                        <button onClick={userJoinWorkout} className="bg-indigo-800 hover:bg-indigo-700 px-6 py-4 text-white text-sm tracking-wider cursor-pointer uppercase duration-400 ease-in-out">
-                            {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
-                        </button>
-                    </div>
+                    {user.id !== workout.user_id &&
+                        <div>
+                            <button onClick={userJoinWorkout} className="bg-indigo-800 hover:bg-indigo-700 px-6 py-4 text-white text-sm tracking-wider cursor-pointer uppercase duration-400 ease-in-out">
+                                {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
+                            </button>
+                        </div>
+                    }
                     {workout.user?.id === user?.id && (
                         <div className="p-4">
                             <Link to={`/workout/${id}/edit`}>Modifica l'allenamento</Link>
