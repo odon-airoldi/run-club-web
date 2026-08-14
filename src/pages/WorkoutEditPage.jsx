@@ -9,7 +9,7 @@ export default function WorkoutEditPage() {
 
     const navigate = useNavigate();
 
-    const { workout, showWorkout } = useWorkout();
+    const { workout, showWorkout, getWorkoutPaceTime } = useWorkout();
 
     const { id } = useParams();
     // const [workout, setWorkout] = useState({
@@ -49,7 +49,9 @@ export default function WorkoutEditPage() {
 
     }, [id]);
 
-    console.log(workout)
+    // destrutturo l'oggetto di risposta della funzione per formattare pace da secondi a minuti e secondi
+    const { minutes, seconds } = getWorkoutPaceTime(workout.pace)
+
 
     async function editWorkout(e) {
 
@@ -100,6 +102,7 @@ export default function WorkoutEditPage() {
 
     }
 
+
     return (
         <>
             <h1>Aggiorna l'allenamento</h1>
@@ -138,8 +141,8 @@ export default function WorkoutEditPage() {
                 </div>
                 <div>
                     <label htmlFor="pace_m">Passo</label>
-                    <input className="border" type="number" id="pace_m" name="pace_m" min="0" max="59" value={workout.pace_m} onChange={handleChange} /> min
-                    <input className="border" type="number" id="pace_s" name="pace_s" min="0" max="59" value={workout.pace_s} onChange={handleChange} /> sec
+                    <input className="border" type="number" id="pace_m" name="pace_m" min="0" max="59" value={minutes} onChange={handleChange} /> min
+                    <input className="border" type="number" id="pace_s" name="pace_s" min="0" max="59" value={seconds} onChange={handleChange} /> sec
                 </div>
                 <div>
                     <button type="submit">Modifica</button>

@@ -24,9 +24,10 @@ export default function WorkoutPage() {
         // true se fra users che partecipano al workout c'è un user con un id uguale all' id di user autenticato altrimenti false
         setJoinWorkout(workout.users_run?.some(user_run => user_run.id === user?.id) ?? false)
 
+
     }, [id]);
 
-    console.log(workout)
+    const { minutes, seconds } = getWorkoutPaceTime(workout.pace)
 
 
     // user runs workouts
@@ -145,7 +146,7 @@ export default function WorkoutPage() {
                         </div>
                         <div>
                             <div>Passo</div>
-                            <div className="text-indigo-500">{getWorkoutPaceTime(workout.pace)}</div>
+                            <div className="text-indigo-500">{minutes}:{seconds}</div>
                         </div>
                         <div>
                             <div>Proiezione durata allenamento</div>

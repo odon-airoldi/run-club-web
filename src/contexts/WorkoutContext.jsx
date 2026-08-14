@@ -20,17 +20,21 @@ function WorkoutProvider({ children }) {
         } catch (error) {
             console.log(error)
         }
+
     }
 
     // converti pace da secondi in minuti:secondi
     function getWorkoutPaceTime(paceSeconds) {
 
-        if (!paceSeconds) return;
+        // if (!paceSeconds) return;
 
         const minutes = Math.floor(paceSeconds / 60)
         const seconds = String(Math.floor(paceSeconds % 60)).padStart(2, '0')
 
-        return `${minutes}:${seconds}`
+        return {
+            minutes: minutes,
+            seconds: seconds
+        }
 
     }
 
