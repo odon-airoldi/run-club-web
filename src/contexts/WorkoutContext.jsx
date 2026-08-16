@@ -10,6 +10,7 @@ function WorkoutProvider({ children }) {
 
     const navigate = useNavigate();
     const [workout, setWorkout] = useState({});
+    const [loading, setLoading] = useState(true);
 
     // show workout
     async function showWorkout(id) {
@@ -19,6 +20,8 @@ function WorkoutProvider({ children }) {
 
         } catch (error) {
             console.log(error)
+        } finally {
+            setLoading(false)
         }
 
     }
@@ -53,13 +56,19 @@ function WorkoutProvider({ children }) {
 
     }
 
+    function getWorkoutDateTime(dateTime) {
+        
+    }
+
     return (
 
         // il provider offre ai componenti figli i valori che gli passo
         <WorkoutContext.Provider
             value={{
                 showWorkout,
+                loading,
                 workout,
+                setWorkout,
                 getWorkoutPaceTime,
                 getWorkoutDurationTime
             }}

@@ -79,6 +79,8 @@ export default function WorkoutPage() {
 
     }
 
+    console.log(workout.date_time)
+
     return (
         <div className="p-4">
             <div className="grid grid-cols-3 gap-4">
