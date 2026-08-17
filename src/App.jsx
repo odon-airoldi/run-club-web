@@ -33,6 +33,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/users" element={<UsersPage />} />
+                <Route path="/*" element={<IndexPage />} />
               </Route>
             </Routes>
           </WorkoutProvider>

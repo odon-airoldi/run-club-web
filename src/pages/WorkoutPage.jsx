@@ -15,6 +15,7 @@ export default function WorkoutPage() {
     const { workout, showWorkout, getWorkoutPaceTime, getWorkoutDurationTime } = useWorkout();
     const [joinWorkout, setJoinWorkout] = useState(false);
 
+    console.log(workout)
 
     useEffect(() => {
 

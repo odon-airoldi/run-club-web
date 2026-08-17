@@ -20,7 +20,8 @@ function WorkoutProvider({ children }) {
 
         } catch (error) {
             console.log(error)
-        } finally {
+            navigate('/');
+        } finally { 
             setLoading(false)
         }
 
@@ -57,7 +58,7 @@ function WorkoutProvider({ children }) {
     }
 
     function getWorkoutDateTime(dateTime) {
-        
+
     }
 
     return (
