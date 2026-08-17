@@ -89,21 +89,21 @@ export default function WorkoutPage() {
                     <h1 className="text-3xl font-bold text-indigo-800">{workout.name}</h1>
                     <p className="">{workout.description}</p>
 
-                    {workout.user_id === user?.id ? // se sei il proprietario del workout
+                    {(user.role === 'admin' || user.id === workout.user_id) && // se user è admin o è proprietario del workout
                         <div className="p-4">
                             <Link to={`/workout/${id}/edit`}>Modifica l'allenamento</Link>
-
                             {!visibility ?
-                                (<div>
+                                <div>
                                     <button type="button" onClick={handleDeleteWorkout}>Elimina allenamento</button>
-                                </div>)
+                                </div>
                                 :
-                                (<div>
+                                <div>
                                     <button onClick={() => deleteWorkout()}>Vuoi eliminare definitivamente l'allenamento?</button>
-                                </div >)
+                                </div >
                             }
                         </div>
-                        : // altrimenti
+                    }
+                    {user.id !== workout.user_id && // se user non è proprietario del workout
                         <div>
                             <button onClick={userJoinWorkout} className="bg-indigo-800 hover:bg-indigo-700 px-6 py-4 text-white text-sm tracking-wider cursor-pointer uppercase duration-400 ease-in-out">
                                 {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
