@@ -19,7 +19,6 @@ export default function WorkoutsPage() {
             const response = await axios.get(`http://api.run-club.test/api/workouts/`);
 
             setWorkouts(response.data)
-            console.log(response.data)
 
         } catch (error) {
             console.log(error)
@@ -32,6 +31,8 @@ export default function WorkoutsPage() {
         indexWorkout();
 
     }, []);
+
+    console.log(workouts)
 
 
     return (
