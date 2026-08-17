@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import { useWorkout } from "../contexts/WorkoutContext";
 import axios from "axios";
 
@@ -8,6 +9,8 @@ import axios from "axios";
 export default function WorkoutEditPage() {
 
     const navigate = useNavigate();
+
+    const { user } = useAuth();
 
     const { id } = useParams();
 
@@ -97,6 +100,8 @@ export default function WorkoutEditPage() {
 
     }
 
+    // redirect al render se user non admin e non è proprietario del workout
+    if (user.role !== 'admin' && user.id !== workout.user_id) return <Navigate to="/" replace />
 
     return (
         <>

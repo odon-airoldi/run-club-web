@@ -5,7 +5,7 @@ export default function AppHeader() {
 
     const { user, logoutAuth } = useAuth();
 
-    // console.log(user)
+    console.log(user)
 
     return (
         <header>
@@ -27,7 +27,8 @@ export default function AppHeader() {
                 {user && <li className="p-4"><Link to="/dashboard">Profilo</Link></li>}
 
             </ul>
-        </header >
+        </header>
     )
+
 
 } 

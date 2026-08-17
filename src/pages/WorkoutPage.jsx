@@ -79,7 +79,6 @@ export default function WorkoutPage() {
 
     }
 
-    console.log(workout.date_time)
 
     return (
         <div className="p-4">
