@@ -31,7 +31,7 @@ function App() {
                 <Route path="/workout/create" element={<WorkoutCreatePage />} />
                 <Route path="/workout/:id/edit" element={<WorkoutEditPage />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/users/:id" element={<DashboardPage />} />
                 <Route path="/users" element={<UsersPage />} />
                 <Route path="/*" element={<IndexPage />} />
               </Route>

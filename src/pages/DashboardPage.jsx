@@ -11,9 +11,38 @@ export default function DashboardPage() {
 
     const { user, logoutAuth } = useAuth();
 
+    const { id } = useParams();
+    console.log(id)
+
+
+    const [users, setUsers] = useState([])
+
+    async function indexUsers() {
+        try {
+            const response = await axios.get('http://api.run-club.test/api/users',
+                {
+                    withCredentials: true
+                }
+            )
+
+            setUsers(response.data)
+
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+
+        indexUsers()
+
+    }, [])
+
     const [workouts, setWorkouts] = useState([]);
     const [runsWorkouts, setRunsWorkouts] = useState([]);
 
+    // workout di user
     async function userWorkouts() {
         try {
             const response = await axios.get(`http://api.run-club.test/api/user/${user.id}/workouts`, {
@@ -25,6 +54,7 @@ export default function DashboardPage() {
         }
     }
 
+    // workout a cui partecipa
     async function userRunsWorkouts() {
         try {
             const response = await axios.get('http://api.run-club.test/api/user/runs/workouts', {
@@ -48,10 +78,7 @@ export default function DashboardPage() {
     return (
         <>
             <div>
-                <h1>Dashboard</h1>
-
-                <p>ciao {user.name}</p>
-                <button onClick={logoutAuth}>Logout</button>
+                <h1 className="font-bold text-8xl">{user.name}</h1>
 
 
                 <h2 className="font-bold text-xl">I miei allenamenti</h2>
