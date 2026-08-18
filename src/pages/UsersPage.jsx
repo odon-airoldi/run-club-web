@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function UsersPage() {
 
@@ -56,7 +56,7 @@ export default function UsersPage() {
                                     {user.id}
                                 </div>
                                 <div>
-                                    {user.name}
+                                    <Link to={`/users/${user.id}`}>{user.name}</Link>
                                 </div>
                                 <div>
                                     {user.role}

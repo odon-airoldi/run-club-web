@@ -12,20 +12,19 @@ export default function DashboardPage() {
     const { userAuth, logoutAuth } = useAuth();
 
     const { id } = useParams();
-    console.log(id)
 
+    const [user, setUser] = useState(null)
 
-    const [users, setUsers] = useState([])
-
-    async function indexUsers() {
+    // user
+    async function showUser() {
         try {
-            const response = await axios.get('http://api.run-club.test/api/users',
+            const response = await axios.get(`http://api.run-club.test/api/users/${id}`,
                 {
                     withCredentials: true
                 }
             )
 
-            setUsers(response.data)
+            setUser(response.data)
 
 
         } catch (error) {
@@ -33,11 +32,7 @@ export default function DashboardPage() {
         }
     }
 
-    useEffect(() => {
-
-        indexUsers()
-
-    }, [])
+    console.log(user)
 
     const [workouts, setWorkouts] = useState([]);
     const [runsWorkouts, setRunsWorkouts] = useState([]);
@@ -45,7 +40,7 @@ export default function DashboardPage() {
     // workout di user
     async function userWorkouts() {
         try {
-            const response = await axios.get(`http://api.run-club.test/api/user/${userAuth.id}/workouts`, {
+            const response = await axios.get(`http://api.run-club.test/api/user/${id}/workouts`, {
                 withCredentials: true
             });
             setWorkouts(response.data)
@@ -57,7 +52,7 @@ export default function DashboardPage() {
     // workout a cui partecipa
     async function userRunsWorkouts() {
         try {
-            const response = await axios.get('http://api.run-club.test/api/user/runs/workouts', {
+            const response = await axios.get(`http://api.run-club.test/api/user/${id}/runs/workouts`, {
                 withCredentials: true
             });
             setRunsWorkouts(response.data)
@@ -67,18 +62,20 @@ export default function DashboardPage() {
     }
 
     useEffect(() => {
+
+        showUser();
         userWorkouts();
         userRunsWorkouts();
 
-    }, [])
+    }, [id])
 
-
+    // se user non è autenticato redirect
     if (!userAuth) return <Navigate to="/" replace />
 
     return (
         <>
             <div>
-                <h1 className="font-bold text-8xl">{userAuth.name}</h1>
+                <h1 className="font-bold text-8xl">{user?.name}</h1>
 
 
                 <h2 className="font-bold text-xl">I miei allenamenti</h2>
