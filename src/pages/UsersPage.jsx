@@ -6,7 +6,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 export default function UsersPage() {
 
     const navigate = useNavigate()
-    const { user } = useAuth()
+    const { userAuth } = useAuth()
     const [users, setUsers] = useState([])
 
     async function indexUsers() {
@@ -33,7 +33,7 @@ export default function UsersPage() {
 
     console.log(users)
 
-    if (!user || user.role !== 'admin') return <Navigate to="/" replace />
+    if (!userAuth || userAuth.role !== 'admin') return <Navigate to="/" replace />
 
 
     return (

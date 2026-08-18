@@ -7,7 +7,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 export default function WorkoutCreatePage() {
 
-    const { user } = useAuth();
+    const { userAuth } = useAuth();
 
     const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ export default function WorkoutCreatePage() {
                 buffer_time: e.target.buffer_time.value,
                 distance: e.target.distance.value,
                 pace: Number(e.target.pace_m.value) * 60 + Number(e.target.pace_s.value),
-                user_id: user?.id
+                user_id: userAuth?.id
             }
 
             const response = await axios.post('http://api.run-club.test/api/workouts',

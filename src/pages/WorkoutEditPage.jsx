@@ -10,7 +10,7 @@ export default function WorkoutEditPage() {
 
     const navigate = useNavigate();
 
-    const { user } = useAuth();
+    const { userAuth } = useAuth();
 
     const { id } = useParams();
 
@@ -101,7 +101,7 @@ export default function WorkoutEditPage() {
     }
 
     // redirect al render se user non admin e non è proprietario del workout
-    if (user.role !== 'admin' && user.id !== workout.user_id) return <Navigate to="/" replace />
+    if (userAuth.role !== 'admin' && userAuth.id !== workout.user_id) return <Navigate to="/" replace />
 
     return (
         <>

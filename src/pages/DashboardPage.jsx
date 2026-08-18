@@ -9,7 +9,7 @@ export default function DashboardPage() {
 
     const navigate = useNavigate();
 
-    const { user, logoutAuth } = useAuth();
+    const { userAuth, logoutAuth } = useAuth();
 
     const { id } = useParams();
     console.log(id)
@@ -45,7 +45,7 @@ export default function DashboardPage() {
     // workout di user
     async function userWorkouts() {
         try {
-            const response = await axios.get(`http://api.run-club.test/api/user/${user.id}/workouts`, {
+            const response = await axios.get(`http://api.run-club.test/api/user/${userAuth.id}/workouts`, {
                 withCredentials: true
             });
             setWorkouts(response.data)
@@ -73,12 +73,12 @@ export default function DashboardPage() {
     }, [])
 
 
-    if (!user) return <Navigate to="/" replace />
+    if (!userAuth) return <Navigate to="/" replace />
 
     return (
         <>
             <div>
-                <h1 className="font-bold text-8xl">{user.name}</h1>
+                <h1 className="font-bold text-8xl">{userAuth.name}</h1>
 
 
                 <h2 className="font-bold text-xl">I miei allenamenti</h2>

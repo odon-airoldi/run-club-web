@@ -10,7 +10,7 @@ function AuthProvider({ children }) {
 
     const navigate = useNavigate();
 
-    const [user, setUser] = useState(null);
+    const [userAuth, setUserAuth] = useState(null);
     const [loading, setLoading] = useState(true);
 
     // verifica autenticazione salvo dati
@@ -24,10 +24,10 @@ function AuthProvider({ children }) {
                 }
             )
             // se autenticato salvo dati nello state
-            setUser(response.data);
+            setUserAuth(response.data);
         } catch {
             // se non c'è sessione valida setto in null
-            setUser(null)
+            setUserAuth(null)
         } finally {
             // in ogni caso setto che il caricamente è finito
             setLoading(false)
@@ -57,13 +57,13 @@ function AuthProvider({ children }) {
                 }
             );
 
-            setUser(null);
+            setUserAuth(null);
             navigate('/login');
 
         } catch (error) {
             console.log(error.response);
         } finally {
-            setUser(null);
+            setUserAuth(null);
             navigate('/login');
         }
 
@@ -81,8 +81,8 @@ function AuthProvider({ children }) {
         // il provider offre ai componenti figli i valori che gli passo
         <AuthContext.Provider
             value={{
-                user,
-                setUser,
+                userAuth,
+                setUserAuth,
                 loading,
                 setLoading,
                 checkAuth,

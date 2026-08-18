@@ -8,7 +8,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 export default function WorkoutsPage() {
 
-    const { user } = useAuth();
+    const { userAuth } = useAuth();
 
     const [workouts, setWorkouts] = useState([]);
 
@@ -47,7 +47,7 @@ export default function WorkoutsPage() {
                 }
             </div>
 
-            {user && <Link to="/workout/create">Aggiungi un allenamento</Link>}
+            {userAuth && <Link to="/workout/create">Aggiungi un allenamento</Link>}
 
         </>
     );

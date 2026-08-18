@@ -8,7 +8,7 @@ export default function LoginPage() {
 
     const navigate = useNavigate();
 
-    const { setUser, checkAuth } = useAuth();
+    const { checkAuth } = useAuth();
 
     async function handleLogin(e) {
 
