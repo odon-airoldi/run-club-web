@@ -21,7 +21,7 @@ function WorkoutProvider({ children }) {
         } catch (error) {
             console.log(error)
             navigate('/');
-        } finally { 
+        } finally {
             setLoading(false)
         }
 
@@ -54,10 +54,6 @@ function WorkoutProvider({ children }) {
         const seconds = String(Math.floor(resultsInSeconds % 60)).padStart(2, '0')
 
         return `${hours}:${minutes}:${seconds}`
-
-    }
-
-    function getWorkoutDateTime(dateTime) {
 
     }
 

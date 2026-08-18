@@ -22,8 +22,8 @@ export default function WorkoutPage() {
         // mi servo dal context della funzione per chiamata axios passando come parametro id
         showWorkout(id);
 
-        // true se fra users che partecipano al workout c'è un user con un id uguale all' id di user autenticato altrimenti false
-        setJoinWorkout(workout.users_run?.some(user_run => user_run.id === user?.id) ?? false)
+        // true se fra users che partecipano al workout c'è un user con un id uguale all'id di user autenticato altrimenti false
+        setJoinWorkout(workout.users_run?.some(user_run => user_run.id === userAuth?.id) ?? false)
 
 
     }, [id]);
@@ -86,7 +86,7 @@ export default function WorkoutPage() {
             <div className="p-4">
                 <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-1">
-                        <div className="text-sm">Creato da {workout.user?.name}</div>
+                        <div className="text-sm"><Link to={`/users/${workout.user_id}`}>Creato da {workout.user?.name}</Link></div>
 
                         <h1 className="text-3xl font-bold text-indigo-800">{workout.name}</h1>
                         <p className="">{workout.description}</p>
