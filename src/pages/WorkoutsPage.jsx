@@ -32,13 +32,17 @@ export default function WorkoutsPage() {
 
     }, []);
 
-    const now = new Date();
 
     // ordinamento workout prima i futuri poi i passati mantendendo l'ordine cronologico
+
+    const now = new Date();
+
     const sorted = [
         ...workouts.filter((workout) => new Date(workout.date_time) > now),
         ...workouts.filter((workout) => new Date(workout.date_time) < now),
     ]
+
+
 
 
     return (
@@ -49,10 +53,13 @@ export default function WorkoutsPage() {
             <div className="grid grid-cols-4 gap-4">
                 {
 
-                    sorted
-                        .map((workout) => (
-                            <AppWorkoutCard key={workout.id} workout={workout} />
-                        ))
+
+                    sorted.map((workout) => {
+                        const isPast = new Date(workout.date_time) < now;
+                        return (
+                            <AppWorkoutCard key={workout.id} workout={workout} isPast={isPast} />
+                        )
+                    })
                 }
             </div>
 
