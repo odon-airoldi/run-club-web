@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 // creazione context
 const UserContext = createContext();
 
@@ -9,24 +10,52 @@ const UserContext = createContext();
 function UserProvider({ children }) {
 
     const navigate = useNavigate();
-    // const [workout, setWorkout] = useState({});
-    // const [loading, setLoading] = useState(true);
 
-    // show workout
-    // async function showWorkout(id) {
-    //     try {
-    //         const response = await axios.get(`http://api.run-club.test/api/workouts/${id}`);
-    //         setWorkout(response.data);
+    const [user, setUser] = useState(null)
+    const [workouts, setWorkouts] = useState(null);
+    const [runsWorkouts, setRunsWorkouts] = useState(null);
 
-    //     } catch (error) {
-    //         console.log(error)
-    //         navigate('/');
-    //     } finally {
-    //         setLoading(false)
-    //     }
+    // user
+    async function showUser(id) {
+        try {
+            const response = await axios.get(`http://api.run-club.test/api/users/${id}`,
+                {
+                    withCredentials: true
+                }
+            )
 
-    // }
+            setUser(response.data)
 
+        } catch (error) {
+            console.log(error)
+            navigate('/');
+        }
+    }
+
+
+    // workout di user
+    async function userWorkouts(id) {
+        try {
+            const response = await axios.get(`http://api.run-club.test/api/user/${id}/workouts`, {
+                withCredentials: true
+            });
+            setWorkouts(response.data)
+        } catch (error) {
+            console.log(error.response)
+        }
+    }
+
+    // workout a cui partecipa
+    async function userRunsWorkouts(id) {
+        try {
+            const response = await axios.get(`http://api.run-club.test/api/user/${id}/runs/workouts`, {
+                withCredentials: true
+            });
+            setRunsWorkouts(response.data)
+        } catch (error) {
+            console.log(error.response)
+        }
+    }
 
 
 
@@ -36,7 +65,12 @@ function UserProvider({ children }) {
         // il provider offre ai componenti figli i valori che gli passo
         <UserContext.Provider
             value={{
-
+                user,
+                workouts,
+                runsWorkouts,
+                showUser,
+                userWorkouts,
+                userRunsWorkouts
             }}
         >
 

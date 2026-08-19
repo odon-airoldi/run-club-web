@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 // creazione context
 const WorkoutContext = createContext();
 
@@ -9,6 +10,7 @@ const WorkoutContext = createContext();
 function WorkoutProvider({ children }) {
 
     const navigate = useNavigate();
+
     const [workout, setWorkout] = useState({});
     const [loading, setLoading] = useState(true);
 

@@ -11,7 +11,7 @@ export default function WorkoutPage() {
     const navigate = useNavigate();
 
     const { id } = useParams();
-    const { userAuth, loading } = useAuth();
+    const { userAuth } = useAuth();
     const { workout, showWorkout, getWorkoutPaceTime, getWorkoutDurationTime } = useWorkout();
     const [joinWorkout, setJoinWorkout] = useState(false);
 

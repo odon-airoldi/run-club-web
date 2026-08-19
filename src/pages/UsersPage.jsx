@@ -31,10 +31,8 @@ export default function UsersPage() {
 
     }, [])
 
-    console.log(users)
 
     if (!userAuth || userAuth.role !== 'admin') return <Navigate to="/" replace />
-
 
     return (
         <>
