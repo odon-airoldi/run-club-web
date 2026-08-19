@@ -4,13 +4,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 
-export default function LoginPage() {
+export default function RegisterPage() {
 
     const navigate = useNavigate();
 
     const { checkAuth } = useAuth();
 
-    async function handleLogin(e) {
+    async function handleRegister(e) {
 
         e.preventDefault();
 
@@ -54,9 +54,9 @@ export default function LoginPage() {
 
     return (
         <>
-            <h1>Login</h1>
+            <h1>Register</h1>
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleRegister}>
                 <div>
                     <label htmlFor="email">Email</label>
                     <input className="border" type="email" id="email" name="email" />
@@ -66,10 +66,10 @@ export default function LoginPage() {
                     <input className="border" type="password" id="password" name="password" />
                 </div>
                 <div>
-                    <button type="submit">Accedi</button>
+                    <button type="submit">Registrati</button>
                 </div>
                 <div>
-                    <Link to="/register">Crea un nuovo accout</Link>
+                    <div>Sei già membro? <Link to="/login">Accedi</Link></div>
                 </div>
             </form>
 

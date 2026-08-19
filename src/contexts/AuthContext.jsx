@@ -58,13 +58,13 @@ function AuthProvider({ children }) {
             );
 
             setUserAuth(null);
-            navigate('/login');
+            navigate('/');
 
         } catch (error) {
             console.log(error.response);
         } finally {
             setUserAuth(null);
-            navigate('/login');
+            navigate('/');
         }
 
     }
