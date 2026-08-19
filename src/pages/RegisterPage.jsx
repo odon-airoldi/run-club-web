@@ -23,10 +23,12 @@ export default function RegisterPage() {
                 }
             );
             // invio credenziali al backend, se corrette laravel autentica l'utente e rigenere il cookie di sessione in autenticato
-            await axios.post('http://api.run-club.test/login',
+            await axios.post('http://api.run-club.test/register',
                 {
+                    name: e.target.name.value,
                     email: e.target.email.value,
-                    password: e.target.password.value
+                    password: e.target.password.value,
+                    password_confirmation: e.target.password.value
                 },
                 {
                     // includi cookie di sessione autenticato
@@ -42,7 +44,7 @@ export default function RegisterPage() {
             // utilizzo la funzione offerta dal context per la verifica dell'autenticazione e salvataggio dei dati user nello state
             await checkAuth();
 
-            navigate('/dashboard')
+            navigate('/')
 
         } catch (error) {
 
@@ -58,12 +60,20 @@ export default function RegisterPage() {
 
             <form onSubmit={handleRegister}>
                 <div>
+                    <label htmlFor="name">Name</label>
+                    <input className="border" type="text" id="name" name="name" />
+                </div>
+                <div>
                     <label htmlFor="email">Email</label>
                     <input className="border" type="email" id="email" name="email" />
                 </div>
                 <div>
                     <label htmlFor="password">Password</label>
                     <input className="border" type="password" id="password" name="password" />
+                </div>
+                <div>
+                    <label htmlFor="password">Conferma password</label>
+                    <input className="border" type="password" id="password_confirmation" name="password_confirmation" />
                 </div>
                 <div>
                     <button type="submit">Registrati</button>
