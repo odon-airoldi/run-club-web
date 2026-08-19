@@ -60,10 +60,10 @@ export default function UsersPage() {
                                     {user.role}
                                 </div>
                                 <div>
+                                    {user.workouts.length}
                                     {/* {user.workouts.map((workout) => (
                                         <span key={workout.id}>{workout.id}</span>
                                     ))} */}
-                                    {user.workouts.length}
                                 </div>
                                 <div>
                                     {user.runs_workouts.length}

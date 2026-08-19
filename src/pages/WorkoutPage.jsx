@@ -84,15 +84,16 @@ export default function WorkoutPage() {
     return (
         <>
             <div className="p-4">
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-24">
                     <div className="col-span-1">
                         <div className="text-sm"><Link to={`/users/${workout.user_id}`}>Creato da {workout.user?.name}</Link></div>
 
-                        <h1 className="text-3xl font-bold text-indigo-800">{workout.name}</h1>
-                        <p className="">{workout.description}</p>
+                        <h1 className="text-3xl font-bold text-indigo-800 mb-4">{workout.name}</h1>
+                        <p className="mb-4">{workout.description}</p>
 
-                        {(userAuth?.role === 'admin' || userAuth?.id === workout.user_id) && // se user è admin o è proprietario del workout
-                            <div className="p-4">
+                        { // se user è admin o è proprietario del workout
+                            (userAuth?.role === 'admin' || userAuth?.id === workout.user_id) &&
+                            <div className="">
                                 <Link to={`/workout/${id}/edit`}>Modifica l'allenamento</Link>
                                 {!visibility ?
                                     <div>
@@ -105,7 +106,8 @@ export default function WorkoutPage() {
                                 }
                             </div>
                         }
-                        {(userAuth?.id !== workout.user_id) && // se user non è proprietario del workout
+                        { // se user non è proprietario del workout
+                            (userAuth?.id !== workout.user_id) &&
                             <div>
                                 <button onClick={userJoinWorkout} className="bg-indigo-800 hover:bg-indigo-700 px-6 py-4 text-white text-sm tracking-wider cursor-pointer uppercase duration-400 ease-in-out">
                                     {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
@@ -154,6 +156,19 @@ export default function WorkoutPage() {
                             <div>
                                 <div>Proiezione durata allenamento</div>
                                 <div className="text-indigo-500">{getWorkoutDurationTime(workout.distance, workout.pace)}</div>
+                            </div>
+                            <div className="col-span-3">
+                                <div>{workout.users_run?.length} Partecipanti</div>
+                                <div className="grid auto-cols-max grid-flow-col gap-4">
+                                    {
+
+                                        workout.users_run?.map((user) => (
+                                            <Link to={`/users/${user.id}`} key={user.id}>
+                                                <div className="">{user.name}</div>
+                                            </Link>
+                                        ))
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>

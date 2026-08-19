@@ -59,6 +59,18 @@ function WorkoutProvider({ children }) {
 
     }
 
+    function sortedWorkouts(workouts) {
+
+        const now = new Date();
+
+        const sorted = [
+            ...workouts.filter((workout) => new Date(workout.date_time) > now),
+            ...workouts.filter((workout) => new Date(workout.date_time) < now),
+        ]
+
+        return sorted
+    }
+
     return (
 
         // il provider offre ai componenti figli i valori che gli passo
@@ -69,7 +81,8 @@ function WorkoutProvider({ children }) {
                 workout,
                 setWorkout,
                 getWorkoutPaceTime,
-                getWorkoutDurationTime
+                getWorkoutDurationTime,
+                sortedWorkouts
             }}
         >
 

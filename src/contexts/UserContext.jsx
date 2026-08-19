@@ -67,6 +67,7 @@ function UserProvider({ children }) {
             value={{
                 user,
                 workouts,
+                setWorkouts,
                 runsWorkouts,
                 showUser,
                 userWorkouts,

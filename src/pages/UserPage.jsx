@@ -4,6 +4,7 @@ import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 import { useUser } from "../contexts/UserContext";
+import { useWorkout } from "../contexts/WorkoutContext";
 import AppWorkoutCard from "../components/AppWorkoutCard";
 
 export default function UserPage() {
@@ -13,10 +14,10 @@ export default function UserPage() {
     const { id } = useParams();
 
     const { userAuth } = useAuth();
-    const { user, workouts, runsWorkouts, showUser, userWorkouts, userRunsWorkouts } = useUser();
+    const { user, workouts, setWorkouts, runsWorkouts, showUser, userWorkouts, userRunsWorkouts } = useUser();
+    const { sortedWorkouts } = useWorkout();
 
-    console.log(user)
-
+    // console.log(user)
 
     useEffect(() => {
 
@@ -41,18 +42,21 @@ export default function UserPage() {
 
                     <div className="grid grid-cols-4 gap-4">
                         {
-                            workouts.map((workout) => (
+                            sortedWorkouts(workouts).map((workout) => (
                                 <AppWorkoutCard key={workout.id} workout={workout} />
                             ))
                         }
                     </div>
 
-                    {userAuth.id === user.id && < Link to="/workout/create">Aggiungi un allenamento</Link>}
+
+                    {   // se user autenticato è uguale a user in pagina
+                        userAuth.id === user.id && < Link to="/workout/create">Aggiungi un allenamento</Link>
+                    }
 
                     <h2 className="font-bold text-xl">Allenamenti a cui hai partecipato</h2>
                     <div className="grid grid-cols-4 gap-4">
                         {
-                            runsWorkouts.map((workout) => (
+                            sortedWorkouts(runsWorkouts).map((workout) => (
                                 <AppWorkoutCard key={workout.id} workout={workout} />
                             ))
                         }
