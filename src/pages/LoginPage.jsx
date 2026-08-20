@@ -42,7 +42,7 @@ export default function LoginPage() {
             // utilizzo la funzione offerta dal context per la verifica dell'autenticazione e salvataggio dei dati user nello state
             await checkAuth();
 
-            navigate('/dashboard')
+            navigate('/')
 
         } catch (error) {
 
