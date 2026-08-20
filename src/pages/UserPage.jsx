@@ -42,7 +42,10 @@ export default function UserPage() {
                 }
             )
 
-            setUserAuth(null)
+            if (userAuth.id === user.id) {
+                setUserAuth(null)
+            }
+
             navigate('/');
 
         } catch (error) {
@@ -50,6 +53,7 @@ export default function UserPage() {
         }
 
     }
+
 
     // se user non è autenticato redirect
     if (!userAuth) return <Navigate to="/" replace />
@@ -87,7 +91,7 @@ export default function UserPage() {
                     </div>
 
                     <div>
-                        <button onClick={handleDeleteUser}>elimina il tuo account</button>
+                        <button onClick={handleDeleteUser}>Elimina account</button>
                     </div>
                 </div >
             </>

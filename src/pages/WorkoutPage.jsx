@@ -86,7 +86,12 @@ export default function WorkoutPage() {
             <div className="p-4">
                 <div className="grid grid-cols-3 gap-24">
                     <div className="col-span-1">
-                        <div className="text-sm"><Link to={`/users/${workout.user_id}`}>Creato da {workout.user?.name}</Link></div>
+                        <div className="text-sm">
+                            Creato da {workout.user ?
+                                <Link to={`/users/${workout.user_id}`}>{workout.user?.name}</Link>
+                                : 'Utente eliminato'
+                            }
+                        </div>
 
                         <h1 className="text-3xl font-bold text-indigo-800 mb-4">{workout.name}</h1>
                         <p className="mb-4">{workout.description}</p>
