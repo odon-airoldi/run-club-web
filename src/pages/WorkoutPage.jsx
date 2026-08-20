@@ -72,7 +72,7 @@ export default function WorkoutPage() {
                     }
                 }
             )
-            navigate(`/`);
+            navigate('/');
 
         } catch (error) {
             console.log(error.response);

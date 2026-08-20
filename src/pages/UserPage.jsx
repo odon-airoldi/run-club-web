@@ -13,7 +13,7 @@ export default function UserPage() {
 
     const { id } = useParams();
 
-    const { userAuth } = useAuth();
+    const { userAuth, setUserAuth } = useAuth();
     const { user, workouts, setWorkouts, runsWorkouts, showUser, userWorkouts, userRunsWorkouts } = useUser();
     const { sortedWorkouts } = useWorkout();
 
@@ -26,6 +26,30 @@ export default function UserPage() {
         userRunsWorkouts(id);
 
     }, [id])
+
+
+    // user elimina account
+    async function handleDeleteUser() {
+
+        try {
+            const response = await axios.delete(`http://api.run-club.test/api/users/${id}`,
+                {
+                    withCredentials: true,
+                    withXSRFToken: true,
+                    headers: {
+                        Accept: 'application/json'
+                    }
+                }
+            )
+
+            setUserAuth(null)
+            navigate('/');
+
+        } catch (error) {
+            console.log(error.response)
+        }
+
+    }
 
     // se user non è autenticato redirect
     if (!userAuth) return <Navigate to="/" replace />
@@ -60,6 +84,10 @@ export default function UserPage() {
                                 <AppWorkoutCard key={workout.id} workout={workout} />
                             ))
                         }
+                    </div>
+
+                    <div>
+                        <button onClick={handleDeleteUser}>elimina il tuo account</button>
                     </div>
                 </div >
             </>
