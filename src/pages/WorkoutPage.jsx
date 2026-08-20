@@ -15,7 +15,6 @@ export default function WorkoutPage() {
     const { workout, showWorkout, getWorkoutPaceTime, getWorkoutDurationTime } = useWorkout();
     const [joinWorkout, setJoinWorkout] = useState(false);
 
-    console.log(workout)
 
     useEffect(() => {
 
@@ -112,7 +111,7 @@ export default function WorkoutPage() {
                             </div>
                         }
                         { // se user non è proprietario del workout
-                            (userAuth?.id !== workout.user_id) &&
+                            (userAuth?.id !== workout.user_id && new Date(workout.date_time) > new Date()) &&
                             <div>
                                 <button onClick={userJoinWorkout} className="bg-indigo-800 hover:bg-indigo-700 px-6 py-4 text-white text-sm tracking-wider cursor-pointer uppercase duration-400 ease-in-out">
                                     {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
