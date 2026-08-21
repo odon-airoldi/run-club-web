@@ -14,6 +14,7 @@ export default function WorkoutPage() {
     const { userAuth } = useAuth();
     const { workout, showWorkout, getWorkoutPaceTime, getWorkoutDurationTime } = useWorkout();
     const [joinWorkout, setJoinWorkout] = useState(false);
+    const now = new Date();
 
 
     useEffect(() => {
@@ -110,13 +111,17 @@ export default function WorkoutPage() {
                                 }
                             </div>
                         }
-                        { // se user non è proprietario del workout
-                            (userAuth?.id !== workout.user_id && new Date(workout.date_time) > new Date()) &&
-                            <div>
-                                <button onClick={userJoinWorkout} className="bg-indigo-800 hover:bg-indigo-700 px-6 py-4 text-white text-sm tracking-wider cursor-pointer uppercase duration-400 ease-in-out">
-                                    {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
-                                </button>
-                            </div>
+                        { // se user non è proprietario del workout e la data del workout è maggiore rispetto alla data attuale
+                            userAuth?.id !== workout.user_id &&
+
+                                new Date(workout.date_time) > now ?
+                                <div>
+                                    <button onClick={userJoinWorkout} className="bg-indigo-800 hover:bg-indigo-700 px-6 py-4 text-white text-sm tracking-wider cursor-pointer uppercase duration-400 ease-in-out">
+                                        {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
+                                    </button>
+                                </div>
+                                : <div>Workout concluso</div>
+
                         }
                     </div>
                     <div className="col-span-2">
@@ -162,8 +167,16 @@ export default function WorkoutPage() {
                                 <div className="text-indigo-500">{getWorkoutDurationTime(workout.distance, workout.pace)}</div>
                             </div>
                             <div className="col-span-3">
-                                <div>{workout.users_run?.length} Partecipanti</div>
+                                <div>
+                                    {workout.users_run?.length + 1}
+                                    {
+                                        new Date(workout.date_time) > now
+                                            ? workout.users_run?.length > 1 ? 'persone parteciperanno' : 'persona parteciperà'
+                                            : workout.users_run?.length > 1 ? 'persone hanno partecipato' : 'persona ha partecipato'
+                                    }
+                                </div>
                                 <div className="grid auto-cols-max grid-flow-col gap-4">
+                                    {workout.user?.name}
                                     {
 
                                         workout.users_run?.map((user) => (
