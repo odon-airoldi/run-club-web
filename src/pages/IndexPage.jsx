@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import AppLink from "../components/AppLink";
 
 export default function IndexPage() {
 
@@ -11,8 +12,8 @@ export default function IndexPage() {
 
             {!userAuth &&
                 <div>
-                    <div>Sei già membro? <Link to="/login">Accedi</Link></div>
-                    <div>oppure <Link to="/register">iscriviti</Link></div>
+                    <div>Sei già membro? <AppLink to="/login">Accedi</AppLink></div>
+                    <div>oppure <AppLink to="/register">iscriviti</AppLink></div>
                 </div>
             }
         </div>
