@@ -63,10 +63,10 @@ export default function LoginPage() {
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form onSubmit={handleLogin} className="space-y-6">
                     <div>
-                        <AppInput type="email" name="email" label="Email" />
+                        <AppInput type="email" id="email" name="email" label="Email" />
                     </div>
                     <div>
-                        <AppInput type="password" name="password" label="Password" />
+                        <AppInput type="password" id="password" name="password" label="Password" />
                     </div>
                     <div>
                         <AppButton type="submit">Accedi</AppButton>

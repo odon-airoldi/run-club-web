@@ -5,7 +5,7 @@ import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 import AppLink from "../components/AppLink";
 import AppButton from "../components/AppButtton";
-
+import AppInput from "../components/AppInput";
 
 export default function WorkoutCreatePage() {
 
@@ -61,38 +61,17 @@ export default function WorkoutCreatePage() {
         <>
             <h1>Aggiungi un allenamento</h1>
             <form onSubmit={addWorkout}>
-                <div>
-                    <label htmlFor="name">Name</label>
-                    <input className="border" type="text" id="name" name="name" />
-                </div>
+                <AppInput type="text" name="name" label="Nome" />
                 <div>
                     <label htmlFor="description">Description</label>
                     <textarea className="border" type="text" id="description" name="description"></textarea>
                 </div>
-                <div>
-                    <label htmlFor="date">Data</label>
-                    <input className="border" type="date" id="date" name="date" />
-                </div>
-                <div>
-                    <label htmlFor="time">Ora</label>
-                    <input className="border" type="time" id="time" name="time" />
-                </div>
-                <div>
-                    <label htmlFor="place_city">Città</label>
-                    <input className="border" type="text" id="place_city" name="place_city" />
-                </div>
-                <div>
-                    <label htmlFor="place_address">Indirizzo</label>
-                    <input className="border" type="text" id="place_address" name="place_address" />
-                </div>
-                <div>
-                    <label htmlFor="buffer_time">Tempo di attesa</label>
-                    <input className="border" type="number" id="buffer_time" name="buffer_time" /> min
-                </div>
-                <div>
-                    <label htmlFor="distance">Distanza</label>
-                    <input className="border" type="number" id="distance" name="distance" /> Km
-                </div>
+                <AppInput type="date" name="date" label="Data" />
+                <AppInput type="time" name="time" label="Ora" />
+                <AppInput type="text" name="place_city" label="Città" />
+                <AppInput type="text" name="place_address" label="Indirizzo" />
+                <AppInput type="number" name="buffer_time" label="Tempo di attesa" />
+                <AppInput type="number" name="distance" label="Distanza" />
                 <div>
                     <label htmlFor="pace_m">Passo</label>
                     <input className="border" type="number" id="pace_m" name="pace_m" min="0" max="59" /> min

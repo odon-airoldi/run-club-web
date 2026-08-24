@@ -67,10 +67,10 @@ export default function RegisterPage() {
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form onSubmit={handleRegister} className="space-y-6">
-                        <AppInput type="name" name="name" label="Nome" />
-                        <AppInput type="email" name="email" label="Email" />
-                        <AppInput type="password" name="password" label="Password" />
-                        <AppInput type="password" name="password_confirmation" label="Conferma Password" />
+                        <AppInput type="name" id="name" name="name" label="Nome" />
+                        <AppInput type="email" id="email" name="email" label="Email" />
+                        <AppInput type="password" id="password" name="password" label="Password" />
+                        <AppInput type="password" id="password_confirmation" name="password_confirmation" label="Conferma Password" />
                         <AppButton type="submit">Registrati</AppButton>
                     </form>
 
