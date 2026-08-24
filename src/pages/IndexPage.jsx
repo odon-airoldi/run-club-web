@@ -7,7 +7,7 @@ export default function IndexPage() {
 
     return (
         <div className="p-4">
-            <h1 className="font-bold text-8xl mb-4">RUN CLUB</h1>
+            <h1 className="font-semibold text-8xl mb-4 font-zalando text-indigo-800">Run Club</h1>
 
             {!userAuth &&
                 <div>

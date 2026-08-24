@@ -5,6 +5,7 @@ import axios from "axios";
 import AppWorkoutCard from "../components/AppWorkoutCard";
 import { useAuth } from "../contexts/AuthContext";
 import { useWorkout } from "../contexts/WorkoutContext";
+import AppLink from "../components/AppLink";
 
 
 export default function WorkoutsPage() {
@@ -43,7 +44,7 @@ export default function WorkoutsPage() {
 
     return (
         <div className="p-4">
-            <h2 className="text-8xl font-bold text-indigo-800">Allenamenti</h2>
+            <h2 className="font-semibold text-8xl mb-4 font-zalando text-indigo-800">Allenamenti</h2>
             <div className="grid grid-cols-4 gap-4">
                 {
 
@@ -55,7 +56,7 @@ export default function WorkoutsPage() {
 
 
             { // se user è autenticato
-                userAuth && <Link to="/workout/create">Aggiungi un allenamento</Link>
+                userAuth && <AppLink to="/workout/create">Aggiungi un allenamento</AppLink>
             }
 
         </div>

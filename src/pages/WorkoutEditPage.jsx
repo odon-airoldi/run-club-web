@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useWorkout } from "../contexts/WorkoutContext";
+import AppButton from "../components/AppButtton";
+import AppLink from "../components/AppLink";
 import axios from "axios";
 
 
@@ -147,11 +149,11 @@ export default function WorkoutEditPage() {
                             <input className="border" type="number" id="pace_s" name="pace_s" min="0" max="59" value={editWorkout.pace_s} onChange={handleChange} /> sec
                         </div>
                         <div>
-                            <button type="submit">Modifica</button>
+                            <AppButton type="submit">Modifica</AppButton>
                         </div>
                     </form>
 
-                    <Link to="/">Tutti gli allenamenti</Link>
+                    <AppLink to="/workouts">Tutti gli allenamenti</AppLink>
                 </div>
             }
         </>

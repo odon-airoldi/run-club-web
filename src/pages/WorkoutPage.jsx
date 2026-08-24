@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useWorkout } from "../contexts/WorkoutContext";
+import AppLink from "../components/AppLink";
+import AppButton from "../components/AppButtton";
 import axios from "axios";
 
 
@@ -99,11 +101,10 @@ export default function WorkoutPage() {
                         { // se user è admin o è proprietario del workout
                             (userAuth?.role === 'admin' || userAuth?.id === workout.user_id) &&
                             <div className="">
-                                <Link to={`/workout/${id}/edit`}>Modifica l'allenamento</Link>
+                                <AppLink to={`/workout/${id}/edit`}>Modifica</AppLink>
                                 {!visibility ?
-                                    <div>
-                                        <button type="button" onClick={handleDeleteWorkout}>Elimina allenamento</button>
-                                    </div>
+
+                                    <AppButton onClick={handleDeleteWorkout}>Elimina allenamento</AppButton>
                                     :
                                     <div>
                                         <button onClick={() => deleteWorkout()}>Vuoi eliminare definitivamente l'allenamento?</button>
@@ -116,9 +117,9 @@ export default function WorkoutPage() {
 
                                 new Date(workout.date_time) > now ?
                                 <div>
-                                    <button onClick={userJoinWorkout} className="bg-indigo-800 hover:bg-indigo-700 px-6 py-4 text-white text-sm tracking-wider cursor-pointer uppercase duration-400 ease-in-out">
+                                    <AppButton onClick={userJoinWorkout}>
                                         {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
-                                    </button>
+                                    </AppButton>
                                 </div>
                                 : <div>Workout concluso</div>
 

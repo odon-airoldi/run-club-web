@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@import "@fontsource-variable/zalando-sans-semiexpanded/wght.css";
+
+.font-zalando {
+    font-family: 'Zalando Sans SemiExpanded Variable', sans-serif;
+}

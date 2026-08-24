@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
+import AppLink from "../components/AppLink";
+import AppButton from "../components/AppButtton";
 
 
 export default function WorkoutCreatePage() {
@@ -97,11 +99,11 @@ export default function WorkoutCreatePage() {
                     <input className="border" type="number" id="pace_s" name="pace_s" min="0" max="59" /> sec
                 </div>
                 <div>
-                    <button type="submit">Aggiungi</button>
+                    <AppButton type="submit">Aggiungi</AppButton>
                 </div>
             </form>
 
-            <Link to="/">Tutti gli allenamenti</Link>
+            <AppLink to="/workouts">Tutti gli allenamenti</AppLink>
         </>
     );
 

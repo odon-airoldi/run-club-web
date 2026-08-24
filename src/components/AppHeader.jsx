@@ -8,25 +8,27 @@ export default function AppHeader() {
     // console.log(user)
 
     return (
-        <header>
+        <header className="bg-linear-to-r from-gray-200 to-white">
+
             {userAuth?.role == 'admin' &&
-                <div className="bg-indigo-900">
-                    <ul className="flex">
-                        <li className="p-2 text-white">Ciao Admin</li>
-                        <li className="p-2 text-white"><Link to="/users">Users</Link></li>
+                <div className="px-12 py-2 bg-indigo-900">
+                    <ul className="flex gap-8 uppercase text-xs tracking-widest">
+                        <li className="text-white">Ciao Admin</li>
+                        <li className="text-white"><Link to="/users">Users</Link></li>
                     </ul>
                 </div>
             }
 
-            <ul className="flex">
-                <li className="p-4"><Link to="/">Home</Link></li>
-                <li className="p-4"><Link to="/workouts">Allenamenti</Link></li>
-                <li className="p-4">
-                    {userAuth ? <div>Ciao {userAuth.name} <Link onClick={logoutAuth}>Logout</Link></div> : <Link to="/login">Login</Link>}
-                </li>
-                {userAuth && <li className="p-4"><Link to={`/users/${userAuth.id}`}>Profilo</Link></li>}
-
-            </ul>
+            <div className="px-12 py-6">
+                <ul className="flex gap-12 font-zalando font-semibold uppercase text-sm tracking-wide text-indigo-900">
+                    <li className=""><Link to="/">Home</Link></li>
+                    <li className=""><Link to="/workouts">Allenamenti</Link></li>
+                    <li className="">
+                        {userAuth ? <div>Ciao {userAuth.name} <Link onClick={logoutAuth}>Logout</Link></div> : <Link to="/login">Login</Link>}
+                    </li>
+                    {userAuth && <li className=""><Link to={`/users/${userAuth.id}`}>Profilo</Link></li>}
+                </ul>
+            </div>
         </header>
     )
 
