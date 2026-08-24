@@ -31,7 +31,7 @@ export default function RegisterPage() {
                     name: e.target.name.value,
                     email: e.target.email.value,
                     password: e.target.password.value,
-                    password_confirmation: e.target.password.value
+                    password_confirmation: e.target.password_confirmation.value
                 },
                 {
                     // includi cookie di sessione autenticato
