@@ -107,7 +107,7 @@ export default function WorkoutPage() {
                                     <AppButton onClick={handleDeleteWorkout}>Elimina allenamento</AppButton>
                                     :
                                     <div>
-                                        <button onClick={() => deleteWorkout()}>Vuoi eliminare definitivamente l'allenamento?</button>
+                                        <AppButton onClick={() => deleteWorkout()}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
                                     </div >
                                 }
                             </div>

@@ -8,7 +8,7 @@ export default function AppHeader() {
     // console.log(user)
 
     return (
-        <header className="bg-linear-to-r from-gray-200 to-white">
+        <header className="">
 
             {userAuth?.role == 'admin' &&
                 <div className="px-12 py-2 bg-indigo-900">
@@ -20,10 +20,10 @@ export default function AppHeader() {
             }
 
             <div className="px-12 py-6">
-                <ul className="flex gap-12 font-zalando font-semibold uppercase text-sm tracking-wide text-indigo-900">
-                    <li className=""><Link to="/">Home</Link></li>
-                    <li className=""><Link to="/workouts">Allenamenti</Link></li>
-                    <li className="">
+                <ul className="flex gap-12 font-zalando font-semibold uppercase- text-lg tracking-wide text-mauve-500">
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/workouts">Allenamenti</Link></li>
+                    <li>
                         {userAuth ? <div>Ciao {userAuth.name} <Link onClick={logoutAuth}>Logout</Link></div> : <Link to="/login">Login</Link>}
                     </li>
                     {userAuth && <li className=""><Link to={`/users/${userAuth.id}`}>Profilo</Link></li>}
