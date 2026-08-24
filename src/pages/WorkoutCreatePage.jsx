@@ -66,20 +66,15 @@ export default function WorkoutCreatePage() {
                     <label htmlFor="description">Description</label>
                     <textarea className="border" type="text" id="description" name="description"></textarea>
                 </div>
-                <AppInput type="date" name="date" label="Data" />
-                <AppInput type="time" name="time" label="Ora" />
-                <AppInput type="text" name="place_city" label="Città" />
-                <AppInput type="text" name="place_address" label="Indirizzo" />
-                <AppInput type="number" name="buffer_time" label="Tempo di attesa" />
-                <AppInput type="number" name="distance" label="Distanza" />
-                <div>
-                    <label htmlFor="pace_m">Passo</label>
-                    <input className="border" type="number" id="pace_m" name="pace_m" min="0" max="59" /> min
-                    <input className="border" type="number" id="pace_s" name="pace_s" min="0" max="59" /> sec
-                </div>
-                <div>
-                    <AppButton type="submit">Aggiungi</AppButton>
-                </div>
+                <AppInput type="date" id="date" name="date" label="Data" />
+                <AppInput type="time" id="time" name="time" label="Ora" />
+                <AppInput type="text" id="place_city" name="place_city" label="Città" />
+                <AppInput type="text" id="place_address" name="place_address" label="Indirizzo" />
+                <AppInput type="number" id="buffer_time" name="buffer_time" label="Tempo di attesa" />
+                <AppInput type="number" id="distance" name="distance" label="Distanza" />
+                <AppInput type="number" id="pace_m" name="pace_m" min="0" max="59" label="passo" />
+                <AppInput type="number" id="pace_s" name="pace_s" min="0" max="59" />
+                <AppButton type="submit">Aggiungi</AppButton>
             </form>
 
             <AppLink to="/workouts">Tutti gli allenamenti</AppLink>
