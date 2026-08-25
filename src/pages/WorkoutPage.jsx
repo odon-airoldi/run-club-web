@@ -57,9 +57,9 @@ export default function WorkoutPage() {
 
     // delete workout
 
-    const [visibility, setVisibility] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
     function handleDeleteWorkout() {
-        setVisibility(true)
+        setOpenModal(true)
     }
 
     async function deleteWorkout() {
@@ -201,11 +201,10 @@ export default function WorkoutPage() {
                 (userAuth?.role === 'admin' || userAuth?.id === workout.user_id) &&
                 <div className="my-4 flex gap-1">
                     <AppLink to={`/workout/${id}/edit`}>Modifica</AppLink>
-                    {!visibility ?
 
-                        <AppButton onClick={handleDeleteWorkout}>Elimina</AppButton>
-                        :
-                        <div>
+                    <AppButton onClick={handleDeleteWorkout}>Elimina</AppButton>
+                    {openModal &&
+                        <div className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center" onClick={() => setOpenModal(false)}>
                             <AppButton onClick={() => deleteWorkout()}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
                         </div >
                     }
