@@ -113,15 +113,13 @@ export default function WorkoutPage() {
                             </div>
                         }
                         { // se user non è proprietario del workout e la data del workout è maggiore rispetto alla data attuale
-                            userAuth?.id !== workout.user_id &&
-
+                            userAuth?.id !== workout.user_id && (
                                 new Date(workout.date_time) > now ?
-                                <div>
                                     <AppButton onClick={userJoinWorkout}>
                                         {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
                                     </AppButton>
-                                </div>
-                                : <div>Workout concluso</div>
+                                    : <div>Workout concluso</div>
+                            )
 
                         }
                     </div>
