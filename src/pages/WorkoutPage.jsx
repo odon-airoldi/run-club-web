@@ -17,6 +17,7 @@ export default function WorkoutPage() {
     const { workout, showWorkout, getWorkoutPaceTime, getWorkoutDurationTime } = useWorkout();
     const [joinWorkout, setJoinWorkout] = useState(false);
     const now = new Date();
+    const [openModal, setOpenModal] = useState(false);
 
 
     useEffect(() => {
@@ -56,12 +57,6 @@ export default function WorkoutPage() {
     }
 
     // delete workout
-
-    const [openModal, setOpenModal] = useState(false);
-    function handleDeleteWorkout() {
-        setOpenModal(true)
-    }
-
     async function deleteWorkout() {
 
         try {
@@ -202,10 +197,10 @@ export default function WorkoutPage() {
                 <div className="my-4 flex gap-1">
                     <AppLink to={`/workout/${id}/edit`}>Modifica</AppLink>
 
-                    <AppButton onClick={handleDeleteWorkout}>Elimina</AppButton>
+                    <AppButton onClick={() => setOpenModal(true)}>Elimina</AppButton>
                     {openModal &&
-                        <div className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center" onClick={() => setOpenModal(false)}>
-                            <AppButton onClick={() => deleteWorkout()}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
+                        <div onClick={() => setOpenModal(false)} className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
+                            <AppButton onClick={deleteWorkout}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
                         </div >
                     }
                 </div>

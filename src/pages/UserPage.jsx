@@ -19,6 +19,8 @@ export default function UserPage() {
     const { user, workouts, setWorkouts, runsWorkouts, showUser, userWorkouts, userRunsWorkouts } = useUser();
     const { sortedWorkouts } = useWorkout();
 
+    const [openModal, setOpenModal] = useState(false);
+
     // console.log(user)
 
     useEffect(() => {
@@ -93,7 +95,13 @@ export default function UserPage() {
 
                 <div>
                     <AppButton onClick={logoutAuth}>Logout</AppButton>
-                    <AppButton onClick={handleDeleteUser}>Elimina account</AppButton>
+
+                    <AppButton onClick={() => setOpenModal(true)}>Elimina account</AppButton>
+                    {openModal &&
+                        <div className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center" onClick={() => setOpenModal(false)}>
+                            <AppButton onClick={handleDeleteUser}>Vuoi eliminare definitivamente il tuo account?</AppButton>
+                        </div >
+                    }
                 </div>
             </div >
         );
