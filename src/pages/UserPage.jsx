@@ -15,7 +15,7 @@ export default function UserPage() {
 
     const { id } = useParams();
 
-    const { userAuth, setUserAuth } = useAuth();
+    const { userAuth, setUserAuth, logoutAuth } = useAuth();
     const { user, workouts, setWorkouts, runsWorkouts, showUser, userWorkouts, userRunsWorkouts } = useUser();
     const { sortedWorkouts } = useWorkout();
 
@@ -92,6 +92,7 @@ export default function UserPage() {
                 </div>
 
                 <div>
+                    <AppButton onClick={logoutAuth}>Logout</AppButton>
                     <AppButton onClick={handleDeleteUser}>Elimina account</AppButton>
                 </div>
             </div >

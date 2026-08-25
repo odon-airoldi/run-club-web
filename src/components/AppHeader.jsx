@@ -3,7 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 export default function AppHeader() {
 
-    const { userAuth, logoutAuth } = useAuth();
+    const { userAuth } = useAuth();
 
     // console.log(user)
 
@@ -19,17 +19,18 @@ export default function AppHeader() {
                 </div>
             }
 
-            <div className="px-12 py-6">
+            <div className="px-12 py-6 flex justify-between">
                 <ul className="flex gap-12 font-zalando font-semibold uppercase- text-lg tracking-wide text-mauve-500">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/workouts">Allenamenti</Link></li>
+                </ul>
+                <ul className="flex gap-12 font-zalando font-semibold uppercase- text-lg tracking-wide text-mauve-500">
                     <li>
-                        {userAuth ? <div>Ciao {userAuth.name} <Link onClick={logoutAuth}>Logout</Link></div> : <Link to="/login">Login</Link>}
+                        {userAuth ? <Link to={`/users/${userAuth.id}`}>Ciao {userAuth.name}</Link> : <div><Link to="/login">Accedi</Link> o <Link to="/register">Registrati</Link></div>}
                     </li>
-                    {userAuth && <li className=""><Link to={`/users/${userAuth.id}`}>Profilo</Link></li>}
                 </ul>
             </div>
-        </header>
+        </header >
     )
 
 

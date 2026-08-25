@@ -87,8 +87,8 @@ export default function WorkoutPage() {
         <div className="">
             <div className="border border-mauve-300 rounded-sm text-mauve-600">
                 <div className="grid grid-cols-2">
-                    <div className="p-4 border-r border-mauve-300">
-                        <div className="flex gap-6 text-xl uppercase mb-2">
+                    <div className="border-r border-mauve-300">
+                        <div className="p-4 flex gap-6 text-xl uppercase mb-2 border-b border-mauve-300">
                             <div>
                                 <span className="text-mauve-400">
                                     {new Date(workout.date_time).toLocaleDateString('it-IT', {
@@ -115,75 +115,80 @@ export default function WorkoutPage() {
                             </div>
 
                         </div>
-
-                        <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-8">{workout.name}</h1>
-                        <p className="mb-4 text-mauve-600">{workout.description}</p>
-
-                        <div>
-                            <div className="text-sm">
-                                Creato da {workout.user ?
-                                    <Link to={`/users/${workout.user_id}`}>{workout.user?.name}</Link>
-                                    : 'Utente eliminato'
-                                }
+                        <div className="px-4 pt-2 pb-4">
+                            <div className="text-xs uppercase text-mauve-400 mb-1">
+                                Creato da {workout.user ? workout.user.name : 'Utente eliminato'}
                             </div>
+                            <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">{workout.name}</h1>
 
-                            <div>
-                                {workout.users_run?.length + 1}
-                                {
-                                    new Date(workout.date_time) > now
-                                        ? workout.users_run?.length > 1 ? 'persone parteciperanno' : 'persona parteciperà'
-                                        : workout.users_run?.length > 1 ? 'persone hanno partecipato' : 'persona ha partecipato'
-                                }
-                            </div>
-                            <div className="grid auto-cols-max grid-flow-col gap-4">
-                                {workout.user?.name}
-                                {
+                            <p className="mb-6 text-mauve-600">{workout.description}</p>
 
-                                    workout.users_run?.map((user) => (
-                                        <Link to={`/users/${user.id}`} key={user.id}>
-                                            <div className="">{user.name}</div>
+                            <div className="flex justify-between items-end">
+
+                                <div>
+                                    <div className="grid auto-cols-max grid-flow-col gap-1 text-white text-sm/[30px] mb-2">
+                                        <Link to={`/users/${workout.user?.id}`} className="w-[32px] aspect-square rounded-full bg-mauve-400 flex justify-center">
+                                            {workout.user?.name.split(' ').map(i => i[0]).join('')}
                                         </Link>
-                                    ))
-                                }
+                                        {
+                                            workout.users_run?.map((user) => (
+                                                <Link to={`/users/${user.id}`} key={user.id} className="w-[32px] aspect-square rounded-full bg-mauve-400 flex justify-center">
+                                                    <div className="">{user.name.split(' ').map(i => i[0]).join('')}</div>
+                                                </Link>
+                                            ))
+                                        }
+                                    </div>
+                                    <div className="text-xs uppercase text-mauve-400">
+                                        {workout.users_run?.length + 1}
+                                        {
+                                            new Date(workout.date_time) > now
+                                                ? (workout.users_run?.length + 1 > 1 ? ' persone parteciperanno' : ' persona parteciperà')
+                                                : (workout.users_run?.length + 1 > 1 ? ' persone hanno partecipato' : ' persona ha partecipato')
+                                        }
+                                    </div>
+                                </div>
+
+                                <div>
+                                    { // se user non è proprietario del workout e la data del workout è maggiore rispetto alla data attuale
+                                        userAuth?.id !== workout.user_id && (
+                                            new Date(workout.date_time) > now ?
+                                                <AppButton onClick={userJoinWorkout}>
+                                                    {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
+                                                </AppButton>
+                                                : <div>Workout concluso</div>
+                                        )
+
+                                    }
+                                </div>
                             </div>
 
-                            { // se user non è proprietario del workout e la data del workout è maggiore rispetto alla data attuale
-                                userAuth?.id !== workout.user_id && (
-                                    new Date(workout.date_time) > now ?
-                                        <AppButton onClick={userJoinWorkout}>
-                                            {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
-                                        </AppButton>
-                                        : <div>Workout concluso</div>
-                                )
-
-                            }
                         </div>
                     </div>
                     <div className="p-4">
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-2 gap-8">
 
                             <div>
-                                <div>Luogo di partenza</div>
+                                <div className="text-xs mb-1 uppercase text-mauve-400">Punto di ritrovo</div>
                                 <div className="text-indigo-500">
                                     {workout.place_city}<br />
                                     {workout.place_address}
                                 </div>
                             </div>
                             <div>
-                                <div>Durata ritrovo gruppo</div>
-                                <div className="text-indigo-500">{workout.buffer_time} min</div>
+                                <div className="text-xs mb-1 uppercase text-mauve-400">Tempo di attesa</div>
+                                <div className="text-indigo-500">{workout.buffer_time} Min</div>
                             </div>
 
                             <div>
-                                <div>Distanza</div>
+                                <div className="text-xs mb-1 uppercase text-mauve-400">Distanza</div>
                                 <div className="text-indigo-500">{workout.distance} Km</div>
                             </div>
                             <div>
-                                <div>Passo</div>
-                                <div className="text-indigo-500">{minutes}:{seconds}</div>
+                                <div className="text-xs mb-1 uppercase text-mauve-400">Passo</div>
+                                <div className="text-indigo-500">{minutes}:{seconds} Min/Km</div>
                             </div>
                             <div>
-                                <div>Proiezione durata allenamento</div>
+                                <div className="text-xs mb-1 uppercase text-mauve-400">Stima tempo</div>
                                 <div className="text-indigo-500">{getWorkoutDurationTime(workout.distance, workout.pace)}</div>
                             </div>
                         </div>
@@ -198,7 +203,7 @@ export default function WorkoutPage() {
                     <AppLink to={`/workout/${id}/edit`}>Modifica</AppLink>
                     {!visibility ?
 
-                        <AppButton onClick={handleDeleteWorkout}>Elimina allenamento</AppButton>
+                        <AppButton onClick={handleDeleteWorkout}>Elimina</AppButton>
                         :
                         <div>
                             <AppButton onClick={() => deleteWorkout()}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
