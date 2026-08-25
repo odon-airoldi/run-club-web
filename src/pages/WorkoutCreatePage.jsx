@@ -6,6 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 import AppLink from "../components/AppLink";
 import AppButton from "../components/AppButtton";
 import AppInput from "../components/AppInput";
+import AppTextarea from "../components/AppTextarea";
 
 export default function WorkoutCreatePage() {
 
@@ -61,11 +62,8 @@ export default function WorkoutCreatePage() {
         <>
             <h1>Aggiungi un allenamento</h1>
             <form onSubmit={addWorkout}>
-                <AppInput type="text" name="name" label="Nome" />
-                <div>
-                    <label htmlFor="description">Description</label>
-                    <textarea className="border" type="text" id="description" name="description"></textarea>
-                </div>
+                <AppInput type="text" id="name" name="name" label="Nome" />
+                <AppTextarea type="text" id="description" name="description" label="Descrizione" />
                 <AppInput type="date" id="date" name="date" label="Data" />
                 <AppInput type="time" id="time" name="time" label="Ora" />
                 <AppInput type="text" id="place_city" name="place_city" label="Città" />
