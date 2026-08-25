@@ -5,6 +5,8 @@ import { useAuth } from "../contexts/AuthContext";
 import { useWorkout } from "../contexts/WorkoutContext";
 import AppButton from "../components/AppButtton";
 import AppLink from "../components/AppLink";
+import AppInput from "../components/AppInput";
+import AppTextarea from "../components/AppTextarea";
 import axios from "axios";
 
 
@@ -111,46 +113,17 @@ export default function WorkoutEditPage() {
                 <div>
                     <h1>Aggiorna l'allenamento</h1>
                     <form onSubmit={handleSubmitWorkout}>
-                        <div>
-                            <label htmlFor="name">Name</label>
-                            <input className="border" type="text" id="name" name="name" value={editWorkout.name} onChange={handleChange} />
-                        </div>
-                        <div>
-                            <label htmlFor="description">Description</label>
-                            <textarea className="border" type="text" id="description" name="description" value={editWorkout.description} onChange={handleChange} />
-                        </div>
-                        <div>
-                            <label htmlFor="date">Data</label>
-                            <input className="border" type="date" id="date" name="date" value={editWorkout.date} onChange={handleChange} />
-                        </div>
-                        <div>
-                            <label htmlFor="time">Ora</label>
-                            <input className="border" type="time" id="time" name="time" value={editWorkout.time} onChange={handleChange} />
-                        </div>
-                        <div>
-                            <label htmlFor="place_city">Città</label>
-                            <input className="border" type="text" id="place_city" name="place_city" value={editWorkout.place_city} onChange={handleChange} />
-                        </div>
-                        <div>
-                            <label htmlFor="place_address">Indirizzo</label>
-                            <input className="border" type="text" id="place_address" name="place_address" value={editWorkout.place_address} onChange={handleChange} />
-                        </div>
-                        <div>
-                            <label htmlFor="buffer_time">Tempo di attesa</label>
-                            <input className="border" type="number" id="buffer_time" name="buffer_time" value={editWorkout.buffer_time} onChange={handleChange} /> min
-                        </div>
-                        <div>
-                            <label htmlFor="distance">Distanza</label>
-                            <input className="border" type="number" id="distance" name="distance" value={editWorkout.distance} onChange={handleChange} /> Km
-                        </div>
-                        <div>
-                            <label htmlFor="pace_m">Passo</label>
-                            <input className="border" type="number" id="pace_m" name="pace_m" min="0" max="59" value={editWorkout.pace_m} onChange={handleChange} /> min
-                            <input className="border" type="number" id="pace_s" name="pace_s" min="0" max="59" value={editWorkout.pace_s} onChange={handleChange} /> sec
-                        </div>
-                        <div>
-                            <AppButton type="submit">Modifica</AppButton>
-                        </div>
+                        <AppInput type="text" id="name" name="name" label="Nome" value={editWorkout.name} onChange={handleChange} />
+                        <AppTextarea type="text" id="description" name="description" label="Descrizione" value={editWorkout.description} onChange={handleChange} />
+                        <AppInput type="date" id="date" name="date" label="Data" value={editWorkout.date} onChange={handleChange} />
+                        <AppInput type="time" id="time" name="time" label="Ora" value={editWorkout.time} onChange={handleChange} />
+                        <AppInput type="text" id="place_city" name="place_city" label="Città" value={editWorkout.place_city} onChange={handleChange} />
+                        <AppInput type="text" id="place_address" name="place_address" label="Indirizzo" value={editWorkout.place_address} onChange={handleChange} />
+                        <AppInput type="number" id="buffer_time" name="buffer_time" label="Tempo di attesa" value={editWorkout.buffer_time} onChange={handleChange} />
+                        <AppInput type="number" id="distance" name="distance" label="Distanza" value={editWorkout.distance} onChange={handleChange} />
+                        <AppInput type="number" id="pace_m" name="pace_m" min="0" max="59" label="passo" value={editWorkout.pace_m} onChange={handleChange} />
+                        <AppInput type="number" id="pace_s" name="pace_s" min="0" max="59" value={editWorkout.pace_s} onChange={handleChange} />
+                        <AppButton type="submit">Modifica</AppButton>
                     </form>
 
                     <AppLink to="/workouts">Tutti gli allenamenti</AppLink>
