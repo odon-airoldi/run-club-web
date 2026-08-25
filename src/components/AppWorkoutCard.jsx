@@ -38,7 +38,7 @@ export default function AppWorkoutCard({ workout }) {
                     <div className="text-xs mb-1 uppercase text-mauve-400">
                         {workout.place_city}
                     </div>
-                    <h2 className="font-zalando font-semibold text-lg/6 text-indigo-800 mb-2">{workout.name}</h2>
+                    <h2 className="font-zalando font-semibold text-lg/6 text-indigo-600 mb-2">{workout.name}</h2>
                 </div>
 
                 <div className="flex justify-between px-4 py-2 text-sm text-xs uppercase">

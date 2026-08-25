@@ -36,29 +36,30 @@ export default function UsersPage() {
 
     return (
         <div className="">
-            <h1 className="font-bold text-8xl">Users List</h1>
 
-            <div className="grid grid-cols-1 gap-4">
-                <div className="grid grid-cols-5 gap-4 border-b border-gray-200">
+            <h1 className="font-semibold text-8xl mb-4 font-zalando text-indigo-600">Users List</h1>
+
+            <div className="flex flex-col">
+                <div className="grid grid-cols-9 gap-4 py-2 border-b border-gray-200 text-xs uppercase text-mauve-400">
                     <div>ID</div>
-                    <div>Nome</div>
-                    <div>Ruolo</div>
-                    <div>Allenamenti creati</div>
-                    <div>Allenamenti a cui si è unito</div>
+                    <div className="col-span-2">Nome</div>
+                    <div className="col-span-2">Ruolo</div>
+                    <div className="col-span-2">Allenamenti creati</div>
+                    <div className="col-span-2">Allenamenti a cui si è unito</div>
                 </div>
                 {
                     users.map((user) => (
-                        <div className="grid grid-cols-5 gap-4 border-b border-gray-200" key={user.id}>
+                        <div className="grid grid-cols-9 gap-4 py-2 border-b border-gray-200 text-sm text-mauve-600" key={user.id}>
                             <div>
                                 {user.id}
                             </div>
-                            <div>
-                                <Link to={`/users/${user.id}`}>{user.name}</Link>
+                            <div className="col-span-2">
+                                <Link className="text-indigo-600" to={`/users/${user.id}`}>{user.name}</Link>
                             </div>
-                            <div>
+                            <div className="col-span-2">
                                 {user.role}
                             </div>
-                            <div>
+                            <div className="col-span-2">
                                 {user.workouts.length}
                                 {/* {user.workouts.map((workout) => (
                                         <span key={workout.id}>{workout.id}</span>
