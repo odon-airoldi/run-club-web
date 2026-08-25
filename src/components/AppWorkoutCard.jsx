@@ -13,7 +13,7 @@ export default function AppWorkoutCard({ workout }) {
             <Link className="flex h-full flex-col" to={`/workout/${workout.id}`}>
 
                 <div className="flex justify-between px-4 py-2 text-xs uppercase">
-                    <div className="flex items-center gap-1">
+                    <div className="flex gap-1">
                         <span className="text-mauve-400">
                             {new Date(workout.date_time).toLocaleDateString('it-IT', {
                                 weekday: 'long'
@@ -25,7 +25,7 @@ export default function AppWorkoutCard({ workout }) {
                             year: 'numeric'
                         })}
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex gap-1">
                         <span className="text-mauve-400">Ore</span>
                         {new Date(workout.date_time).toLocaleTimeString('it-IT', {
                             hour: 'numeric',

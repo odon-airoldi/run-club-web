@@ -10,8 +10,8 @@ export default function AppHeader() {
     return (
         <header className="">
 
-            {userAuth?.role == 'admin' &&
-                <div className="px-12 py-2 bg-indigo-900">
+            {userAuth?.role === 'admin' &&
+                <div className="px-12 py-2 bg-mauve-400">
                     <ul className="flex gap-8 uppercase text-xs tracking-widest">
                         <li className="text-white">Ciao Admin</li>
                         <li className="text-white"><Link to="/users">Users</Link></li>
