@@ -59,7 +59,7 @@ export default function WorkoutCreatePage() {
     }
 
     return (
-        <>
+        <div className="">
             <h1>Aggiungi un allenamento</h1>
             <form onSubmit={addWorkout}>
                 <AppInput type="text" id="name" name="name" label="Nome" />
@@ -74,9 +74,8 @@ export default function WorkoutCreatePage() {
                 <AppInput type="number" id="pace_s" name="pace_s" min="0" max="59" />
                 <AppButton type="submit">Aggiungi</AppButton>
             </form>
-
             <AppLink to="/workouts">Tutti gli allenamenti</AppLink>
-        </>
+        </div>
     );
 
 }

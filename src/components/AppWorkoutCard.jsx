@@ -9,8 +9,8 @@ export default function AppWorkoutCard({ workout }) {
     const { minutes, seconds } = getWorkoutPaceTime(workout.pace);
 
     return (
-        <div className="border border-mauve-300 rounded-sm text-mauve-600">
-            <Link className={`flex h-full flex-col ${new Date(workout.date_time) < new Date() ? 'text-gray-400' : ''}`} to={`/workout/${workout.id}`}>
+        <div className={`border border-mauve-300 rounded-sm text-mauve-600 ${new Date(workout.date_time) < new Date() ? 'opacity-60' : ''}`}>
+            <Link className="flex h-full flex-col" to={`/workout/${workout.id}`}>
 
                 <div className="flex justify-between px-4 py-2 text-xs uppercase">
                     <div className="flex items-center gap-1">

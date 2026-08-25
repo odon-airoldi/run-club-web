@@ -63,40 +63,38 @@ export default function UserPage() {
     if (user && workouts && runsWorkouts)
 
         return (
-            <>
-                <div>
-                    <h1 className="font-bold text-8xl">{user.name}</h1>
+            <div className="">
+                <h1 className="font-bold text-8xl">{user.name}</h1>
 
-                    <h2 className="font-bold text-xl">I miei allenamenti</h2>
+                <h2 className="font-bold text-xl">I miei allenamenti</h2>
 
-                    <div className="grid grid-cols-4 gap-4">
-                        {
-                            sortedWorkouts(workouts).map((workout) => (
-                                <AppWorkoutCard key={workout.id} workout={workout} />
-                            ))
-                        }
-                    </div>
-
-
-                    {   // se user autenticato è uguale a user in pagina
-                        userAuth.id === user.id &&
-                        <AppLink to="/workout/create">Aggiungi un allenamento</AppLink>
+                <div className="grid grid-cols-4 gap-4">
+                    {
+                        sortedWorkouts(workouts).map((workout) => (
+                            <AppWorkoutCard key={workout.id} workout={workout} />
+                        ))
                     }
+                </div>
 
-                    <h2 className="font-bold text-xl">Allenamenti a cui hai partecipato</h2>
-                    <div className="grid grid-cols-4 gap-4">
-                        {
-                            sortedWorkouts(runsWorkouts).map((workout) => (
-                                <AppWorkoutCard key={workout.id} workout={workout} />
-                            ))
-                        }
-                    </div>
 
-                    <div>
-                        <AppButton onClick={handleDeleteUser}>Elimina account</AppButton>
-                    </div>
-                </div >
-            </>
+                {   // se user autenticato è uguale a user in pagina
+                    userAuth.id === user.id &&
+                    <AppLink to="/workout/create">Aggiungi un allenamento</AppLink>
+                }
+
+                <h2 className="font-bold text-xl">Allenamenti a cui hai partecipato</h2>
+                <div className="grid grid-cols-4 gap-4">
+                    {
+                        sortedWorkouts(runsWorkouts).map((workout) => (
+                            <AppWorkoutCard key={workout.id} workout={workout} />
+                        ))
+                    }
+                </div>
+
+                <div>
+                    <AppButton onClick={handleDeleteUser}>Elimina account</AppButton>
+                </div>
+            </div >
         );
 
 

@@ -108,7 +108,7 @@ export default function WorkoutEditPage() {
     if (userAuth.role !== 'admin' && userAuth.id !== workout.user_id) return <Navigate to="/" replace />
 
     return (
-        <>
+        <div className="">
             {editWorkout &&
                 <div>
                     <h1>Aggiorna l'allenamento</h1>
@@ -129,7 +129,7 @@ export default function WorkoutEditPage() {
                     <AppLink to="/workouts">Tutti gli allenamenti</AppLink>
                 </div>
             }
-        </>
+        </div>
     );
 
 }

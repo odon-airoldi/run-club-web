@@ -84,115 +84,113 @@ export default function WorkoutPage() {
 
 
     return (
-        <>
-            <div className="p-4">
-                <div className="grid grid-cols-3 gap-24">
-                    <div className="col-span-1">
-                        <div className="text-sm">
-                            Creato da {workout.user ?
-                                <Link to={`/users/${workout.user_id}`}>{workout.user?.name}</Link>
-                                : 'Utente eliminato'
+        <div className="">
+            <div className="grid grid-cols-3 gap-24">
+                <div className="col-span-1">
+                    <div className="text-sm">
+                        Creato da {workout.user ?
+                            <Link to={`/users/${workout.user_id}`}>{workout.user?.name}</Link>
+                            : 'Utente eliminato'
+                        }
+                    </div>
+
+                    <h1 className="text-3xl font-bold text-indigo-800 mb-4">{workout.name}</h1>
+                    <p className="mb-4">{workout.description}</p>
+
+                    { // se user è admin o è proprietario del workout
+                        (userAuth?.role === 'admin' || userAuth?.id === workout.user_id) &&
+                        <div className="">
+                            <AppLink to={`/workout/${id}/edit`}>Modifica</AppLink>
+                            {!visibility ?
+
+                                <AppButton onClick={handleDeleteWorkout}>Elimina allenamento</AppButton>
+                                :
+                                <div>
+                                    <AppButton onClick={() => deleteWorkout()}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
+                                </div >
                             }
                         </div>
+                    }
+                    { // se user non è proprietario del workout e la data del workout è maggiore rispetto alla data attuale
+                        userAuth?.id !== workout.user_id && (
+                            new Date(workout.date_time) > now ?
+                                <AppButton onClick={userJoinWorkout}>
+                                    {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
+                                </AppButton>
+                                : <div>Workout concluso</div>
+                        )
 
-                        <h1 className="text-3xl font-bold text-indigo-800 mb-4">{workout.name}</h1>
-                        <p className="mb-4">{workout.description}</p>
-
-                        { // se user è admin o è proprietario del workout
-                            (userAuth?.role === 'admin' || userAuth?.id === workout.user_id) &&
-                            <div className="">
-                                <AppLink to={`/workout/${id}/edit`}>Modifica</AppLink>
-                                {!visibility ?
-
-                                    <AppButton onClick={handleDeleteWorkout}>Elimina allenamento</AppButton>
-                                    :
-                                    <div>
-                                        <AppButton onClick={() => deleteWorkout()}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
-                                    </div >
+                    }
+                </div>
+                <div className="col-span-2">
+                    <div className="grid grid-cols-3 gap-4">
+                        <div>
+                            <div className="text-indigo-500 capitalize">
+                                {new Date(workout.date_time).toLocaleDateString('it-IT', {
+                                    weekday: 'long',
+                                    day: 'numeric',
+                                    month: 'short',
+                                    year: 'numeric'
+                                })}
+                            </div>
+                        </div>
+                        <div>
+                            <div>Ora</div>
+                            <div className="text-indigo-500">
+                                {new Date(workout.date_time).toLocaleTimeString('it-IT', {
+                                    hour: 'numeric',
+                                    minute: 'numeric'
+                                })}
+                            </div>
+                            <div>Durata ritrovo gruppo</div>
+                            <div className="text-indigo-500">{workout.buffer_time} min</div>
+                        </div>
+                        <div>
+                            <div>Luogo di partenza</div>
+                            <div className="text-indigo-500">
+                                {workout.place_city}<br />
+                                {workout.place_address}
+                            </div>
+                        </div>
+                        <div>
+                            <div>Distanza</div>
+                            <div className="text-indigo-500">{workout.distance} Km</div>
+                        </div>
+                        <div>
+                            <div>Passo</div>
+                            <div className="text-indigo-500">{minutes}:{seconds}</div>
+                        </div>
+                        <div>
+                            <div>Proiezione durata allenamento</div>
+                            <div className="text-indigo-500">{getWorkoutDurationTime(workout.distance, workout.pace)}</div>
+                        </div>
+                        <div className="col-span-3">
+                            <div>
+                                {workout.users_run?.length + 1}
+                                {
+                                    new Date(workout.date_time) > now
+                                        ? workout.users_run?.length > 1 ? 'persone parteciperanno' : 'persona parteciperà'
+                                        : workout.users_run?.length > 1 ? 'persone hanno partecipato' : 'persona ha partecipato'
                                 }
                             </div>
-                        }
-                        { // se user non è proprietario del workout e la data del workout è maggiore rispetto alla data attuale
-                            userAuth?.id !== workout.user_id && (
-                                new Date(workout.date_time) > now ?
-                                    <AppButton onClick={userJoinWorkout}>
-                                        {joinWorkout ? 'Ti sei unito al workout' : 'Partecipa'}
-                                    </AppButton>
-                                    : <div>Workout concluso</div>
-                            )
+                            <div className="grid auto-cols-max grid-flow-col gap-4">
+                                {workout.user?.name}
+                                {
 
-                        }
-                    </div>
-                    <div className="col-span-2">
-                        <div className="grid grid-cols-3 gap-4">
-                            <div>
-                                <div className="text-indigo-500 capitalize">
-                                    {new Date(workout.date_time).toLocaleDateString('it-IT', {
-                                        weekday: 'long',
-                                        day: 'numeric',
-                                        month: 'short',
-                                        year: 'numeric'
-                                    })}
-                                </div>
-                            </div>
-                            <div>
-                                <div>Ora</div>
-                                <div className="text-indigo-500">
-                                    {new Date(workout.date_time).toLocaleTimeString('it-IT', {
-                                        hour: 'numeric',
-                                        minute: 'numeric'
-                                    })}
-                                </div>
-                                <div>Durata ritrovo gruppo</div>
-                                <div className="text-indigo-500">{workout.buffer_time} min</div>
-                            </div>
-                            <div>
-                                <div>Luogo di partenza</div>
-                                <div className="text-indigo-500">
-                                    {workout.place_city}<br />
-                                    {workout.place_address}
-                                </div>
-                            </div>
-                            <div>
-                                <div>Distanza</div>
-                                <div className="text-indigo-500">{workout.distance} Km</div>
-                            </div>
-                            <div>
-                                <div>Passo</div>
-                                <div className="text-indigo-500">{minutes}:{seconds}</div>
-                            </div>
-                            <div>
-                                <div>Proiezione durata allenamento</div>
-                                <div className="text-indigo-500">{getWorkoutDurationTime(workout.distance, workout.pace)}</div>
-                            </div>
-                            <div className="col-span-3">
-                                <div>
-                                    {workout.users_run?.length + 1}
-                                    {
-                                        new Date(workout.date_time) > now
-                                            ? workout.users_run?.length > 1 ? 'persone parteciperanno' : 'persona parteciperà'
-                                            : workout.users_run?.length > 1 ? 'persone hanno partecipato' : 'persona ha partecipato'
-                                    }
-                                </div>
-                                <div className="grid auto-cols-max grid-flow-col gap-4">
-                                    {workout.user?.name}
-                                    {
-
-                                        workout.users_run?.map((user) => (
-                                            <Link to={`/users/${user.id}`} key={user.id}>
-                                                <div className="">{user.name}</div>
-                                            </Link>
-                                        ))
-                                    }
-                                </div>
+                                    workout.users_run?.map((user) => (
+                                        <Link to={`/users/${user.id}`} key={user.id}>
+                                            <div className="">{user.name}</div>
+                                        </Link>
+                                    ))
+                                }
                             </div>
                         </div>
                     </div>
-
-
                 </div>
+
+
             </div>
-        </>
+        </div>
     );
 
 }

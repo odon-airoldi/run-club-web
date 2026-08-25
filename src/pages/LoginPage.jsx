@@ -55,27 +55,29 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-            <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Accedi</h2>
-            </div>
+        <div className="">
+            <div className="flex min-h-full flex-col justify-center">
+                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+                    <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Accedi</h2>
+                </div>
 
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form onSubmit={handleLogin} className="space-y-6">
-                    <div>
-                        <AppInput type="email" id="email" name="email" label="Email" />
-                    </div>
-                    <div>
-                        <AppInput type="password" id="password" name="password" label="Password" />
-                    </div>
-                    <div>
-                        <AppButton type="submit">Accedi</AppButton>
-                    </div>
-                </form>
+                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                    <form onSubmit={handleLogin} className="space-y-6">
+                        <div>
+                            <AppInput type="email" id="email" name="email" label="Email" />
+                        </div>
+                        <div>
+                            <AppInput type="password" id="password" name="password" label="Password" />
+                        </div>
+                        <div>
+                            <AppButton type="submit">Accedi</AppButton>
+                        </div>
+                    </form>
 
-                <p className="mt-10 text-center text-sm/6 text-gray-500">
-                    Non sei membro? <Link to="/register" className="font-semibold text-indigo-600 hover:text-indigo-500">Registrati gratis</Link>
-                </p>
+                    <p className="mt-10 text-center text-sm/6 text-gray-500">
+                        Non sei membro? <Link to="/register" className="font-semibold text-indigo-600 hover:text-indigo-500">Registrati gratis</Link>
+                    </p>
+                </div>
             </div>
         </div>
     );

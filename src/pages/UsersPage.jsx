@@ -35,50 +35,48 @@ export default function UsersPage() {
     if (!userAuth || userAuth.role !== 'admin') return <Navigate to="/" replace />
 
     return (
-        <>
-            <div className="p-4">
-                <h1 className="font-bold text-8xl">Users List</h1>
+        <div className="">
+            <h1 className="font-bold text-8xl">Users List</h1>
 
-                <div className="grid grid-cols-1 gap-4">
-                    <div className="grid grid-cols-5 gap-4 border-b border-gray-200">
-                        <div>ID</div>
-                        <div>Nome</div>
-                        <div>Ruolo</div>
-                        <div>Allenamenti creati</div>
-                        <div>Allenamenti a cui si è unito</div>
-                    </div>
-                    {
-                        users.map((user) => (
-                            <div className="grid grid-cols-5 gap-4 border-b border-gray-200" key={user.id}>
-                                <div>
-                                    {user.id}
-                                </div>
-                                <div>
-                                    <Link to={`/users/${user.id}`}>{user.name}</Link>
-                                </div>
-                                <div>
-                                    {user.role}
-                                </div>
-                                <div>
-                                    {user.workouts.length}
-                                    {/* {user.workouts.map((workout) => (
-                                        <span key={workout.id}>{workout.id}</span>
-                                    ))} */}
-                                </div>
-                                <div>
-                                    {user.runs_workouts.length}
-                                    {/* {user.runs_workouts.map((workout) => (
-                                        <span key={workout.id}>{workout.id}</span>
-                                    ))} */}
-                                </div>
-                            </div>
-                        ))
-                    }
-
-
+            <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-5 gap-4 border-b border-gray-200">
+                    <div>ID</div>
+                    <div>Nome</div>
+                    <div>Ruolo</div>
+                    <div>Allenamenti creati</div>
+                    <div>Allenamenti a cui si è unito</div>
                 </div>
+                {
+                    users.map((user) => (
+                        <div className="grid grid-cols-5 gap-4 border-b border-gray-200" key={user.id}>
+                            <div>
+                                {user.id}
+                            </div>
+                            <div>
+                                <Link to={`/users/${user.id}`}>{user.name}</Link>
+                            </div>
+                            <div>
+                                {user.role}
+                            </div>
+                            <div>
+                                {user.workouts.length}
+                                {/* {user.workouts.map((workout) => (
+                                        <span key={workout.id}>{workout.id}</span>
+                                    ))} */}
+                            </div>
+                            <div>
+                                {user.runs_workouts.length}
+                                {/* {user.runs_workouts.map((workout) => (
+                                        <span key={workout.id}>{workout.id}</span>
+                                    ))} */}
+                            </div>
+                        </div>
+                    ))
+                }
+
+
             </div>
-        </>
+        </div>
     );
 
 
