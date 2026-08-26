@@ -1,12 +1,14 @@
 
 import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
+import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 import AppLink from "../components/AppLink";
 import AppButton from "../components/AppButtton";
 import AppInput from "../components/AppInput";
 import AppTextarea from "../components/AppTextarea";
+import axios from "axios";
+
 
 export default function WorkoutCreatePage() {
 
@@ -63,6 +65,7 @@ export default function WorkoutCreatePage() {
 
     return (
         <div className="w-120 mx-auto">
+            <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-indigo-600 uppercase font-light text-sm mb-4"><ArrowLeftIcon className="size-4" /><span>Torna indietro</span></button>
             <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">Aggiungi un allenamento</h1>
             <form onSubmit={addWorkout} className="grid grid-cols-4 gap-4">
                 <div className="col-span-4">
