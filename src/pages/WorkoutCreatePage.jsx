@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 import AppLink from "../components/AppLink";
@@ -57,6 +57,9 @@ export default function WorkoutCreatePage() {
         }
 
     }
+
+    // redirect al render se user non è autenticato
+    if (!userAuth) return <Navigate to="/" replace />
 
     return (
         <div className="w-120 mx-auto">
