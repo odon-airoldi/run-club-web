@@ -59,20 +59,42 @@ export default function WorkoutCreatePage() {
     }
 
     return (
-        <div className="">
-            <h1>Aggiungi un allenamento</h1>
-            <form onSubmit={addWorkout}>
-                <AppInput type="text" id="name" name="name" label="Nome" />
-                <AppTextarea type="text" id="description" name="description" label="Descrizione" />
-                <AppInput type="date" id="date" name="date" label="Data" />
-                <AppInput type="time" id="time" name="time" label="Ora" />
-                <AppInput type="text" id="place_city" name="place_city" label="Città" />
-                <AppInput type="text" id="place_address" name="place_address" label="Indirizzo" />
-                <AppInput type="number" id="buffer_time" name="buffer_time" label="Tempo di attesa" />
-                <AppInput type="number" id="distance" name="distance" label="Distanza" />
-                <AppInput type="number" id="pace_m" name="pace_m" min="0" max="59" label="passo" />
-                <AppInput type="number" id="pace_s" name="pace_s" min="0" max="59" />
-                <AppButton type="submit">Aggiungi</AppButton>
+        <div className="w-120 mx-auto">
+            <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">Aggiungi un allenamento</h1>
+            <form onSubmit={addWorkout} className="grid grid-cols-4 gap-4">
+                <div className="col-span-4">
+                    <AppInput type="text" id="name" name="name" label="Nome" />
+                </div>
+                <div className="col-span-4">
+                    <AppTextarea type="text" id="description" name="description" label="Descrizione" />
+                </div>
+                <div className="col-span-4">
+                    <AppInput type="date" id="date" name="date" label="Data" />
+                </div>
+                <div className="col-span-2">
+                    <AppInput type="time" id="time" name="time" label="Ora" />
+                </div>
+                <div className="col-span-2">
+                    <AppInput type="number" id="buffer_time" name="buffer_time" label="Tempo di attesa" />
+                </div>
+                <div className="col-span-4">
+                    <AppInput type="text" id="place_city" name="place_city" label="Città" />
+                </div>
+                <div className="col-span-4">
+                    <AppInput type="text" id="place_address" name="place_address" label="Indirizzo" />
+                </div>
+                <div className="col-span-2">
+                    <AppInput type="number" id="distance" name="distance" label="Distanza" />
+                </div>
+                <div className="col-span-1">
+                    <AppInput type="number" id="pace_m" name="pace_m" min="0" max="59" label="Passo Min" />
+                </div>
+                <div className="col-span-1">
+                    <AppInput type="number" id="pace_s" name="pace_s" min="0" max="59" label="Passo Sec" />
+                </div>
+                <div className="col-span-4">
+                    <AppButton type="submit">Aggiungi</AppButton>
+                </div>
             </form>
             <AppLink to="/workouts">Tutti gli allenamenti</AppLink>
         </div>

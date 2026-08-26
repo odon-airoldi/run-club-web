@@ -121,7 +121,7 @@ export default function WorkoutPage() {
                             <div className="flex justify-between items-end">
 
                                 <div>
-                                    <div className="grid auto-cols-max grid-flow-col gap-1 text-white text-sm/[30px] mb-2">
+                                    <div className="flex gap-1 text-white text-sm/[30px] mb-2">
                                         <Link to={`/users/${workout.user?.id}`} className="w-[32px] aspect-square rounded-full bg-mauve-400 flex justify-center">
                                             {workout.user?.name.split(' ').map(i => i[0]).join('')}
                                         </Link>

@@ -104,26 +104,49 @@ export default function WorkoutEditPage() {
 
     }
 
-    // redirect al render se user non admin e non è proprietario del workout
-    if (userAuth.role !== 'admin' && userAuth.id !== workout.user_id) return <Navigate to="/" replace />
+    // redirect al render se user non è autenticato oppure se user non è admin e non è proprietario del workout
+    if (!userAuth || userAuth.role !== 'admin' && userAuth.id !== workout.user_id) return <Navigate to="/" replace />
+
 
     return (
         <div className="">
             {editWorkout &&
-                <div>
-                    <h1>Aggiorna l'allenamento</h1>
-                    <form onSubmit={handleSubmitWorkout}>
-                        <AppInput type="text" id="name" name="name" label="Nome" value={editWorkout.name} onChange={handleChange} />
-                        <AppTextarea type="text" id="description" name="description" label="Descrizione" value={editWorkout.description} onChange={handleChange} />
-                        <AppInput type="date" id="date" name="date" label="Data" value={editWorkout.date} onChange={handleChange} />
-                        <AppInput type="time" id="time" name="time" label="Ora" value={editWorkout.time} onChange={handleChange} />
-                        <AppInput type="text" id="place_city" name="place_city" label="Città" value={editWorkout.place_city} onChange={handleChange} />
-                        <AppInput type="text" id="place_address" name="place_address" label="Indirizzo" value={editWorkout.place_address} onChange={handleChange} />
-                        <AppInput type="number" id="buffer_time" name="buffer_time" label="Tempo di attesa" value={editWorkout.buffer_time} onChange={handleChange} />
-                        <AppInput type="number" id="distance" name="distance" label="Distanza" value={editWorkout.distance} onChange={handleChange} />
-                        <AppInput type="number" id="pace_m" name="pace_m" min="0" max="59" label="passo" value={editWorkout.pace_m} onChange={handleChange} />
-                        <AppInput type="number" id="pace_s" name="pace_s" min="0" max="59" value={editWorkout.pace_s} onChange={handleChange} />
-                        <AppButton type="submit">Modifica</AppButton>
+                <div className="w-120 mx-auto">
+                    <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">Aggiorna l'allenamento</h1>
+                    <form onSubmit={handleSubmitWorkout} className="grid grid-cols-4 gap-4">
+                        <div className="col-span-4">
+                            <AppInput type="text" id="name" name="name" label="Nome" value={editWorkout.name} onChange={handleChange} />
+                        </div>
+                        <div className="col-span-4">
+                            <AppTextarea type="text" id="description" name="description" label="Descrizione" value={editWorkout.description} onChange={handleChange} />
+                        </div>
+                        <div className="col-span-4">
+                            <AppInput type="date" id="date" name="date" label="Data" value={editWorkout.date} onChange={handleChange} />
+                        </div>
+                        <div className="col-span-2">
+                            <AppInput type="time" id="time" name="time" label="Ora" value={editWorkout.time} onChange={handleChange} />
+                        </div>
+                        <div className="col-span-2">
+                            <AppInput type="number" id="buffer_time" name="buffer_time" label="Tempo di attesa" value={editWorkout.buffer_time} onChange={handleChange} />
+                        </div>
+                        <div className="col-span-4">
+                            <AppInput type="text" id="place_city" name="place_city" label="Città" value={editWorkout.place_city} onChange={handleChange} />
+                        </div>
+                        <div className="col-span-4">
+                            <AppInput type="text" id="place_address" name="place_address" label="Indirizzo" value={editWorkout.place_address} onChange={handleChange} />
+                        </div>
+                        <div className="col-span-2">
+                            <AppInput type="number" id="distance" name="distance" label="Distanza" value={editWorkout.distance} onChange={handleChange} />
+                        </div>
+                        <div className="col-span-1">
+                            <AppInput type="number" id="pace_m" name="pace_m" min="0" max="59" label="Passo Min" value={editWorkout.pace_m} onChange={handleChange} />
+                        </div>
+                        <div className="col-span-1">
+                            <AppInput type="number" id="pace_s" name="pace_s" min="0" max="59" label="Passo Sec" value={editWorkout.pace_s} onChange={handleChange} />
+                        </div>
+                        <div className="col-span-4">
+                            <AppButton type="submit">Modifica</AppButton>
+                        </div>
                     </form>
 
                     <AppLink to="/workouts">Tutti gli allenamenti</AppLink>
