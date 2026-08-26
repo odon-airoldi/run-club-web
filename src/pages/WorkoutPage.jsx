@@ -15,9 +15,10 @@ export default function WorkoutPage() {
     const { id } = useParams();
     const { userAuth } = useAuth();
     const { workout, showWorkout, getWorkoutPaceTime, getWorkoutDurationTime } = useWorkout();
-    const [joinWorkout, setJoinWorkout] = useState(false);
+    const [joinWorkout, setJoinWorkout] = useState(null);
     const now = new Date();
     const [openModal, setOpenModal] = useState(false);
+    const { minutes, seconds } = getWorkoutPaceTime(workout.pace)
 
 
     useEffect(() => {
@@ -25,13 +26,18 @@ export default function WorkoutPage() {
         // mi servo dal context della funzione per chiamata axios passando come parametro id
         showWorkout(id);
 
+    }, [id, joinWorkout]);
+
+
+    useEffect(() => {
+
         // true se fra users che partecipano al workout c'è un user con un id uguale all'id di user autenticato altrimenti false
         setJoinWorkout(workout.users_run?.some(user_run => user_run.id === userAuth?.id) ?? false)
 
 
-    }, [id]);
+    }, [workout]);
 
-    const { minutes, seconds } = getWorkoutPaceTime(workout.pace)
+
 
 
     // user runs workouts
@@ -76,6 +82,8 @@ export default function WorkoutPage() {
         }
 
     }
+
+
 
 
     return (
@@ -142,7 +150,6 @@ export default function WorkoutPage() {
                                         }
                                     </div>
                                 </div>
-
                                 <div>
                                     { // se user non è proprietario del workout e la data del workout è maggiore rispetto alla data attuale
                                         userAuth?.id !== workout.user_id && (
