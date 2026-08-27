@@ -121,11 +121,9 @@ export default function WorkoutPage() {
                                 Creato da {workout.user ? workout.user.name : 'Utente eliminato'}
                             </div>
                             <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">{workout.name}</h1>
-
-                            <p className="mb-6 text-mauve-600">{workout.description}</p>
+                            <p className="mb-6">{workout.description}</p>
 
                             <div className="flex justify-between items-end">
-
                                 <div>
                                     <div className="flex gap-1 text-white text-sm/[30px] mb-2">
                                         <Link to={`/users/${workout.user?.id}`} className="w-[32px] aspect-square rounded-full bg-mauve-400 flex justify-center">
@@ -164,7 +162,6 @@ export default function WorkoutPage() {
                                     }
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div className="p-4">

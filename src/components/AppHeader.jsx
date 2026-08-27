@@ -14,7 +14,8 @@ export default function AppHeader() {
                 <div className="px-12 py-2 bg-mauve-400">
                     <ul className="flex gap-8 uppercase text-xs tracking-widest">
                         <li className="text-white">Ciao Admin</li>
-                        <li className="text-white"><Link to="/users">Users</Link></li>
+                        <li className="text-white"><Link to="/admin/users">Runners</Link></li>
+                        <li className="text-white"><Link to="/admin/workouts">Allenamenti</Link></li>
                     </ul>
                 </div>
             }

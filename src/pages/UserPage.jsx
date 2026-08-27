@@ -67,7 +67,7 @@ export default function UserPage() {
 
         return (
             <div className="">
-                <div className="text-center">
+                <div className="text-center mb-8">
                     <h1 className="font-semibold text-6xl font-zalando text-indigo-600">{user.name}</h1>
                 </div>
 

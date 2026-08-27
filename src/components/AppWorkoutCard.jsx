@@ -3,14 +3,14 @@ import { useWorkout } from "../contexts/WorkoutContext";
 
 export default function AppWorkoutCard({ workout }) {
 
-    console.log(workout)
+    // console.log(workout)
 
     const { getWorkoutPaceTime } = useWorkout();
 
     const { minutes, seconds } = getWorkoutPaceTime(workout.pace);
 
     return (
-        <div className={`border border-mauve-300 rounded-sm text-mauve-600 ${new Date(workout.date_time) < new Date() ? 'opacity-60' : ''}`}>
+        <div className={`border border-mauve-300 rounded-sm ${new Date(workout.date_time) < new Date() ? 'opacity-60' : ''}`}>
             <Link className="flex h-full flex-col" to={`/workout/${workout.id}`}>
 
                 <div className="flex justify-between px-4 py-2 text-xs uppercase">
@@ -46,7 +46,7 @@ export default function AppWorkoutCard({ workout }) {
                 </div>
 
 
-                <div className="flex justify-between px-4 py-2 text-sm text-xs uppercase">
+                <div className="flex justify-between px-4 py-2 text-xs uppercase">
                     <div><span className="text-mauve-400">Km</span> {workout.distance}</div>
                     <div><span className="text-mauve-400">Min/Km</span> {minutes}:{seconds}</div>
                 </div>
