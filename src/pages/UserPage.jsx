@@ -20,8 +20,7 @@ export default function UserPage() {
     const { sortedWorkouts } = useWorkout();
 
     const [openModal, setOpenModal] = useState(false);
-
-    // console.log(user)
+    const [tab, setTab] = useState(1)
 
     useEffect(() => {
 
@@ -75,34 +74,29 @@ export default function UserPage() {
                     <h1 className="font-semibold text-8xl font-zalando text-indigo-600">{user.name}</h1>
                 </div>
 
-                <div className="flex justify-center">
-                    <div className="text-center">
-                        <h2 className="font-semibold text-2xl uppercase text-indigo-600">Allenamenti creati <span className="">{workouts.length}</span></h2>
-                    </div>
-                    <div className="text-center">
-                        <h2 className="font-semibold text-2xl uppercase text-indigo-600">Partecipazioni<span>{runsWorkouts.length}</span></h2>
-                    </div>
+                <div className="flex justify-center gap-8 py-4 border-b border-mauve-300 text-md text-mauve-400">
+                    <button role="tab" onClick={() => setTab(1)} className={`uppercase ${tab === 1 && 'text-indigo-600'}`}>Allenamenti creati <span className="">{workouts.length}</span></button>
+                    <button role="tab" onClick={() => setTab(2)} className={`uppercase ${tab === 2 && 'text-indigo-600'}`}>Partecipazioni <span>{runsWorkouts.length}</span></button>
                 </div>
 
-                <div>
-                    <div className="grid grid-cols-4 gap-4">
-                        {
+
+                <div className="py-8">
+                    <div role="tab" className="grid grid-cols-4 gap-4">
+                        {tab === 1 &&
                             sortedWorkouts(workouts).map((workout) => (
                                 <AppWorkoutCard key={workout.id} workout={workout} />
                             ))
                         }
                     </div>
-                </div>
-
-                <div>
-                    <div className="grid grid-cols-4 gap-4">
-                        {
+                    <div role="tab" className="grid grid-cols-4 gap-4">
+                        {tab === 2 &&
                             sortedWorkouts(runsWorkouts).map((workout) => (
                                 <AppWorkoutCard key={workout.id} workout={workout} />
                             ))
                         }
                     </div>
                 </div>
+
 
 
                 <div className="flex gap-1">
