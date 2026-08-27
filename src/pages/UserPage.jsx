@@ -67,16 +67,16 @@ export default function UserPage() {
 
         return (
             <div className="">
-                <div className="">
-                    <h1 className="font-semibold text-8xl font-zalando text-indigo-600">{user.name}</h1>
+                <div className="text-center">
+                    <h1 className="font-semibold text-6xl font-zalando text-indigo-600">{user.name}</h1>
                 </div>
 
                 <div role="tablist" className="flex justify-center gap-8 text-md text-mauve-400">
-                    <button role="tab" onClick={() => setTab(1)} className={`flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b -mb-[1px] ${tab === 1 ? 'border-indigo-600' : 'border-transparent'}`}>
+                    <button role="tab" onClick={() => setTab(1)} className={`flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b -mb-[1px] cursor-pointer ${tab === 1 ? 'border-indigo-600' : 'border-transparent'}`}>
                         Allenamenti creati <span className="w-[24px] aspect-square rounded-full bg-mauve-400 flex items-center justify-center text-white text-xs">{workouts.length}</span>
 
                     </button>
-                    <button role="tab" onClick={() => setTab(2)} className={`flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b -mb-[1px] ${tab === 2 ? 'border-indigo-600' : 'border-transparent'}`}>
+                    <button role="tab" onClick={() => setTab(2)} className={`flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b -mb-[1px] cursor-pointer ${tab === 2 ? 'border-indigo-600' : 'border-transparent'}`}>
                         Partecipazioni <span className="w-[24px] aspect-square rounded-full bg-mauve-400 flex items-center justify-center text-white text-xs">{runsWorkouts.length}</span>
                     </button>
                     {   // se user autenticato è uguale a user in pagina
@@ -94,14 +94,14 @@ export default function UserPage() {
                             workouts.length > 0 ?
                                 sortedWorkouts(workouts).map((workout) => (
                                     <AppWorkoutCard key={workout.id} workout={workout} />
-                                )) : <div className="col-span-4 text-mauve-400 text-center">Nessun allenamento</div>
+                                )) : <div className="col-span-4 pt-8 text-lg text-mauve-400 font-zalando text-center">Nessun allenamento</div>
                         )}
 
                         {tab === 2 && (
                             runsWorkouts.length > 0 ?
                                 sortedWorkouts(runsWorkouts).map((workout) => (
                                     <AppWorkoutCard key={workout.id} workout={workout} />
-                                )) : <div className="col-span-4 text-mauve-400 text-center">Nessun allenamento</div>
+                                )) : <div className="col-span-4 pt-8 text-lg text-mauve-400 font-zalando text-center">Nessun allenamento</div>
                         )}
                     </div>
                 </div>
@@ -111,18 +111,22 @@ export default function UserPage() {
 
                     { // se user è nel suo profilo
                         (userAuth?.id === user.id) &&
-                        <button onClick={logoutAuth} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400">Logout</button>
+                        <button onClick={logoutAuth} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Logout</button>
                     }
 
                     { // se user è nel suo profilo o è admin
                         (userAuth?.id === user.id || userAuth?.role === 'admin') &&
-                        <button onClick={() => setOpenModal(true)} className=" border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400">Elimina account</button>
+                        <button onClick={() => setOpenModal(true)} className=" border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Elimina account</button>
                     }
                 </div>
 
                 {openModal &&
                     <div className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center" onClick={() => setOpenModal(false)}>
-                        <AppButton onClick={handleDeleteUser}>Vuoi eliminare definitivamente il tuo account?</AppButton>
+                        <div className="text-center">
+                            <p className="text-lg font-zalando mb-4">
+                                Vuoi eliminare definitivamente {userAuth?.id === user.id ? ' il tuo account?' : `l\'account di ${user.name}`}</p>
+                            <AppButton onClick={handleDeleteUser}>Elimina</AppButton>
+                        </div>
                     </div >
                 }
             </div>

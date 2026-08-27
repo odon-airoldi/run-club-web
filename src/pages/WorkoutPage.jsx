@@ -200,12 +200,14 @@ export default function WorkoutPage() {
                 </div>
             </div>
 
-            { // se user è admin o è proprietario del workout
-                (userAuth?.role === 'admin' || userAuth?.id === workout.user_id) &&
-                <div className="my-4 flex gap-1">
-                    <AppLink to={`/workout/${id}/edit`}>Modifica</AppLink>
 
-                    <AppButton onClick={() => setOpenModal(true)}>Elimina</AppButton>
+            { // se user è admin o è proprietario del workout
+
+                (userAuth?.role === 'admin' || userAuth?.id === workout.user_id) &&
+                <div className="flex justify-end gap-2 py-4">
+                    <Link to={`/workout/${id}/edit`} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Modifica</Link>
+
+                    <button onClick={() => setOpenModal(true)} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Elimina</button>
                     {openModal &&
                         <div onClick={() => setOpenModal(false)} className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
                             <AppButton onClick={deleteWorkout}>Vuoi eliminare definitivamente l'allenamento?</AppButton>

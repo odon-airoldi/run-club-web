@@ -8,7 +8,7 @@ export default function AppLayout() {
 
         <>
             <AppHeader />
-            <div className="p-4">
+            <div className="p-4 text-mauve-600">
                 <Outlet />
             </div>
             <AppFooter />
