@@ -150,8 +150,6 @@ export default function WorkoutEditPage() {
                             <AppButton type="submit">Modifica</AppButton>
                         </div>
                     </form>
-
-                    <AppLink to="/workouts">Tutti gli allenamenti</AppLink>
                 </div>
             }
         </div>

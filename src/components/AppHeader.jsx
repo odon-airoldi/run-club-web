@@ -26,7 +26,7 @@ export default function AppHeader() {
                 </ul>
                 <ul className="flex gap-12 font-zalando font-semibold uppercase- text-lg tracking-wide text-mauve-500">
                     <li>
-                        {userAuth ? <Link to={`/users/${userAuth.id}`}>Ciao {userAuth.name}</Link> : <div><Link to="/login">Accedi</Link> o <Link to="/register">Registrati</Link></div>}
+                        {userAuth ? <Link to={`/users/${userAuth.id}`}>Ciao {userAuth.name}</Link> : <div><Link to="/login">Accedi</Link></div>}
                     </li>
                 </ul>
             </div>

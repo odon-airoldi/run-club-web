@@ -38,8 +38,6 @@ export default function WorkoutPage() {
     }, [workout]);
 
 
-
-
     // user runs workouts
     const userJoinWorkout = async () => {
         try {

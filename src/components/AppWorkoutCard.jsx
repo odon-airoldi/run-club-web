@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { useWorkout } from "../contexts/WorkoutContext";
-import { CalendarDaysIcon, ClockIcon, MapPinIcon } from '@heroicons/react/24/outline'
 
 export default function AppWorkoutCard({ workout }) {
+
+    console.log(workout)
 
     const { getWorkoutPaceTime } = useWorkout();
 
@@ -39,11 +40,15 @@ export default function AppWorkoutCard({ workout }) {
                         {workout.place_city}
                     </div>
                     <h2 className="font-zalando font-semibold text-lg/6 text-indigo-600 mb-2">{workout.name}</h2>
+                    <div className="text-xs mb-1 uppercase text-mauve-400">
+                        {workout.users_run_count + 1} {workout.users_run_count + 1 > 1 ? 'partecipanti' : 'partecipante'}
+                    </div>
                 </div>
 
+
                 <div className="flex justify-between px-4 py-2 text-sm text-xs uppercase">
-                    <p><span className="text-mauve-400">Km</span> {workout.distance}</p>
-                    <p><span className="text-mauve-400">Min/Km</span> {minutes}:{seconds}</p>
+                    <div><span className="text-mauve-400">Km</span> {workout.distance}</div>
+                    <div><span className="text-mauve-400">Min/Km</span> {minutes}:{seconds}</div>
                 </div>
 
             </Link>

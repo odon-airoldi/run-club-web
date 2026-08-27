@@ -102,7 +102,6 @@ export default function WorkoutCreatePage() {
                     <AppButton type="submit">Aggiungi</AppButton>
                 </div>
             </form>
-            <AppLink to="/workouts">Tutti gli allenamenti</AppLink>
         </div>
     );
 
