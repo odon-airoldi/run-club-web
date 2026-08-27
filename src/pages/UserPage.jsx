@@ -66,36 +66,47 @@ export default function UserPage() {
 
         return (
             <div className="">
-                <h1 className="font-semibold text-8xl mb-4 font-zalando text-indigo-600">{user.name}</h1>
-
-                <h2 className="font-bold text-xl">I miei allenamenti</h2>
-
-                <div className="grid grid-cols-4 gap-4">
-                    {
-                        sortedWorkouts(workouts).map((workout) => (
-                            <AppWorkoutCard key={workout.id} workout={workout} />
-                        ))
-                    }
-                </div>
-
-
                 {   // se user autenticato è uguale a user in pagina
                     userAuth.id === user.id &&
                     <AppLink to="/workout/create">Aggiungi un allenamento</AppLink>
                 }
 
-                <h2 className="font-bold text-xl">Allenamenti a cui hai partecipato</h2>
-                <div className="grid grid-cols-4 gap-4">
-                    {
-                        sortedWorkouts(runsWorkouts).map((workout) => (
-                            <AppWorkoutCard key={workout.id} workout={workout} />
-                        ))
-                    }
+                <div className="">
+                    <h1 className="font-semibold text-8xl font-zalando text-indigo-600">{user.name}</h1>
+                </div>
+
+                <div className="flex justify-center">
+                    <div className="text-center">
+                        <h2 className="font-semibold text-2xl uppercase text-indigo-600">Allenamenti creati <span className="">{workouts.length}</span></h2>
+                    </div>
+                    <div className="text-center">
+                        <h2 className="font-semibold text-2xl uppercase text-indigo-600">Partecipazioni<span>{runsWorkouts.length}</span></h2>
+                    </div>
                 </div>
 
                 <div>
-                    <AppButton onClick={logoutAuth}>Logout</AppButton>
+                    <div className="grid grid-cols-4 gap-4">
+                        {
+                            sortedWorkouts(workouts).map((workout) => (
+                                <AppWorkoutCard key={workout.id} workout={workout} />
+                            ))
+                        }
+                    </div>
+                </div>
 
+                <div>
+                    <div className="grid grid-cols-4 gap-4">
+                        {
+                            sortedWorkouts(runsWorkouts).map((workout) => (
+                                <AppWorkoutCard key={workout.id} workout={workout} />
+                            ))
+                        }
+                    </div>
+                </div>
+
+
+                <div className="flex gap-1">
+                    <AppButton onClick={logoutAuth}>Logout</AppButton>
                     <AppButton onClick={() => setOpenModal(true)}>Elimina account</AppButton>
                     {openModal &&
                         <div className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center" onClick={() => setOpenModal(false)}>
