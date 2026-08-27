@@ -1,13 +1,15 @@
 
 import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 import { useUser } from "../contexts/UserContext";
 import { useWorkout } from "../contexts/WorkoutContext";
+import { PlusIcon } from '@heroicons/react/24/solid'
 import AppWorkoutCard from "../components/AppWorkoutCard";
 import AppLink from "../components/AppLink";
 import AppButton from "../components/AppButtton";
+import axios from "axios";
+
 
 export default function UserPage() {
 
@@ -65,50 +67,66 @@ export default function UserPage() {
 
         return (
             <div className="">
-                {   // se user autenticato è uguale a user in pagina
-                    userAuth.id === user.id &&
-                    <AppLink to="/workout/create">Aggiungi un allenamento</AppLink>
-                }
-
                 <div className="">
                     <h1 className="font-semibold text-8xl font-zalando text-indigo-600">{user.name}</h1>
                 </div>
 
-                <div className="flex justify-center gap-8 py-4 border-b border-mauve-300 text-md text-mauve-400">
-                    <button role="tab" onClick={() => setTab(1)} className={`uppercase ${tab === 1 && 'text-indigo-600'}`}>Allenamenti creati <span className="">{workouts.length}</span></button>
-                    <button role="tab" onClick={() => setTab(2)} className={`uppercase ${tab === 2 && 'text-indigo-600'}`}>Partecipazioni <span>{runsWorkouts.length}</span></button>
-                </div>
+                <div role="tablist" className="flex justify-center gap-8 text-md text-mauve-400">
+                    <button role="tab" onClick={() => setTab(1)} className={`flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b -mb-[1px] ${tab === 1 ? 'border-indigo-600' : 'border-transparent'}`}>
+                        Allenamenti creati <span className="w-[24px] aspect-square rounded-full bg-mauve-400 flex items-center justify-center text-white text-xs">{workouts.length}</span>
 
-
-                <div className="py-8">
-                    <div role="tab" className="grid grid-cols-4 gap-4">
-                        {tab === 1 &&
-                            sortedWorkouts(workouts).map((workout) => (
-                                <AppWorkoutCard key={workout.id} workout={workout} />
-                            ))
-                        }
-                    </div>
-                    <div role="tab" className="grid grid-cols-4 gap-4">
-                        {tab === 2 &&
-                            sortedWorkouts(runsWorkouts).map((workout) => (
-                                <AppWorkoutCard key={workout.id} workout={workout} />
-                            ))
-                        }
-                    </div>
-                </div>
-
-
-
-                <div className="flex gap-1">
-                    <AppButton onClick={logoutAuth}>Logout</AppButton>
-                    <AppButton onClick={() => setOpenModal(true)}>Elimina account</AppButton>
-                    {openModal &&
-                        <div className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center" onClick={() => setOpenModal(false)}>
-                            <AppButton onClick={handleDeleteUser}>Vuoi eliminare definitivamente il tuo account?</AppButton>
-                        </div >
+                    </button>
+                    <button role="tab" onClick={() => setTab(2)} className={`flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b -mb-[1px] ${tab === 2 ? 'border-indigo-600' : 'border-transparent'}`}>
+                        Partecipazioni <span className="w-[24px] aspect-square rounded-full bg-mauve-400 flex items-center justify-center text-white text-xs">{runsWorkouts.length}</span>
+                    </button>
+                    {   // se user autenticato è uguale a user in pagina
+                        userAuth.id === user.id &&
+                        <Link role="tab" to="/workout/create" className={`flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b border-transparent -mb-[1px]`}>
+                            Crea allenamento <span className="w-[24px] aspect-square rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs"><PlusIcon className="size-4" /></span>
+                        </Link>
                     }
                 </div>
-            </div >
+
+
+                <div className="pt-8 pb-16 border-y border-mauve-300">
+                    <div role="tabpanel" className="grid grid-cols-4 gap-4">
+                        {tab === 1 && (
+                            workouts.length > 0 ?
+                                sortedWorkouts(workouts).map((workout) => (
+                                    <AppWorkoutCard key={workout.id} workout={workout} />
+                                )) : <div className="col-span-4 text-mauve-400 text-center">Nessun allenamento</div>
+                        )}
+
+                        {tab === 2 && (
+                            runsWorkouts.length > 0 ?
+                                sortedWorkouts(runsWorkouts).map((workout) => (
+                                    <AppWorkoutCard key={workout.id} workout={workout} />
+                                )) : <div className="col-span-4 text-mauve-400 text-center">Nessun allenamento</div>
+                        )}
+                    </div>
+                </div>
+
+
+                <div className="flex justify-end gap-2 py-4">
+
+                    { // se user è nel suo profilo
+                        (userAuth?.id === user.id) &&
+                        <button onClick={logoutAuth} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400">Logout</button>
+                    }
+
+                    { // se user è nel suo profilo o è admin
+                        (userAuth?.id === user.id || userAuth?.role === 'admin') &&
+                        <button onClick={() => setOpenModal(true)} className=" border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400">Elimina account</button>
+                    }
+                </div>
+
+                {openModal &&
+                    <div className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center" onClick={() => setOpenModal(false)}>
+                        <AppButton onClick={handleDeleteUser}>Vuoi eliminare definitivamente il tuo account?</AppButton>
+                    </div >
+                }
+            </div>
+
         );
 
 

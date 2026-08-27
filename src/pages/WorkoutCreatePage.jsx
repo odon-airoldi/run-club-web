@@ -66,7 +66,7 @@ export default function WorkoutCreatePage() {
     return (
         <div className="w-120 mx-auto">
             <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-indigo-600 uppercase font-light text-sm mb-4"><ArrowLeftIcon className="size-4" /><span>Torna indietro</span></button>
-            <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">Aggiungi un allenamento</h1>
+            <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">Crea un allenamento</h1>
             <form onSubmit={addWorkout} className="grid grid-cols-4 gap-4">
                 <div className="col-span-4">
                     <AppInput type="text" id="name" name="name" label="Nome" />
