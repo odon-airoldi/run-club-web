@@ -107,7 +107,7 @@ export default function AdminWorkoutsPage() {
                                 </div>
 
                                 <div className="col-span-3">
-                                    {workout.user?.name}
+                                    {workout.user?.name ? workout.user?.name : 'Utente eliminato'}
                                 </div>
 
                                 <div className="col-span-3">
