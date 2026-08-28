@@ -147,7 +147,7 @@ export default function AdminWorkoutsPage() {
                                     </button>
 
                                     {workoutSelected === workout.id &&
-                                        <div className="absolute z-1 top-0 right-4 rounded-sm pt-4 pe-8 pb-8 ps-4 bg-mauve-200">
+                                        <div className="absolute z-1 top-0 right-4 rounded-sm pt-4 pe-8 pb-6 ps-4 bg-mauve-200">
                                             <ul className="flex flex-col gap-1">
                                                 <li><Link to={`/workout/${workoutSelected}`}>Visualizza</Link></li>
                                                 <li><Link to={`/workout/${workoutSelected}/edit`}>Modifica</Link></li>
@@ -156,7 +156,7 @@ export default function AdminWorkoutsPage() {
                                         </div>
                                     }
                                     {(openModal && workoutSelected === workout.id) &&
-                                        <div onClick={() => setWorkoutSelected(null)} className="fixed z-2 inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
+                                        <div onClick={() => { setWorkoutSelected(null); setOpenModal(false) }} className="fixed z-2 inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
                                             <AppButton onClick={() => deleteWorkout(workoutSelected)}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
                                         </div >
                                     }
