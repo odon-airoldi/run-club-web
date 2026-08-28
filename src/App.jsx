@@ -15,6 +15,7 @@ import WorkoutEditPage from './pages/WorkoutEditPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import UserPage from './pages/UserPage'
+import UserEditPage from './pages/UserEditPage'
 import AppLayout from './layouts/AppLayout'
 import AdminUsersPage from './pages/AdminUsersPage'
 import AdminWorkoutsPage from './pages/AdminWorkoutsPage'
@@ -37,6 +38,7 @@ function App() {
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="register" element={<RegisterPage />} />
                   <Route path="/user/:id" element={<UserPage />} />
+                  <Route path="/user/:id/edit" element={<UserEditPage />} />
                   <Route path="/admin/users" element={<AdminUsersPage />} />
                   <Route path="/admin/workouts" element={<AdminWorkoutsPage />} />
                   <Route path="/*" element={<IndexPage />} />

@@ -66,6 +66,7 @@ function UserProvider({ children }) {
         <UserContext.Provider
             value={{
                 user,
+                setUser,
                 workouts,
                 setWorkouts,
                 runsWorkouts,
