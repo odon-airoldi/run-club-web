@@ -36,7 +36,7 @@ function App() {
                   <Route path="/workout/:id/edit" element={<WorkoutEditPage />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="register" element={<RegisterPage />} />
-                  <Route path="/users/:id" element={<UserPage />} />
+                  <Route path="/user/:id" element={<UserPage />} />
                   <Route path="/admin/users" element={<AdminUsersPage />} />
                   <Route path="/admin/workouts" element={<AdminWorkoutsPage />} />
                   <Route path="/*" element={<IndexPage />} />

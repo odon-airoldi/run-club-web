@@ -126,12 +126,12 @@ export default function WorkoutPage() {
                             <div className="flex justify-between items-end">
                                 <div>
                                     <div className="flex gap-1 text-white text-sm/[30px] mb-2">
-                                        <Link to={`/users/${workout.user?.id}`} className="w-[32px] aspect-square rounded-full bg-mauve-400 flex justify-center">
+                                        <Link to={`/user/${workout.user?.id}`} className="w-[32px] aspect-square rounded-full bg-mauve-400 flex justify-center">
                                             {workout.user?.name.split(' ').map(i => i[0]).join('')}
                                         </Link>
                                         {
                                             workout.users_run?.map((user) => (
-                                                <Link to={`/users/${user.id}`} key={user.id} className="w-[32px] aspect-square rounded-full bg-mauve-400 flex justify-center">
+                                                <Link to={`/user/${user.id}`} key={user.id} className="w-[32px] aspect-square rounded-full bg-mauve-400 flex justify-center">
                                                     <div className="">{user.name.split(' ').map(i => i[0]).join('')}</div>
                                                 </Link>
                                             ))
