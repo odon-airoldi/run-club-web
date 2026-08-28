@@ -17,7 +17,7 @@ export default function AdminWorkoutsPage() {
     const { sortedWorkouts } = useWorkout();
     const { getWorkoutPaceTime } = useWorkout();
     const [workouts, setWorkouts] = useState([]);
-    const [workoutSelected, setWorkoutSelected] = useState(null);
+    const [itemSelected, setItemSelected] = useState(null);
     const [openModal, setOpenModal] = useState(false);
 
 
@@ -49,7 +49,7 @@ export default function AdminWorkoutsPage() {
                 }
             )
             setOpenModal(false)
-            setWorkoutSelected(null)
+            setItemSelected(null)
             // aggiorno lo stato di workouts filtrando il workout eliminato
             setWorkouts((prevWorkouts) => prevWorkouts.filter((workout) => workout.id !== id))
 
@@ -71,8 +71,8 @@ export default function AdminWorkoutsPage() {
 
     return (
         <div className="">
-            <div>
-                <h2 className="font-semibold text-8xl mb-4 font-zalando text-indigo-600">Allenamenti</h2>
+            <div className="text-center mb-8">
+                <h1 className="font-semibold text-6xl font-zalando text-indigo-600">Allenamenti</h1>
             </div>
 
             <div className="">
@@ -142,22 +142,22 @@ export default function AdminWorkoutsPage() {
                                 </div>
 
                                 <div className="flex justify-center items-start relative">
-                                    <button onClick={() => setWorkoutSelected(workout.id)} className="cursor-pointer block">
+                                    <button onClick={() => setItemSelected(workout.id)} className="cursor-pointer block">
                                         <EllipsisHorizontalIcon className="w-[20px] h-[20px]" />
                                     </button>
 
-                                    {workoutSelected === workout.id &&
+                                    {itemSelected === workout.id &&
                                         <div className="absolute z-1 top-0 right-4 rounded-sm pt-4 pe-8 pb-6 ps-4 bg-mauve-200">
                                             <ul className="flex flex-col gap-1">
-                                                <li><Link to={`/workout/${workoutSelected}`}>Visualizza</Link></li>
-                                                <li><Link to={`/workout/${workoutSelected}/edit`}>Modifica</Link></li>
+                                                <li><Link to={`/workout/${itemSelected}`}>Visualizza</Link></li>
+                                                <li><Link to={`/workout/${itemSelected}/edit`}>Modifica</Link></li>
                                                 <li><button onClick={() => setOpenModal(true)} className="cursor-pointer">Elimina</button></li>
                                             </ul>
                                         </div>
                                     }
-                                    {(openModal && workoutSelected === workout.id) &&
-                                        <div onClick={() => { setWorkoutSelected(null); setOpenModal(false) }} className="fixed z-2 inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
-                                            <AppButton onClick={() => deleteWorkout(workoutSelected)}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
+                                    {(openModal && itemSelected === workout.id) &&
+                                        <div onClick={() => { setItemSelected(null); setOpenModal(false) }} className="fixed z-2 inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
+                                            <AppButton onClick={() => deleteWorkout(itemSelected)}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
                                         </div >
                                     }
                                 </div>
