@@ -4,7 +4,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useWorkout } from "../contexts/WorkoutContext";
 import AppLink from "../components/AppLink";
-import AppButton from "../components/AppButtton";
+import AppButton from "../components/AppButton";
 import axios from "axios";
 
 

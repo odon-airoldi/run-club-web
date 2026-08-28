@@ -1,21 +1,24 @@
 
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
-import AppWorkoutCard from "../components/AppWorkoutCard";
 import { useAuth } from "../contexts/AuthContext";
 import { useWorkout } from "../contexts/WorkoutContext";
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
+import AppWorkoutCard from "../components/AppWorkoutCard";
 import AppLink from "../components/AppLink";
+import AppButton from "../components/AppButton";
+import axios from "axios";
+
 
 
 export default function AdminWorkoutsPage() {
 
     const { userAuth } = useAuth();
     const { sortedWorkouts } = useWorkout();
-
-    const [workouts, setWorkouts] = useState([]);
-
     const { getWorkoutPaceTime } = useWorkout();
+    const [workouts, setWorkouts] = useState([]);
+    const [workoutSelected, setWorkoutSelected] = useState(0);
+    const [openModal, setOpenModal] = useState(false);
 
 
     // index workouts
@@ -33,6 +36,27 @@ export default function AdminWorkoutsPage() {
 
     }
 
+    // delete workout
+    async function deleteWorkout(id) {
+
+        try {
+            const response = await axios.delete(`http://api.run-club.test/api/workouts/${id}`,
+                {
+                    withCredentials: true,
+                    withXSRFToken: true,
+                    headers: {
+                        Accept: 'application/json'
+                    }
+                }
+            )
+            setOpenModal(false)
+
+        } catch (error) {
+            console.log(error.response);
+        }
+
+    }
+
     useEffect(() => {
 
         indexWorkout();
@@ -42,64 +66,103 @@ export default function AdminWorkoutsPage() {
 
     const now = new Date();
 
+    if (!userAuth || userAuth.role !== 'admin') return <Navigate to="/" replace />
+
     return (
         <div className="">
-            <h2 className="font-semibold text-8xl mb-4 font-zalando text-indigo-600">Allenamenti</h2>
-
-
-            <div className="flex flex-col">
-                <div className="grid grid-cols-12 gap-4 py-2 border-b border-gray-200 text-xs uppercase text-mauve-400">
-                    <div>ID</div>
-                    <div className="col-span-3">Nome</div>
-                    <div className="col-span-2">Ruolo</div>
-                    <div className="col-span-2">Allenamenti creati</div>
-                    <div className="col-span-2">Partecipazioni</div>
-                    <div>Modifica</div>
-                    <div>Elimina</div>
-                </div>
+            <div>
+                <h2 className="font-semibold text-8xl mb-4 font-zalando text-indigo-600">Allenamenti</h2>
             </div>
 
             <div className="">
-
+                <div className="grid grid-cols-24 py-2 border-b border-mauve-300 text-xs uppercase text-mauve-400">
+                    <div>ID</div>
+                    <div className="col-span-6">Nome</div>
+                    <div className="col-span-3">Creato da</div>
+                    <div className="col-span-3">Città</div>
+                    <div className="col-span-2">Data</div>
+                    <div className="col-span-2">Ora</div>
+                    <div className="col-span-2">Km</div>
+                    <div className="col-span-2">Min/Km</div>
+                    <div className="col-span-2">Partecipanti</div>
+                    <div></div>
+                </div>
+            </div>
+            <div className="">
                 {
                     sortedWorkouts(workouts).map((workout) => {
 
                         const { minutes, seconds } = getWorkoutPaceTime(workout.pace);
 
                         return (
-                            <div className={`grid grid-cols-12 gap-4 py-2 border-b border-gray-200 text-sm ${new Date(workout.date_time) < new Date() ? 'opacity-60' : ''}`} key={workout.id}>
-                                <span className="text-mauve-400">
+                            <div className={`grid grid-cols-24 py-2 border-b border-mauve-300 text-sm ${new Date(workout.date_time) < new Date() ? 'opacity-60' : ''}`} key={workout.id}>
+
+                                <div>
+                                    {workout.id}
+                                </div>
+
+                                <div className="col-span-6 pe-2">
+                                    {workout.name}
+                                </div>
+
+                                <div className="col-span-3">
+                                    {workout.user?.name}
+                                </div>
+
+                                <div className="col-span-3">
+                                    {workout.place_city}
+                                </div>
+
+                                <div className="col-span-2">
                                     {new Date(workout.date_time).toLocaleDateString('it-IT', {
-                                        weekday: 'long'
+                                        day: 'numeric',
+                                        month: 'numeric',
+                                        year: '2-digit'
                                     })}
-                                </span>
-                                {new Date(workout.date_time).toLocaleDateString('it-IT', {
-                                    day: 'numeric',
-                                    month: 'short',
-                                    year: 'numeric'
-                                })}
-                                <div className="flex gap-1">
-                                    <span className="text-mauve-400">Ore</span>
+                                </div>
+
+                                <div className="col-span-2">
                                     {new Date(workout.date_time).toLocaleTimeString('it-IT', {
                                         hour: 'numeric',
                                         minute: 'numeric'
                                     })}
                                 </div>
 
-                                <div className="text-xs mb-1 uppercase text-mauve-400">
-                                    {workout.place_city}
-                                </div>
-                                <h2 className="font-zalando font-semibold text-indigo-600 mb-2">{workout.name}</h2>
-                                <div className="text-xs mb-1 uppercase text-mauve-400">
-                                    {workout.users_run_count + 1} {workout.users_run_count + 1 > 1 ? 'partecipanti' : 'partecipante'}
+                                <div className="col-span-2">
+                                    {workout.distance}
                                 </div>
 
-                                <div className="flex justify-between px-4 py-2 text-xs uppercase">
-                                    <div><span className="text-mauve-400">Km</span> {workout.distance}</div>
-                                    <div><span className="text-mauve-400">Min/Km</span> {minutes}:{seconds}</div>
+                                <div className="col-span-2">
+                                    {minutes}:{seconds}
                                 </div>
 
+                                <div className="col-span-2">
+                                    {workout.users_run_count + 1}
+                                </div>
+
+                                <div className="flex justify-center items-start relative">
+                                    <button onClick={() => setWorkoutSelected(workout.id)} className="cursor-pointer block">
+                                        <EllipsisHorizontalIcon className="w-[20px] h-[20px]" />
+                                    </button>
+
+                                    {workoutSelected === workout.id &&
+                                        <div className="absolute z-1 top-0 right-4 rounded-sm pt-4 pe-8 pb-8 ps-4 bg-mauve-200">
+                                            <ul className="flex flex-col gap-1">
+                                                <li><Link to={`/workout/${workout.id}`}>Visualizza</Link></li>
+                                                <li><Link to={`/workout/${workout.id}/edit`}>Modifica</Link></li>
+                                                <li><button onClick={() => setOpenModal(true)} className="cursor-pointer">Elimina</button></li>
+                                            </ul>
+                                        </div>
+                                    }
+                                    {(openModal && workoutSelected === workout.id) &&
+                                        <div onClick={() => setOpenModal(false)} className="fixed z-2 inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
+                                            <AppButton onClick={() => deleteWorkout(workoutSelected)}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
+                                        </div >
+                                    }
+                                </div>
                             </div>
+
+
                         )
                     })
                 }
@@ -107,10 +170,13 @@ export default function AdminWorkoutsPage() {
 
 
             { // se user è autenticato
-                userAuth && <AppLink to="/workout/create">Aggiungi un allenamento</AppLink>
+                userAuth &&
+                <div className="py-4 text-end">
+                    <AppLink to="/workout/create">Aggiungi un allenamento</AppLink>
+                </div>
             }
 
-        </div>
+        </div >
     );
 
 

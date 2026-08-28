@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
-import AppButton from "../components/AppButtton";
+import AppButton from "../components/AppButton";
 import AppInput from "../components/AppInput";
 
 

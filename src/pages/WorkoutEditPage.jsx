@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useWorkout } from "../contexts/WorkoutContext";
 import { ArrowLeftIcon } from '@heroicons/react/24/solid'
-import AppButton from "../components/AppButtton";
+import AppButton from "../components/AppButton";
 import AppLink from "../components/AppLink";
 import AppInput from "../components/AppInput";
 import AppTextarea from "../components/AppTextarea";

@@ -7,7 +7,7 @@ import { useWorkout } from "../contexts/WorkoutContext";
 import { PlusIcon } from '@heroicons/react/24/solid'
 import AppWorkoutCard from "../components/AppWorkoutCard";
 import AppLink from "../components/AppLink";
-import AppButton from "../components/AppButtton";
+import AppButton from "../components/AppButton";
 import axios from "axios";
 
 

@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 import AppLink from "../components/AppLink";
-import AppButton from "../components/AppButtton";
+import AppButton from "../components/AppButton";
 import AppInput from "../components/AppInput";
 import AppTextarea from "../components/AppTextarea";
 import axios from "axios";
