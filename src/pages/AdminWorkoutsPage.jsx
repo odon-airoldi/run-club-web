@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useWorkout } from "../contexts/WorkoutContext";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
@@ -17,7 +17,7 @@ export default function AdminWorkoutsPage() {
     const { sortedWorkouts } = useWorkout();
     const { getWorkoutPaceTime } = useWorkout();
     const [workouts, setWorkouts] = useState([]);
-    const [workoutSelected, setWorkoutSelected] = useState(0);
+    const [workoutSelected, setWorkoutSelected] = useState(null);
     const [openModal, setOpenModal] = useState(false);
 
 
@@ -28,7 +28,6 @@ export default function AdminWorkoutsPage() {
 
             // setto workouts utilizzando la funzione per riordinarli
             setWorkouts(response.data)
-
 
         } catch (error) {
             console.log(error)
@@ -50,6 +49,9 @@ export default function AdminWorkoutsPage() {
                 }
             )
             setOpenModal(false)
+            setWorkoutSelected(null)
+            // aggiorno lo stato di workouts filtrando il workout eliminato
+            setWorkouts((prevWorkouts) => prevWorkouts.filter((workout) => workout.id !== id))
 
         } catch (error) {
             console.log(error.response);
@@ -60,7 +62,6 @@ export default function AdminWorkoutsPage() {
     useEffect(() => {
 
         indexWorkout();
-
 
     }, []);
 
@@ -148,14 +149,14 @@ export default function AdminWorkoutsPage() {
                                     {workoutSelected === workout.id &&
                                         <div className="absolute z-1 top-0 right-4 rounded-sm pt-4 pe-8 pb-8 ps-4 bg-mauve-200">
                                             <ul className="flex flex-col gap-1">
-                                                <li><Link to={`/workout/${workout.id}`}>Visualizza</Link></li>
-                                                <li><Link to={`/workout/${workout.id}/edit`}>Modifica</Link></li>
+                                                <li><Link to={`/workout/${workoutSelected}`}>Visualizza</Link></li>
+                                                <li><Link to={`/workout/${workoutSelected}/edit`}>Modifica</Link></li>
                                                 <li><button onClick={() => setOpenModal(true)} className="cursor-pointer">Elimina</button></li>
                                             </ul>
                                         </div>
                                     }
                                     {(openModal && workoutSelected === workout.id) &&
-                                        <div onClick={() => setOpenModal(false)} className="fixed z-2 inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
+                                        <div onClick={() => setWorkoutSelected(null)} className="fixed z-2 inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
                                             <AppButton onClick={() => deleteWorkout(workoutSelected)}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
                                         </div >
                                     }
