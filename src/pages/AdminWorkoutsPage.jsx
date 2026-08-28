@@ -18,7 +18,7 @@ export default function AdminWorkoutsPage() {
     const { getWorkoutPaceTime } = useWorkout();
     const [workouts, setWorkouts] = useState([]);
     const [itemSelected, setItemSelected] = useState(null);
-    const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(null);
 
 
     // index workouts
@@ -48,7 +48,7 @@ export default function AdminWorkoutsPage() {
                     }
                 }
             )
-            setOpenModal(false)
+            setOpenModal(null)
             setItemSelected(null)
             // aggiorno lo stato di workouts filtrando il workout eliminato
             setWorkouts((prevWorkouts) => prevWorkouts.filter((workout) => workout.id !== id))
@@ -151,15 +151,11 @@ export default function AdminWorkoutsPage() {
                                             <ul className="flex flex-col gap-1">
                                                 <li><Link to={`/workout/${itemSelected}`}>Visualizza</Link></li>
                                                 <li><Link to={`/workout/${itemSelected}/edit`}>Modifica</Link></li>
-                                                <li><button onClick={() => setOpenModal(true)} className="cursor-pointer">Elimina</button></li>
+                                                <li><button onClick={() => setOpenModal(itemSelected)} className="cursor-pointer">Elimina</button></li>
                                             </ul>
                                         </div>
                                     }
-                                    {(openModal && itemSelected === workout.id) &&
-                                        <div onClick={() => { setItemSelected(null); setOpenModal(false) }} className="fixed z-2 inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
-                                            <AppButton onClick={() => deleteWorkout(itemSelected)}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
-                                        </div >
-                                    }
+
                                 </div>
                             </div>
 
@@ -169,6 +165,11 @@ export default function AdminWorkoutsPage() {
                 }
             </div>
 
+            {openModal &&
+                <div onClick={() => { setItemSelected(null); setOpenModal(null) }} className="fixed z-2 inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
+                    <AppButton onClick={() => deleteWorkout(itemSelected)}>Vuoi eliminare definitivamente l'allenamento?</AppButton>
+                </div >
+            }
 
             { // se user è autenticato
                 userAuth &&

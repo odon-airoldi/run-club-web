@@ -12,7 +12,7 @@ export default function AdminUsersPage() {
     const { userAuth, setUserAuth } = useAuth()
     const [users, setUsers] = useState([])
     const [itemSelected, setItemSelected] = useState(null);
-    const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(null);
 
     async function indexUsers() {
         try {
@@ -43,7 +43,7 @@ export default function AdminUsersPage() {
                 }
             )
 
-            setOpenModal(false)
+            setOpenModal(null)
             setItemSelected(null)
             // aggiorno lo stato di users filtrando l'user eliminato
             setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id))
@@ -133,21 +133,21 @@ export default function AdminUsersPage() {
                                         <ul className="flex flex-col gap-1">
                                             <li><Link to={`/user/${itemSelected}`}>Visualizza</Link></li>
                                             {/* <li><Link to={`/user/${itemSelected}/edit`}>Modifica</Link></li> */}
-                                            <li><button onClick={() => setOpenModal(true)} className="cursor-pointer">Elimina</button></li>
+                                            <li><button onClick={() => setOpenModal(itemSelected)} className="cursor-pointer">Elimina</button></li>
                                         </ul>
                                     </div>
                                 }
-                                {(openModal && itemSelected === user.id) &&
-                                    <div onClick={() => { setItemSelected(null); setOpenModal(false) }} className="fixed z-2 inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
-                                        <AppButton onClick={() => handleDeleteUser(itemSelected)}>Vuoi eliminare definitivamente l'utente {user.name}?</AppButton>
-                                    </div >
-                                }
-
                             </div>
                         </div>
                     ))
                 }
             </div>
+
+            {openModal &&
+                <div onClick={() => { setItemSelected(null); setOpenModal(null) }} className="fixed z-2 inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
+                    <AppButton onClick={() => handleDeleteUser(itemSelected)}>Vuoi eliminare definitivamente l'utente?</AppButton>
+                </div >
+            }
         </div>
     );
 
