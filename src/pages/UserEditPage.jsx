@@ -19,7 +19,7 @@ export default function UserEditPage() {
 
     const { id } = useParams();
 
-    const { user, setUser, showUser } = useUser();
+    const { user, setUser, showUser, loading } = useUser();
 
     const [editUser, setEditUser] = useState(null);
 
@@ -31,14 +31,13 @@ export default function UserEditPage() {
 
     useEffect(() => {
 
-        // if (loading) return;
+        if (loading) return;
 
         setEditUser(user);
 
-    }, [id]);
+    }, [user]);
 
-
-
+    console.log(user)
 
     async function handleSubmitUser(e) {
 
@@ -51,7 +50,7 @@ export default function UserEditPage() {
                 email: editUser.email,
             }
 
-            const response = await axios.put(`http://api.run-club.test/api/users/${id}`,
+            const response = await axios.put(`http://api.run-club.test/api/users/${id}/edit`,
 
                 updateUser,
 
@@ -86,10 +85,10 @@ export default function UserEditPage() {
 
     return (
         <div className="">
-            {editWorkout &&
+            {editUser &&
                 <div className="w-120 mx-auto">
-                    <Link to={`/user/${id}`} className="flex items-center gap-2 text-indigo-600 uppercase font-light text-sm mb-4"><ArrowLeftIcon className="size-4" /><span>Torna all'allenamento</span></Link>
-                    <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">Aggiorna il tuo profilo</h1>
+                    <Link to={`/user/${id}`} className="flex items-center gap-2 text-indigo-600 uppercase font-light text-sm mb-4"><ArrowLeftIcon className="size-4" /><span>Torna al profilo</span></Link>
+                    <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">Aggiorna il profilo</h1>
                     <form onSubmit={handleSubmitUser} className="grid grid-cols-4 gap-4">
                         <div className="col-span-4">
                             <AppInput type="text" id="name" name="name" label="Nome" value={editUser.name} onChange={handleChange} />

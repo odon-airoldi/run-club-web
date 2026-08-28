@@ -132,7 +132,7 @@ export default function AdminUsersPage() {
                                     <div className="absolute z-1 top-0 right-4 rounded-sm pt-4 pe-8 pb-6 ps-4 bg-mauve-200">
                                         <ul className="flex flex-col gap-1">
                                             <li><Link to={`/user/${itemSelected}`}>Visualizza</Link></li>
-                                            {/* <li><Link to={`/user/${itemSelected}/edit`}>Modifica</Link></li> */}
+                                            <li><Link to={`/user/${itemSelected}/edit`}>Modifica</Link></li>
                                             <li><button onClick={() => setOpenModal(itemSelected)} className="cursor-pointer">Elimina</button></li>
                                         </ul>
                                     </div>

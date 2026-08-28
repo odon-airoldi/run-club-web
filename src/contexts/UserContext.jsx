@@ -12,6 +12,7 @@ function UserProvider({ children }) {
     const navigate = useNavigate();
 
     const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true);
     const [workouts, setWorkouts] = useState(null);
     const [runsWorkouts, setRunsWorkouts] = useState(null);
 
@@ -29,6 +30,8 @@ function UserProvider({ children }) {
         } catch (error) {
             console.log(error)
             navigate('/');
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -71,6 +74,7 @@ function UserProvider({ children }) {
                 setWorkouts,
                 runsWorkouts,
                 showUser,
+                loading,
                 userWorkouts,
                 userRunsWorkouts
             }}
