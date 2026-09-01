@@ -59,24 +59,22 @@ export default function RegisterPage() {
 
     return (
         <div className="">
-            <div className="flex min-h-full flex-col justify-center">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Registrati</h2>
-                </div>
+            <div className="w-120 mx-auto">
 
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form onSubmit={handleRegister} className="space-y-6">
-                        <AppInput type="name" id="name" name="name" label="Nome" />
-                        <AppInput type="email" id="email" name="email" label="Email" />
-                        <AppInput type="password" id="password" name="password" label="Password" />
-                        <AppInput type="password" id="password_confirmation" name="password_confirmation" label="Conferma Password" />
-                        <AppButton type="submit">Registrati</AppButton>
-                    </form>
+                <h1 className="text-4xl text-center font-semibold font-zalando mb-4">Registrati</h1>
 
-                    <p className="mt-10 text-center text-sm/6 text-gray-500">
-                        Sei già membro? <Link to="/login" className="font-semibold text-indigo-600 hover:text-indigo-500">Accedi</Link>
-                    </p>
-                </div>
+                <form onSubmit={handleRegister} className="space-y-6">
+                    <AppInput type="name" id="name" name="name" label="Nome" />
+                    <AppInput type="email" id="email" name="email" label="Email" />
+                    <AppInput type="password" id="password" name="password" label="Password" />
+                    <AppInput type="password" id="password_confirmation" name="password_confirmation" label="Conferma Password" />
+                    <AppButton type="submit">Registrati</AppButton>
+                </form>
+
+                <p className="mt-10 text-center text-sm/6 text-gray-500">
+                    Sei già membro? <Link to="/login" className="font-semibold text-indigo-600 hover:text-indigo-500">Accedi</Link>
+                </p>
+
             </div>
 
         </div>

@@ -33,6 +33,8 @@ export default function UserPage() {
     }, [id])
 
 
+    console.log(user)
+
     // user elimina account
     async function handleDeleteUser() {
 
@@ -79,7 +81,7 @@ export default function UserPage() {
                     <button role="tab" onClick={() => setTab(2)} className={`flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b -mb-[1px] cursor-pointer ${tab === 2 ? 'border-indigo-600' : 'border-transparent'}`}>
                         Partecipazioni <span className="w-[24px] aspect-square rounded-full bg-mauve-400 flex items-center justify-center text-white text-xs">{runsWorkouts.length}</span>
                     </button>
-                    {   // se user autenticato è uguale a user in pagina
+                    { // se user autenticato è uguale a user in pagina
                         userAuth.id === user.id &&
                         <Link role="tab" to="/workout/create" className={`flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b border-transparent -mb-[1px]`}>
                             Crea allenamento <span className="w-[24px] aspect-square rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs"><PlusIcon className="size-4" /></span>
@@ -110,7 +112,12 @@ export default function UserPage() {
                 <div className="flex justify-end gap-2 py-4">
 
                     { // se user è nel suo profilo
-                        (userAuth?.id === user.id) &&
+                        userAuth?.id === user.id &&
+                        <Link to={`/user/${user.id}/edit`} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Modifica</Link>
+                    }
+
+                    { // se user è nel suo profilo
+                        userAuth?.id === user.id &&
                         <button onClick={logoutAuth} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Logout</button>
                     }
 

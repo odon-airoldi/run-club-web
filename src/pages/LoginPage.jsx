@@ -56,28 +56,26 @@ export default function LoginPage() {
 
     return (
         <div className="">
-            <div className="flex min-h-full flex-col justify-center">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Accedi</h2>
-                </div>
+            <div className="w-120 mx-auto">
 
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form onSubmit={handleLogin} className="space-y-6">
-                        <div>
-                            <AppInput type="email" id="email" name="email" label="Email" />
-                        </div>
-                        <div>
-                            <AppInput type="password" id="password" name="password" label="Password" />
-                        </div>
-                        <div>
-                            <AppButton type="submit">Accedi</AppButton>
-                        </div>
-                    </form>
+                <h1 className="text-4xl text-center font-semibold font-zalando mb-4">Accedi</h1>
 
-                    <p className="mt-10 text-center text-sm/6 text-gray-500">
-                        Non sei membro? <Link to="/register" className="font-semibold text-indigo-600 hover:text-indigo-500">Registrati gratis</Link>
-                    </p>
-                </div>
+                <form onSubmit={handleLogin} className="space-y-6">
+                    <div>
+                        <AppInput type="email" id="email" name="email" label="Email" />
+                    </div>
+                    <div>
+                        <AppInput type="password" id="password" name="password" label="Password" />
+                    </div>
+                    <div>
+                        <AppButton type="submit">Accedi</AppButton>
+                    </div>
+                </form>
+
+                <p className="mt-10 text-center text-sm/6 text-gray-500">
+                    Non sei membro? <Link to="/register" className="font-semibold text-indigo-600 hover:text-indigo-500">Registrati</Link>
+                </p>
+
             </div>
         </div>
     );

@@ -113,8 +113,12 @@ export default function WorkoutEditPage() {
         <div className="">
             {editWorkout &&
                 <div className="w-120 mx-auto">
-                    <Link to={`/workout/${id}`} className="flex items-center gap-2 text-indigo-600 uppercase font-light text-sm mb-4"><ArrowLeftIcon className="size-4" /><span>Torna all'allenamento</span></Link>
+                    <Link to={`/workout/${id}`} className="flex items-center gap-2 text-indigo-600 uppercase font-light text-sm mb-4">
+                        <ArrowLeftIcon className="size-4" />
+                        <span>Torna all'allenamento</span>
+                    </Link>
                     <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">Aggiorna l'allenamento</h1>
+
                     <form onSubmit={handleSubmitWorkout} className="grid grid-cols-4 gap-4">
                         <div className="col-span-4">
                             <AppInput type="text" id="name" name="name" label="Nome" value={editWorkout.name} onChange={handleChange} />
@@ -150,6 +154,7 @@ export default function WorkoutEditPage() {
                             <AppButton type="submit">Modifica</AppButton>
                         </div>
                     </form>
+
                 </div>
             }
         </div>
