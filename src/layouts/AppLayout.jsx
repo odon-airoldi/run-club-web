@@ -6,13 +6,13 @@ export default function AppLayout() {
 
     return (
 
-        <>
+        <div className="min-h-screen flex flex-col">
             <AppHeader />
-            <div className="p-4 text-mauve-600">
+            <div className="flex-1 flex flex-col p-4 text-mauve-600">
                 <Outlet />
             </div>
             <AppFooter />
-        </>
+        </div>
 
     )
 

@@ -121,7 +121,7 @@ export default function WorkoutEditPage() {
 
                     <form onSubmit={handleSubmitWorkout} className="grid grid-cols-4 gap-4">
                         <div className="col-span-4">
-                            <AppInput type="text" id="name" name="name" label="Nome" value={editWorkout.name} onChange={handleChange} />
+                            <AppInput type="text" id="name" name="name" label="Titolo" value={editWorkout.name} onChange={handleChange} />
                         </div>
                         <div className="col-span-4">
                             <AppTextarea type="text" id="description" name="description" label="Descrizione" value={editWorkout.description} onChange={handleChange} />
@@ -144,14 +144,20 @@ export default function WorkoutEditPage() {
                         <div className="col-span-2">
                             <AppInput type="number" id="distance" name="distance" label="Distanza" value={editWorkout.distance} onChange={handleChange} />
                         </div>
-                        <div className="col-span-1">
-                            <AppInput type="number" id="pace_m" name="pace_m" min="0" max="59" label="Passo Min" value={editWorkout.pace_m} onChange={handleChange} />
-                        </div>
-                        <div className="col-span-1">
-                            <AppInput type="number" id="pace_s" name="pace_s" min="0" max="59" label="Passo Sec" value={editWorkout.pace_s} onChange={handleChange} />
-                        </div>
+                        <div className="col-span-2">
+                            <label htmlFor="pace_m" className="block text-xs mb-1 uppercase text-mauve-400 mb-1">Passo</label>
+                            <div className="flex items-center gap-1">
+                                <div className="flex-1">
+                                    <AppInput type="number" id="pace_m" name="pace_m" min="0" max="59" placeholder="Min" value={editWorkout.pace_m} onChange={handleChange} />
+                                </div>
+                                <div className="text-mauve-00 text-sm">:</div>
+                                <div className="flex-1">
+                                    <AppInput type="number" id="pace_s" name="pace_s" min="0" max="59" placeholder="Sec" value={editWorkout.pace_s} onChange={handleChange} />
+                                </div>
+                            </div>
+                        </div >
                         <div className="col-span-4">
-                            <AppButton type="submit">Modifica</AppButton>
+                            <AppButton type="submit" className="w-full">Aggiorna</AppButton>
                         </div>
                     </form>
 

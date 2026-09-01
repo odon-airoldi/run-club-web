@@ -58,7 +58,7 @@ export default function LoginPage() {
         <div className="">
             <div className="w-120 mx-auto">
 
-                <h1 className="text-4xl text-center font-semibold font-zalando mb-4">Accedi</h1>
+                <h1 className="text-3xl text-center font-semibold font-zalando mb-4">Accedi</h1>
 
                 <form onSubmit={handleLogin} className="space-y-6">
                     <div>
@@ -68,7 +68,7 @@ export default function LoginPage() {
                         <AppInput type="password" id="password" name="password" label="Password" />
                     </div>
                     <div>
-                        <AppButton type="submit">Accedi</AppButton>
+                        <AppButton type="submit" className="w-full">Accedi</AppButton>
                     </div>
                 </form>
 
@@ -76,8 +76,8 @@ export default function LoginPage() {
                     Non sei membro? <Link to="/register" className="font-semibold text-indigo-600 hover:text-indigo-500">Registrati</Link>
                 </p>
 
-            </div>
-        </div>
+            </div >
+        </div >
     );
 
 }

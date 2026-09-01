@@ -68,7 +68,7 @@ export default function RegisterPage() {
                     <AppInput type="email" id="email" name="email" label="Email" />
                     <AppInput type="password" id="password" name="password" label="Password" />
                     <AppInput type="password" id="password_confirmation" name="password_confirmation" label="Conferma Password" />
-                    <AppButton type="submit">Registrati</AppButton>
+                    <AppButton type="submit" className="w-full">Registrati</AppButton>
                 </form>
 
                 <p className="mt-10 text-center text-sm/6 text-gray-500">

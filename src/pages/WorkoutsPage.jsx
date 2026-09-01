@@ -44,7 +44,9 @@ export default function WorkoutsPage() {
 
     return (
         <div className="">
-            <h2 className="font-semibold text-8xl mb-4 font-zalando text-indigo-600">Allenamenti</h2>
+            <div className="text-center mb-8">
+                <h2 className="font-semibold text-6xl font-zalando text-indigo-600">Allenamenti</h2>
+            </div>
             <div className="grid grid-cols-4 gap-4">
                 {
 
@@ -55,9 +57,7 @@ export default function WorkoutsPage() {
             </div>
 
 
-            { // se user è autenticato
-                userAuth && <AppLink to="/workout/create">Aggiungi un allenamento</AppLink>
-            }
+
 
         </div>
     );

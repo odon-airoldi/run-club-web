@@ -83,7 +83,7 @@ export default function UserPage() {
                     </button>
                     { // se user autenticato è uguale a user in pagina
                         userAuth.id === user.id &&
-                        <Link role="tab" to="/workout/create" className={`flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b border-transparent -mb-[1px]`}>
+                        <Link role="tab" to="/workout/create" className="flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b border-transparent -mb-[1px]">
                             Crea allenamento <span className="w-[24px] aspect-square rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs"><PlusIcon className="size-4" /></span>
                         </Link>
                     }

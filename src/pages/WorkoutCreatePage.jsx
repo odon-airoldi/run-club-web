@@ -60,25 +60,6 @@ export default function WorkoutCreatePage() {
 
     }
 
-
-    const [pace, setPace] = useState("");
-
-    function handlePaceChange(e) {
-        let digits = e.target.value.replace(/\D/g, "");
-        digits = digits.slice(0, 3); // massimo 3 cifre totali: 1 per i minuti, 2 per i secondi
-
-        let formatted = digits;
-
-        if (digits.length > 1) {
-            const minutesPart = digits.slice(0, 1);
-            const secondsPart = digits.slice(1);
-            formatted = `${minutesPart}:${secondsPart}`;
-        }
-
-        setPace(formatted);
-    }
-
-
     // redirect al render se user non è autenticato
     if (!userAuth) return <Navigate to="/" replace />
 
@@ -88,7 +69,7 @@ export default function WorkoutCreatePage() {
             <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">Crea un allenamento</h1>
             <form onSubmit={addWorkout} className="grid grid-cols-4 gap-4">
                 <div className="col-span-4">
-                    <AppInput type="text" id="name" name="name" label="Nome" />
+                    <AppInput type="text" id="name" name="name" label="Titolo" />
                 </div>
                 <div className="col-span-4">
                     <AppTextarea type="text" id="description" name="description" label="Descrizione" />
@@ -100,7 +81,7 @@ export default function WorkoutCreatePage() {
                     <AppInput type="time" id="time" name="time" label="Ora" />
                 </div>
                 <div className="col-span-2">
-                    <AppInput type="number" id="buffer_time" name="buffer_time" min="0" max="59" label="Tempo di attesa" />
+                    <AppInput type="number" id="buffer_time" name="buffer_time" min="0" max="59" label="Tempo di attesa" placeholder="Min" />
                 </div>
                 <div className="col-span-4">
                     <AppInput type="text" id="place_city" name="place_city" label="Città" />
@@ -109,24 +90,25 @@ export default function WorkoutCreatePage() {
                     <AppInput type="text" id="place_address" name="place_address" label="Indirizzo" />
                 </div>
                 <div className="col-span-2">
-                    <AppInput type="number" id="distance" name="distance" label="Distanza" />
+                    <AppInput type="number" id="distance" name="distance" label="Distanza" placeholder="Km" />
                 </div>
-                <div className="col-span-2 grid grid-cols-2">
-                    <div className="col-span-2">
-                        <label htmlFor="pace_m" className="block text-xs mb-1 uppercase text-mauve-400 mb-1">Passo</label>
+                <div className="col-span-2">
+                    <label htmlFor="pace_m" className="block text-xs mb-1 uppercase text-mauve-400 mb-1">Passo</label>
+                    <div className="flex items-center gap-1">
+                        <div className="flex-1">
+                            <AppInput type="number" id="pace_m" name="pace_m" min="0" max="59" placeholder="Min" />
+                        </div>
+                        <div className="text-mauve-00 text-sm">:</div>
+                        <div className="flex-1">
+                            <AppInput type="number" id="pace_s" name="pace_s" min="0" max="59" placeholder="Sec" />
+                        </div>
                     </div>
-                    <div>
-                        <AppInput type="number" id="pace_m" name="pace_m" min="0" max="59" placeholder="00 min" />
-                    </div>
-                    <div>
-                        <AppInput type="number" id="pace_s" name="pace_s" min="0" max="59" placeholder="00 sec" />
-                    </div>
-                </div>
+                </div >
                 <div className="col-span-4">
-                    <AppButton type="submit">Aggiungi</AppButton>
+                    <AppButton type="submit" className="w-full">Crea</AppButton>
                 </div>
-            </form>
-        </div>
+            </form >
+        </div >
     );
 
 }
