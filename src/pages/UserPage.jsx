@@ -112,7 +112,7 @@ export default function UserPage() {
                 <div className="flex justify-end gap-2 py-4">
 
                     { // se user è nel suo profilo
-                        userAuth?.id === user.id &&
+                        (userAuth?.id === user.id || userAuth?.role === 'admin') &&
                         <Link to={`/user/${user.id}/edit`} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Modifica</Link>
                     }
 

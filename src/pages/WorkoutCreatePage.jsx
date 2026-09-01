@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { ArrowLeftIcon } from '@heroicons/react/24/solid'
+import AppLinkArrowLeft from "../components/AppLinkArrowLeft";
 import AppLink from "../components/AppLink";
 import AppButton from "../components/AppButton";
 import AppInput from "../components/AppInput";
@@ -65,38 +65,37 @@ export default function WorkoutCreatePage() {
 
     return (
         <div className="w-120 mx-auto">
-            <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-indigo-600 uppercase font-light text-sm mb-4"><ArrowLeftIcon className="size-4" /><span>Torna indietro</span></button>
             <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">Crea un allenamento</h1>
             <form onSubmit={addWorkout} className="grid grid-cols-4 gap-4">
                 <div className="col-span-4">
-                    <AppInput type="text" id="name" name="name" label="Titolo" />
+                    <AppInput type="text" id="name" name="name" label="Titolo" required />
                 </div>
                 <div className="col-span-4">
-                    <AppTextarea type="text" id="description" name="description" label="Descrizione" />
+                    <AppTextarea type="text" id="description" name="description" label="Descrizione" required />
                 </div>
                 <div className="col-span-4">
-                    <AppInput type="date" id="date" name="date" label="Data" />
+                    <AppInput type="date" id="date" name="date" label="Data" required />
                 </div>
                 <div className="col-span-2">
-                    <AppInput type="time" id="time" name="time" label="Ora" />
+                    <AppInput type="time" id="time" name="time" label="Ora" required />
                 </div>
                 <div className="col-span-2">
                     <AppInput type="number" id="buffer_time" name="buffer_time" min="0" max="59" label="Tempo di attesa" placeholder="Min" />
                 </div>
                 <div className="col-span-4">
-                    <AppInput type="text" id="place_city" name="place_city" label="Città" />
+                    <AppInput type="text" id="place_city" name="place_city" label="Città" required />
                 </div>
                 <div className="col-span-4">
-                    <AppInput type="text" id="place_address" name="place_address" label="Indirizzo" />
+                    <AppInput type="text" id="place_address" name="place_address" label="Indirizzo" required />
                 </div>
                 <div className="col-span-2">
-                    <AppInput type="number" id="distance" name="distance" label="Distanza" placeholder="Km" />
+                    <AppInput type="number" id="distance" name="distance" label="Distanza" placeholder="Km" required />
                 </div>
                 <div className="col-span-2">
                     <label htmlFor="pace_m" className="block text-xs mb-1 uppercase text-mauve-400 mb-1">Passo</label>
                     <div className="flex items-center gap-1">
                         <div className="flex-1">
-                            <AppInput type="number" id="pace_m" name="pace_m" min="0" max="59" placeholder="Min" />
+                            <AppInput type="number" id="pace_m" name="pace_m" min="0" max="59" placeholder="Min" required />
                         </div>
                         <div className="text-mauve-00 text-sm">:</div>
                         <div className="flex-1">

@@ -6,6 +6,7 @@ import { useWorkout } from "../contexts/WorkoutContext";
 import AppLink from "../components/AppLink";
 import AppButton from "../components/AppButton";
 import axios from "axios";
+import AppLinkArrowLeft from "../components/AppLinkArrowLeft";
 
 
 export default function WorkoutPage() {
@@ -158,7 +159,7 @@ export default function WorkoutPage() {
                                                 </AppButton>
                                             )
                                             //altrimenti
-                                            : <div>Workout concluso</div>
+                                            : <div className="inline-flex justify-center bg-mauve-200 px-3 py-1 text-sm/6 font-zalando font-semibold">Allenamento concluso</div>
                                     }
                                 </div>
                             </div>
@@ -169,27 +170,27 @@ export default function WorkoutPage() {
 
                             <div>
                                 <div className="text-xs mb-1 uppercase text-mauve-400">Punto di ritrovo</div>
-                                <div className="text-indigo-500">
+                                <div className="text-indigo-600">
                                     {workout.place_city}<br />
                                     {workout.place_address}
                                 </div>
                             </div>
                             <div>
                                 <div className="text-xs mb-1 uppercase text-mauve-400">Tempo di attesa</div>
-                                <div className="text-indigo-500">{workout.buffer_time} Min</div>
+                                <div className="text-indigo-600">{workout.buffer_time} Min</div>
                             </div>
 
                             <div>
                                 <div className="text-xs mb-1 uppercase text-mauve-400">Distanza</div>
-                                <div className="text-indigo-500">{workout.distance} Km</div>
+                                <div className="text-indigo-600">{workout.distance} Km</div>
                             </div>
                             <div>
                                 <div className="text-xs mb-1 uppercase text-mauve-400">Passo</div>
-                                <div className="text-indigo-500">{minutes}:{seconds} Min/Km</div>
+                                <div className="text-indigo-600">{minutes}:{seconds} Min/Km</div>
                             </div>
                             <div>
                                 <div className="text-xs mb-1 uppercase text-mauve-400">Stima tempo</div>
-                                <div className="text-indigo-500">{getWorkoutDurationTime(workout.distance, workout.pace)}</div>
+                                <div className="text-indigo-600">{getWorkoutDurationTime(workout.distance, workout.pace)}</div>
                             </div>
                         </div>
                     </div>
@@ -199,9 +200,11 @@ export default function WorkoutPage() {
 
 
             { // se user è admin o è proprietario del workout
-
                 (userAuth?.role === 'admin' || userAuth?.id === workout.user_id) &&
                 <div className="flex justify-end gap-2 py-4">
+                    <AppLinkArrowLeft to={`/workouts`}>Tutti gli allenamenti</AppLinkArrowLeft>
+
+
                     <Link to={`/workout/${id}/edit`} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Modifica</Link>
 
                     <button onClick={() => setOpenModal(true)} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Elimina</button>

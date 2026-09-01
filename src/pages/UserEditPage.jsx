@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useUser } from "../contexts/UserContext";
-import { ArrowLeftIcon } from '@heroicons/react/24/solid'
+import AppLinkArrowLeft from "../components/AppLinkArrowLeft";
 import AppButton from "../components/AppButton";
 import AppLink from "../components/AppLink";
 import AppInput from "../components/AppInput";
@@ -87,7 +87,6 @@ export default function UserEditPage() {
         <div className="">
             {editUser &&
                 <div className="w-120 mx-auto">
-                    <Link to={`/user/${id}`} className="flex items-center gap-2 text-indigo-600 uppercase font-light text-sm mb-4"><ArrowLeftIcon className="size-4" /><span>Torna al profilo</span></Link>
                     <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">Aggiorna il profilo</h1>
                     <form onSubmit={handleSubmitUser} className="grid grid-cols-4 gap-4">
                         <div className="col-span-4">
@@ -97,7 +96,10 @@ export default function UserEditPage() {
                             <AppInput type="text" id="email" name="email" label="Email" value={editUser.email} onChange={handleChange} />
                         </div>
                         <div className="col-span-4">
-                            <AppButton type="submit">Modifica</AppButton>
+                            <AppButton type="submit" className="w-full">Modifica</AppButton>
+                        </div>
+                        <div className="col-span-4">
+                            <AppLinkArrowLeft to={`/user/${id}`}>Torna al profilo</AppLinkArrowLeft>
                         </div>
                     </form>
                 </div>

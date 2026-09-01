@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useWorkout } from "../contexts/WorkoutContext";
-import { ArrowLeftIcon } from '@heroicons/react/24/solid'
+import AppLinkArrowLeft from "../components/AppLinkArrowLeft";
 import AppButton from "../components/AppButton";
 import AppLink from "../components/AppLink";
 import AppInput from "../components/AppInput";
@@ -113,10 +113,6 @@ export default function WorkoutEditPage() {
         <div className="">
             {editWorkout &&
                 <div className="w-120 mx-auto">
-                    <Link to={`/workout/${id}`} className="flex items-center gap-2 text-indigo-600 uppercase font-light text-sm mb-4">
-                        <ArrowLeftIcon className="size-4" />
-                        <span>Torna all'allenamento</span>
-                    </Link>
                     <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">Aggiorna l'allenamento</h1>
 
                     <form onSubmit={handleSubmitWorkout} className="grid grid-cols-4 gap-4">
@@ -159,8 +155,10 @@ export default function WorkoutEditPage() {
                         <div className="col-span-4">
                             <AppButton type="submit" className="w-full">Aggiorna</AppButton>
                         </div>
+                        <div className="col-span-4">
+                            <AppLinkArrowLeft to={`/workout/${id}`}>Torna all'allenamento</AppLinkArrowLeft>
+                        </div>
                     </form>
-
                 </div>
             }
         </div>
