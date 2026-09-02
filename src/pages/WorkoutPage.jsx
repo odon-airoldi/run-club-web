@@ -119,7 +119,7 @@ export default function WorkoutPage() {
                         </div>
                         <div className="px-4 pt-2 pb-4">
                             <div className="text-xs uppercase text-mauve-400 mb-1">
-                                Creato da {workout.user ? workout.user.name : 'Utente eliminato'}
+                                Creato da {workout.user ? `${workout.user.first_name} ${workout.user.last_name}` : 'Utente eliminato'}
                             </div>
                             <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">{workout.name}</h1>
                             <p className="mb-6">{workout.description}</p>
@@ -128,12 +128,16 @@ export default function WorkoutPage() {
                                 <div>
                                     <div className="flex gap-1 text-white text-sm/[30px] mb-2">
                                         <Link to={`/user/${workout.user?.id}`} className="w-[32px] aspect-square rounded-full bg-mauve-400 flex justify-center">
-                                            {workout.user?.name.split(' ').map(i => i[0]).join('')}
+                                            {/* {workout.user?.name.split(' ').map(i => i[0]).join('')} */}
+                                            {workout.user?.first_name.slice(0, 1)}
+                                            {workout.user?.last_name.slice(0, 1)}
                                         </Link>
                                         {
                                             workout.users_run?.map((user) => (
                                                 <Link to={`/user/${user.id}`} key={user.id} className="w-[32px] aspect-square rounded-full bg-mauve-400 flex justify-center">
-                                                    <div className="">{user.name.split(' ').map(i => i[0]).join('')}</div>
+                                                    {/* {user.name.split(' ').map(i => i[0]).join('')} */}
+                                                    {user.first_name.slice(0, 1)}
+                                                    {user.last_name.slice(0, 1)}
                                                 </Link>
                                             ))
                                         }
@@ -197,7 +201,7 @@ export default function WorkoutPage() {
 
                 </div>
             </div>
-x3
+            x3
 
             { // se user è admin o è proprietario del workout
                 (userAuth?.role === 'admin' || userAuth?.id === workout.user_id) &&

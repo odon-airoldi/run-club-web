@@ -46,7 +46,8 @@ export default function UserEditPage() {
         try {
 
             const updateUser = {
-                name: editUser.name,
+                first_name: editUser.first_name,
+                last_name: editUser.last_name,
                 email: editUser.email,
             }
 
@@ -90,7 +91,10 @@ export default function UserEditPage() {
                     <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">Aggiorna il profilo</h1>
                     <form onSubmit={handleSubmitUser} className="grid grid-cols-4 gap-4">
                         <div className="col-span-4">
-                            <AppInput type="text" id="name" name="name" label="Nome" value={editUser.name} onChange={handleChange} />
+                            <AppInput type="text" id="first_name" name="first_name" label="Nome" value={editUser.name} onChange={handleChange} />
+                        </div>
+                        <div className="col-span-4">
+                            <AppInput type="text" id="last_name" name="last_name" label="Cognome" value={editUser.name} onChange={handleChange} />
                         </div>
                         <div className="col-span-4">
                             <AppInput type="text" id="email" name="email" label="Email" value={editUser.email} onChange={handleChange} />

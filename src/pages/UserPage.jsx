@@ -70,7 +70,8 @@ export default function UserPage() {
         return (
             <div className="">
                 <div className="text-center mb-8">
-                    <h1 className="font-semibold text-6xl font-zalando text-indigo-600">{user.name}</h1>
+                    <img className="w-32 aspect-square rounded-full bg-mauve-400 flex justify-center object-cover" src={user.picture} />
+                    <h1 className="font-semibold text-6xl font-zalando text-indigo-600">{user.first_name} {user.last_name}</h1>
                 </div>
 
                 <div role="tablist" className="flex justify-center gap-8 text-md text-mauve-400">
@@ -131,7 +132,7 @@ export default function UserPage() {
                     <div className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center" onClick={() => setOpenModal(false)}>
                         <div className="text-center">
                             <p className="text-lg font-zalando mb-4">
-                                Vuoi eliminare definitivamente {userAuth?.id === user.id ? ' il tuo account?' : `l\'account di ${user.name}`}</p>
+                                Vuoi eliminare definitivamente {userAuth?.id === user.id ? ' il tuo account?' : `l\'account di ${user.first_name} ${user.last_name}`}</p>
                             <AppButton onClick={handleDeleteUser}>Elimina</AppButton>
                         </div>
                     </div >

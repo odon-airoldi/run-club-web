@@ -96,7 +96,7 @@ export default function AdminUsersPage() {
                             </div>
 
                             <div className="col-span-5">
-                                {user.name}
+                                {user.first_name} {user.last_name}
                             </div>
 
                             <div className="col-span-5">

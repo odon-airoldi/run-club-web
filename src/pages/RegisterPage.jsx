@@ -25,7 +25,8 @@ export default function RegisterPage() {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append('name', e.target.name.value);
+        formData.append('first_name', e.target.first_name.value);
+        formData.append('last_name', e.target.last_name.value);
         formData.append('email', e.target.email.value);
         formData.append('password', e.target.password.value);
         formData.append('password_confirmation', e.target.password_confirmation.value);
@@ -66,8 +67,8 @@ export default function RegisterPage() {
             console.log(error.response);
 
         }
-
     }
+
 
     return (
         <div className="">
@@ -76,7 +77,8 @@ export default function RegisterPage() {
                 <h1 className="text-4xl text-center font-semibold font-zalando mb-4">Registrati</h1>
 
                 <form onSubmit={handleRegister} className="space-y-6">
-                    <AppInput type="name" id="name" name="name" label="Nome" required />
+                    <AppInput type="text" id="first_name" name="first_name" label="Nome" required />
+                    <AppInput type="text" id="last_name" name="last_name" label="Cognome" required />
                     <AppInput type="email" id="email" name="email" label="Email" required />
                     <AppInput onChange={handlePictureChange} type="file" id="picture" name="picture" label="Immagine del profilo" />
                     <AppInput type="password" id="password" name="password" label="Password" required />

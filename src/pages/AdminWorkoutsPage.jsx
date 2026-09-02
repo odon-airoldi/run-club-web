@@ -107,7 +107,7 @@ export default function AdminWorkoutsPage() {
                                 </div>
 
                                 <div className="col-span-3">
-                                    {workout.user?.name ? workout.user?.name : 'Utente eliminato'}
+                                    {workout.user?.first_name ? `${workout.user?.first_name} ${workout.user?.last_name}` : 'Utente eliminato'}
                                 </div>
 
                                 <div className="col-span-3">
