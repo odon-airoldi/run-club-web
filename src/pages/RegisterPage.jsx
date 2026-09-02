@@ -13,9 +13,26 @@ export default function RegisterPage() {
 
     const { checkAuth } = useAuth();
 
+    const [pictureFile, setPictureFile] = useState(null);
+
+    function handlePictureChange(e) {
+        const file = e.target.files[0]; // il file selezionato, o undefined se l'utente annulla
+        setPictureFile(file);
+    }
+
     async function handleRegister(e) {
 
         e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('name', e.target.name.value);
+        formData.append('email', e.target.email.value);
+        formData.append('password', e.target.password.value);
+        formData.append('password_confirmation', e.target.password_confirmation.value);
+        if (pictureFile) {
+            formData.append('picture', pictureFile);
+        }
+
 
         try {
             // richiesta a laravel sanctum di genereare un cookie (token CSRF) XSRF-TOKEN e uno di sessione in anonimo
@@ -27,12 +44,7 @@ export default function RegisterPage() {
             );
             // invio credenziali al backend, se corrette laravel autentica l'utente e rigenere il cookie di sessione in autenticato
             await axios.post('http://api.run-club.test/register',
-                {
-                    name: e.target.name.value,
-                    email: e.target.email.value,
-                    password: e.target.password.value,
-                    password_confirmation: e.target.password_confirmation.value
-                },
+                formData,
                 {
                     // includi cookie di sessione autenticato
                     withCredentials: true,
@@ -40,7 +52,7 @@ export default function RegisterPage() {
                     withXSRFToken: true,
                     // comunico al backend che mi aspetto una risposta JSON
                     headers: {
-                        Accept: 'application/json'
+                        'Content-Type': 'multipart/form-data'
                     }
                 }
             );
@@ -64,10 +76,11 @@ export default function RegisterPage() {
                 <h1 className="text-4xl text-center font-semibold font-zalando mb-4">Registrati</h1>
 
                 <form onSubmit={handleRegister} className="space-y-6">
-                    <AppInput type="name" id="name" name="name" label="Nome" />
-                    <AppInput type="email" id="email" name="email" label="Email" />
-                    <AppInput type="password" id="password" name="password" label="Password" />
-                    <AppInput type="password" id="password_confirmation" name="password_confirmation" label="Conferma Password" />
+                    <AppInput type="name" id="name" name="name" label="Nome" required />
+                    <AppInput type="email" id="email" name="email" label="Email" required />
+                    <AppInput onChange={handlePictureChange} type="file" id="picture" name="picture" label="Immagine del profilo" />
+                    <AppInput type="password" id="password" name="password" label="Password" required />
+                    <AppInput type="password" id="password_confirmation" name="password_confirmation" label="Conferma Password" required />
                     <AppButton type="submit" className="w-full">Registrati</AppButton>
                 </form>
 

@@ -197,7 +197,7 @@ export default function WorkoutPage() {
 
                 </div>
             </div>
-
+x3
 
             { // se user è admin o è proprietario del workout
                 (userAuth?.role === 'admin' || userAuth?.id === workout.user_id) &&
