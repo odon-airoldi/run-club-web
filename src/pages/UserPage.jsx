@@ -69,8 +69,8 @@ export default function UserPage() {
 
         return (
             <div className="">
-                <div className="text-center mb-8">
-                    <img className="w-32 aspect-square rounded-full bg-mauve-400 flex justify-center object-cover" src={user.picture} />
+                <div className="flex flex-col items-center gap-4 mb-8">
+                    <img className="w-30 h-30 rounded-full bg-mauve-400 flex justify-center object-cover" src={user.picture} />
                     <h1 className="font-semibold text-6xl font-zalando text-indigo-600">{user.first_name} {user.last_name}</h1>
                 </div>
 
