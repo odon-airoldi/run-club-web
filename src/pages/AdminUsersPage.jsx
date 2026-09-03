@@ -4,6 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import AppButton from "../components/AppButton";
+import AppUserPicture from "../components/AppUserPicture";
 
 
 export default function AdminUsersPage() {
@@ -77,7 +78,7 @@ export default function AdminUsersPage() {
             <div className="">
                 <div className="grid grid-cols-24 py-2 border-b border-mauve-300 text-xs uppercase text-mauve-400">
                     <div>ID</div>
-                    <div className="col-span-5">Nome</div>
+                    <div className="col-span-5">Nome Cognome</div>
                     <div className="col-span-5">Email</div>
                     <div className="col-span-3">Registrato</div>
                     <div className="col-span-3">Ruolo</div>
@@ -89,14 +90,15 @@ export default function AdminUsersPage() {
             <div className="">
                 {
                     users.map((user) => (
-                        <div className="grid grid-cols-24 py-2 border-b border-mauve-300 text-sm" key={user.id}>
+                        <div className="grid grid-cols-24 py-2 border-b border-mauve-300 text-sm/8" key={user.id}>
 
                             <div>
                                 {user.id}
                             </div>
 
-                            <div className="col-span-5">
-                                {user.first_name} {user.last_name}
+                            <div className="col-span-5 flex gap-2">
+                                <AppUserPicture user={user} className="w-8 h-8" />
+                                <div>{user.first_name} {user.last_name}</div>
                             </div>
 
                             <div className="col-span-5">

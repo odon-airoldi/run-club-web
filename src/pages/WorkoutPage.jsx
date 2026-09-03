@@ -5,8 +5,9 @@ import { useAuth } from "../contexts/AuthContext";
 import { useWorkout } from "../contexts/WorkoutContext";
 import AppLink from "../components/AppLink";
 import AppButton from "../components/AppButton";
-import axios from "axios";
+import AppUserPicture from "../components/AppUserPicture";
 import AppLinkArrowLeft from "../components/AppLinkArrowLeft";
+import axios from "axios";
 
 
 export default function WorkoutPage() {
@@ -127,18 +128,10 @@ export default function WorkoutPage() {
                             <div className="flex justify-between items-end">
                                 <div>
                                     <div className="flex gap-1 text-white text-sm/[30px] mb-2">
-                                        <Link to={`/user/${workout.user?.id}`} className="w-[32px] aspect-square rounded-full bg-mauve-400 flex justify-center">
-                                            {/* {workout.user?.name.split(' ').map(i => i[0]).join('')} */}
-                                            {workout.user?.first_name.slice(0, 1)}
-                                            {workout.user?.last_name.slice(0, 1)}
-                                        </Link>
+                                        <AppUserPicture user={workout.user} className="w-8 h-8" />
                                         {
                                             workout.users_run?.map((user) => (
-                                                <Link to={`/user/${user.id}`} key={user.id} className="w-[32px] aspect-square rounded-full bg-mauve-400 flex justify-center">
-                                                    {/* {user.name.split(' ').map(i => i[0]).join('')} */}
-                                                    {user.first_name.slice(0, 1)}
-                                                    {user.last_name.slice(0, 1)}
-                                                </Link>
+                                                <AppUserPicture user={user} className="w-8 h-8" />
                                             ))
                                         }
                                     </div>

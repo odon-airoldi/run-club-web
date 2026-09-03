@@ -6,7 +6,7 @@ import { useUser } from "../contexts/UserContext";
 import { useWorkout } from "../contexts/WorkoutContext";
 import { PlusIcon } from '@heroicons/react/24/solid'
 import AppWorkoutCard from "../components/AppWorkoutCard";
-import AppLink from "../components/AppLink";
+import AppUserPicture from "../components/AppUserPicture";
 import AppButton from "../components/AppButton";
 import axios from "axios";
 
@@ -70,7 +70,7 @@ export default function UserPage() {
         return (
             <div className="">
                 <div className="flex flex-col items-center gap-4 mb-8">
-                    <img className="w-30 h-30 rounded-full bg-mauve-400 flex justify-center object-cover" src={user.picture} />
+                    <AppUserPicture user={user} className="w-30 h-30 text-4xl" />
                     <h1 className="font-semibold text-6xl font-zalando text-indigo-600">{user.first_name} {user.last_name}</h1>
                 </div>
 
