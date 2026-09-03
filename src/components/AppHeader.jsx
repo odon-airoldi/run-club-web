@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { PlusIcon } from '@heroicons/react/24/solid'
+import AppUserPicture from "../components/AppUserPicture";
 
 
 export default function AppHeader() {
@@ -28,13 +29,17 @@ export default function AppHeader() {
                     <li><Link to="/workouts">Allenamenti</Link></li>
                 </ul>
                 <Link to="/" className="absolute left-1/2 -translate-x-1/2 text-3xl tracking-tight text-indigo-600">Run Club</Link>
-                <ul className="flex items-center gap-8 text-lg text-mauve-500">
-                    {userAuth
-                        ?
+                <ul className="flex items-center gap-4 text-lg text-mauve-500">
+                    {userAuth ?
                         <>
-                            <li><Link to={`/user/${userAuth.id}`}>Ciao {userAuth.first_name} {userAuth.last_name}</Link></li>
                             <li>
-                                <Link role="tab" to="/workout/create" className="w-8 aspect-square rounded-full bg-indigo-600 flex items-center justify-center text-white">
+                                <Link to={`/user/${userAuth.id}`} className="flex items-center gap-4">
+                                    <div>{userAuth.first_name} {userAuth.last_name}</div>
+                                    <AppUserPicture user={userAuth} className="w-8 h-8" />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link role="tab" to="/workout/create" className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white">
                                     <PlusIcon className="size-6" />
                                 </Link>
                             </li>

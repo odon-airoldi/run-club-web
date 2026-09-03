@@ -123,8 +123,8 @@ export default function UserEditPage() {
                     <form onSubmit={handleSubmitUser} className="grid grid-cols-4 gap-4">
                         <div className="col-span-4 flex flex-col items-center gap-2">
                             {(picturePreview || editUser.picture)
-                                ? <img className="h-30 w-30 object-cover rounded-full" src={picturePreview || editUser.picture} />
-                                : <div className="h-30 w-30 bg-mauve-200 text-4xl rounded-full text-white flex items-center justify-center">
+                                ? <img className="rounded-full object-cover h-30 w-30 " src={picturePreview || editUser.picture} />
+                                : <div className="rounded-full bg-mauve-200 text-white flex items-center justify-center h-30 w-30 text-4xl">
                                     {user.first_name.slice(0, 1)}
                                     {user.last_name.slice(0, 1)}
                                 </div>
