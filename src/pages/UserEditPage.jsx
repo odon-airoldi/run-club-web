@@ -129,8 +129,8 @@ export default function UserEditPage() {
                                     {user.last_name.slice(0, 1)}
                                 </div>
                             }
-                            <div className="flex gap-2">
-                                <label htmlFor="picture" className="block uppercase text-xs text-mauve-400 mb-1 cursor-pointer">
+                            <div className="flex gap-4">
+                                <label htmlFor="picture" className="block uppercase text-xs text-mauve-400 cursor-pointer">
                                     {(picturePreview || editUser.picture) ? 'Modifica' : 'Aggiungi immagine'}
                                 </label>
                                 <input type="file" id="picture" name="picture" onChange={handleChange} className="hidden" />
