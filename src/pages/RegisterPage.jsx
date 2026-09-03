@@ -13,13 +13,6 @@ export default function RegisterPage() {
 
     const { checkAuth } = useAuth();
 
-    const [pictureFile, setPictureFile] = useState(null);
-
-    function handlePictureChange(e) {
-        const file = e.target.files[0]; // il file selezionato, o undefined se l'utente annulla
-        setPictureFile(file);
-    }
-
     async function handleRegister(e) {
 
         e.preventDefault();
@@ -30,8 +23,11 @@ export default function RegisterPage() {
         formData.append('email', e.target.email.value);
         formData.append('password', e.target.password.value);
         formData.append('password_confirmation', e.target.password_confirmation.value);
-        if (pictureFile) {
-            formData.append('picture', pictureFile);
+
+        const picture = e.target.picture.files[0];
+
+        if (picture) {
+            formData.append('picture', picture);
         }
 
 
@@ -80,7 +76,7 @@ export default function RegisterPage() {
                     <AppInput type="text" id="first_name" name="first_name" label="Nome" required />
                     <AppInput type="text" id="last_name" name="last_name" label="Cognome" required />
                     <AppInput type="email" id="email" name="email" label="Email" required />
-                    <AppInput onChange={handlePictureChange} type="file" id="picture" name="picture" label="Immagine del profilo" />
+                    <AppInput type="file" id="picture" name="picture" label="Immagine del profilo" />
                     <AppInput type="password" id="password" name="password" label="Password" required />
                     <AppInput type="password" id="password_confirmation" name="password_confirmation" label="Conferma Password" required />
                     <AppButton type="submit" className="w-full">Registrati</AppButton>

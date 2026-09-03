@@ -34,7 +34,7 @@ export default function AppHeader() {
                         <>
                             <li><Link to={`/user/${userAuth.id}`}>Ciao {userAuth.first_name} {userAuth.last_name}</Link></li>
                             <li>
-                                <Link role="tab" to="/workout/create" className="w-8 aspect-square rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs">
+                                <Link role="tab" to="/workout/create" className="w-8 aspect-square rounded-full bg-indigo-600 flex items-center justify-center text-white">
                                     <PlusIcon className="size-6" />
                                 </Link>
                             </li>
