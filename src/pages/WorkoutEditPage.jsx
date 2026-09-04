@@ -116,7 +116,7 @@ export default function WorkoutEditPage() {
             </div>
 
             {editWorkout &&
-                <div className="sm:w-128 mx-auto">
+                <div className="sm:w-128 sm:mx-auto">
                     <form onSubmit={handleSubmitWorkout} className="grid grid-cols-4 gap-4">
                         <div className="col-span-4">
                             <AppInput type="text" id="name" name="name" label="Titolo" value={editWorkout.name} onChange={handleChange} />

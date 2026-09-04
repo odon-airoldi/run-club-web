@@ -56,10 +56,10 @@ export default function LoginPage() {
 
     return (
         <div className="">
-            <div className="w-120 mx-auto">
-
-                <h1 className="text-3xl text-center font-semibold font-zalando mb-4">Accedi</h1>
-
+            <div className="text-center mb-8">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-indigo-600 font-semibold font-zalando">Accedi</h1>
+            </div>
+            <div className="sm:w-128 sm:mx-auto">
                 <form onSubmit={handleLogin} className="space-y-6">
                     <div>
                         <AppInput type="email" id="email" name="email" label="Email" />
@@ -71,11 +71,9 @@ export default function LoginPage() {
                         <AppButton type="submit" className="w-full">Accedi</AppButton>
                     </div>
                 </form>
-
                 <p className="mt-10 text-center text-sm/6 text-gray-500">
                     Non sei membro? <Link to="/register" className="font-semibold text-indigo-600 hover:text-indigo-500">Registrati</Link>
                 </p>
-
             </div >
         </div >
     );

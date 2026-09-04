@@ -68,10 +68,10 @@ export default function RegisterPage() {
 
     return (
         <div className="">
-            <div className="sm:w-128 mx-auto">
-
-                <h1 className="text-4xl text-center font-semibold font-zalando mb-4">Registrati</h1>
-
+            <div className="text-center mb-8">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-indigo-600 font-semibold font-zalando">Registrati</h1>
+            </div>
+            <div className="sm:w-128 sm:mx-auto">
                 <form onSubmit={handleRegister} className="space-y-6">
                     <AppInput type="text" id="first_name" name="first_name" label="Nome" required />
                     <AppInput type="text" id="last_name" name="last_name" label="Cognome" required />
