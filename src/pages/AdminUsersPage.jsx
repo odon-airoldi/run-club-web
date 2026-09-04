@@ -78,10 +78,10 @@ export default function AdminUsersPage() {
             <div className="">
                 <div className="grid grid-cols-24 py-2 border-b border-mauve-300 text-xs uppercase text-mauve-400">
                     <div className="col-span-2 sm:col-span-1">ID</div>
-                    <div className="col-span-20 sm:col-span-8 lg:col-span-5 ms-12">Nome Cognome</div>
+                    <div className="col-span-14 sm:col-span-8 lg:col-span-5 ms-12">Nome Cognome</div>
                     <div className="sm:col-span-8 lg:col-span-5 hidden sm:block">Email</div>
                     <div className="col-span-3 hidden sm:block">Registrato</div>
-                    <div className="col-span-3 hidden sm:block">Ruolo</div>
+                    <div className="col-span-6 sm:col-span-3 ">Ruolo</div>
                     <div className="col-span-3 hidden lg:block">Allenamenti</div>
                     <div className="col-span-3 hidden lg:block">Partecipazioni</div>
                     <div className="col-span-2 sm:col-span-1"></div>
@@ -96,7 +96,7 @@ export default function AdminUsersPage() {
                                 {user.id}
                             </div>
 
-                            <div className="col-span-20 sm:col-span-8 lg:col-span-5" >
+                            <div className="col-span-14 sm:col-span-8 lg:col-span-5" >
                                 <Link to={`/user/${user.id}`} className="flex gap-4">
                                     <AppUserPicture user={user} className="w-8 h-8 -mt-1 -mb-1" />
                                     <div>{user.first_name} {user.last_name}</div>
@@ -115,7 +115,7 @@ export default function AdminUsersPage() {
                                 })}
                             </div>
 
-                            <div className="col-span-3 hidden sm:block">
+                            <div className="col-span-6 sm:col-span-3">
                                 {user.role}
                             </div>
 

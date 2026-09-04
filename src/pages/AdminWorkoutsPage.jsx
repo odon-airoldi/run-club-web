@@ -77,16 +77,16 @@ export default function AdminWorkoutsPage() {
 
             <div className="">
                 <div className="grid grid-cols-24 py-2 border-b border-mauve-300 text-xs uppercase text-mauve-400">
-                    <div>ID</div>
-                    <div className="col-span-6">Nome</div>
-                    <div className="col-span-3">Creato da</div>
-                    <div className="col-span-3">Città</div>
-                    <div className="col-span-2">Data</div>
-                    <div className="col-span-2">Ora</div>
-                    <div className="col-span-2">Km</div>
-                    <div className="col-span-2">Min/Km</div>
-                    <div className="col-span-2">Partecipanti</div>
-                    <div></div>
+                    <div className="col-span-2 sm:col-span-1">ID</div>
+                    <div className="col-span-14 sm:col-span-12 lg:col-span-6">Nome</div>
+                    <div className="col-span-6 md:col-span-4 lg:col-span-3 hidden sm:block">Creato da</div>
+                    <div className="col-span-3 hidden lg:block">Città</div>
+                    <div className="col-span-6 sm:col-span-4 lg:col-span-2">Data</div>
+                    <div className="col-span-2 hidden lg:block">Ora</div>
+                    <div className="col-span-2 hidden lg:block">Km</div>
+                    <div className="col-span-2 hidden lg:block">Min/Km</div>
+                    <div className="col-span-2 hidden md:block">Partecipanti</div>
+                    <div className="col-span-2 sm:col-span-1"></div>
                 </div>
             </div>
             <div className="">
@@ -98,23 +98,23 @@ export default function AdminWorkoutsPage() {
                         return (
                             <div className={`grid grid-cols-24 py-3 border-b border-mauve-300 text-sm ${new Date(workout.date_time) < new Date() ? 'opacity-60' : ''}`} key={workout.id}>
 
-                                <div>
+                                <div className="col-span-2 sm:col-span-1">
                                     {workout.id}
                                 </div>
 
-                                <div className="col-span-6 pe-2">
+                                <div className="col-span-14 sm:col-span-12 lg:col-span-6 me-4">
                                     {workout.name}
                                 </div>
 
-                                <div className="col-span-3">
+                                <div className="col-span-6 md:col-span-4 lg:col-span-3 hidden sm:block">
                                     {workout.user?.first_name ? `${workout.user?.first_name} ${workout.user?.last_name}` : 'Utente eliminato'}
                                 </div>
 
-                                <div className="col-span-3">
+                                <div className="col-span-3 hidden lg:block">
                                     {workout.place_city}
                                 </div>
 
-                                <div className="col-span-2">
+                                <div className="col-span-6 sm:col-span-4 lg:col-span-2">
                                     {new Date(workout.date_time).toLocaleDateString('it-IT', {
                                         day: 'numeric',
                                         month: 'numeric',
@@ -122,26 +122,26 @@ export default function AdminWorkoutsPage() {
                                     })}
                                 </div>
 
-                                <div className="col-span-2">
+                                <div className="col-span-2 hidden lg:block">
                                     {new Date(workout.date_time).toLocaleTimeString('it-IT', {
                                         hour: 'numeric',
                                         minute: 'numeric'
                                     })}
                                 </div>
 
-                                <div className="col-span-2">
+                                <div className="col-span-2 hidden lg:block">
                                     {workout.distance}
                                 </div>
 
-                                <div className="col-span-2">
+                                <div className="col-span-2 hidden lg:block">
                                     {minutes}:{seconds}
                                 </div>
 
-                                <div className="col-span-2">
+                                <div className="col-span-2 hidden md:block">
                                     {workout.users_run_count + 1}
                                 </div>
 
-                                <div className="flex justify-center items-start relative">
+                                <div className="col-span-2 sm:col-span-1 flex justify-center items-start relative">
                                     <button onClick={() => setItemSelected(workout.id)} className="cursor-pointer block">
                                         <EllipsisHorizontalIcon className="w-[20px] h-[20px]" />
                                     </button>
