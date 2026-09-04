@@ -77,35 +77,37 @@ export default function AdminUsersPage() {
 
             <div className="">
                 <div className="grid grid-cols-24 py-2 border-b border-mauve-300 text-xs uppercase text-mauve-400">
-                    <div>ID</div>
-                    <div className="col-span-5">Nome Cognome</div>
-                    <div className="col-span-5">Email</div>
-                    <div className="col-span-3">Registrato</div>
-                    <div className="col-span-3">Ruolo</div>
-                    <div className="col-span-3">Allenamenti</div>
-                    <div className="col-span-3">Partecipazioni</div>
-                    <div></div>
+                    <div className="col-span-2 sm:col-span-1">ID</div>
+                    <div className="col-span-20 sm:col-span-8 lg:col-span-5 ms-12">Nome Cognome</div>
+                    <div className="sm:col-span-8 lg:col-span-5 hidden sm:block">Email</div>
+                    <div className="col-span-3 hidden sm:block">Registrato</div>
+                    <div className="col-span-3 hidden sm:block">Ruolo</div>
+                    <div className="col-span-3 hidden lg:block">Allenamenti</div>
+                    <div className="col-span-3 hidden lg:block">Partecipazioni</div>
+                    <div className="col-span-2 sm:col-span-1"></div>
                 </div>
             </div>
             <div className="">
                 {
                     users.map((user) => (
-                        <div className="grid grid-cols-24 py-2 border-b border-mauve-300 text-sm/8" key={user.id}>
+                        <div className="grid grid-cols-24 py-3 border-b border-mauve-300 text-sm" key={user.id}>
 
-                            <div>
+                            <div className="col-span-2 sm:col-span-1">
                                 {user.id}
                             </div>
 
-                            <div className="col-span-5 flex gap-2">
-                                <AppUserPicture user={user} className="w-8 h-8" />
-                                <div>{user.first_name} {user.last_name}</div>
+                            <div className="col-span-20 sm:col-span-8 lg:col-span-5" >
+                                <Link to={`/user/${user.id}`} className="flex gap-4">
+                                    <AppUserPicture user={user} className="w-8 h-8 -mt-1 -mb-1" />
+                                    <div>{user.first_name} {user.last_name}</div>
+                                </Link>
                             </div>
 
-                            <div className="col-span-5">
+                            <div className="sm:col-span-8 lg:col-span-5 hidden sm:block">
                                 {user.email}
                             </div>
 
-                            <div className="col-span-3">
+                            <div className="col-span-3 hidden sm:block">
                                 {new Date(user.created_at).toLocaleDateString('it-IT', {
                                     day: 'numeric',
                                     month: 'numeric',
@@ -113,25 +115,25 @@ export default function AdminUsersPage() {
                                 })}
                             </div>
 
-                            <div className="col-span-3">
+                            <div className="col-span-3 hidden sm:block">
                                 {user.role}
                             </div>
 
-                            <div className="col-span-3">
+                            <div className="col-span-3 hidden lg:block">
                                 {user.workouts.length}
                             </div>
 
-                            <div className="col-span-3">
+                            <div className="col-span-3 hidden lg:block">
                                 {user.runs_workouts.length}
                             </div>
 
-                            <div className="flex justify-center items-start relative">
+                            <div className="col-span-2 sm:col-span-1 flex justify-center items-center relative">
                                 <button onClick={() => setItemSelected(user.id)} className="cursor-pointer block">
                                     <EllipsisHorizontalIcon className="w-[20px] h-[20px]" />
                                 </button>
 
                                 {itemSelected === user.id &&
-                                    <div className="absolute z-1 top-0 right-4 rounded-sm pt-4 pe-8 pb-6 ps-4 bg-mauve-200">
+                                    <div className="absolute z-1 top-0 right-4 pt-4 pe-8 pb-6 ps-4 bg-mauve-200">
                                         <ul className="flex flex-col gap-1">
                                             <li><Link to={`/user/${itemSelected}`}>Visualizza</Link></li>
                                             <li><Link to={`/user/${itemSelected}/edit`}>Modifica</Link></li>

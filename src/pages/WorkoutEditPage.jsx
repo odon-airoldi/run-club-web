@@ -112,7 +112,7 @@ export default function WorkoutEditPage() {
     return (
         <div className="">
             {editWorkout &&
-                <div className="w-120 mx-auto">
+                <div className="sm:w-128 mx-auto">
                     <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4 text-center">Aggiorna l'allenamento</h1>
 
                     <form onSubmit={handleSubmitWorkout} className="grid grid-cols-4 gap-4">

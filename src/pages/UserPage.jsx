@@ -74,17 +74,17 @@ export default function UserPage() {
                     <h1 className="font-semibold text-6xl font-zalando text-indigo-600">{user.first_name} {user.last_name}</h1>
                 </div>
 
-                <div role="tablist" className="flex justify-center gap-8 text-md text-mauve-400">
-                    <button role="tab" onClick={() => setTab(1)} className={`flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b -mb-[1px] cursor-pointer ${tab === 1 ? 'border-indigo-600' : 'border-transparent'}`}>
-                        Allenamenti creati <span className="w-[24px] aspect-square rounded-full bg-mauve-400 flex items-center justify-center text-white text-xs">{workouts.length}</span>
+                <div role="tablist" className="flex justify-center gap-4 md:gap-8 text-xs sm:text-sm text-mauve-400">
+                    <button role="tab" onClick={() => setTab(1)} className={`flex gap-2 items-center py-4 uppercase font-normal tracking-wide border-b -mb-[1px] cursor-pointer ${tab === 1 ? 'border-indigo-600' : 'border-transparent'}`}>
+                        Allenamenti creati <span className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-mauve-400 flex items-center justify-center text-white text-xs">{workouts.length}</span>
 
                     </button>
-                    <button role="tab" onClick={() => setTab(2)} className={`flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b -mb-[1px] cursor-pointer ${tab === 2 ? 'border-indigo-600' : 'border-transparent'}`}>
-                        Partecipazioni <span className="w-[24px] aspect-square rounded-full bg-mauve-400 flex items-center justify-center text-white text-xs">{runsWorkouts.length}</span>
+                    <button role="tab" onClick={() => setTab(2)} className={`flex gap-2 items-center py-4 uppercase font-normal tracking-wide border-b -mb-[1px] cursor-pointer ${tab === 2 ? 'border-indigo-600' : 'border-transparent'}`}>
+                        Partecipazioni <span className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-mauve-400 flex items-center justify-center text-white text-xs">{runsWorkouts.length}</span>
                     </button>
                     { // se user autenticato è uguale a user in pagina
                         userAuth.id === user.id &&
-                        <Link role="tab" to="/workout/create" className="flex gap-2 items-center py-4 uppercase font-light tracking-wide border-b border-transparent -mb-[1px]">
+                        <Link role="tab" to="/workout/create" className="hidden sm:flex gap-2 items-center py-4 uppercase font-normal tracking-wide border-b border-transparent -mb-[1px] text-indigo-600">
                             Crea allenamento <span className="w-[24px] aspect-square rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs"><PlusIcon className="size-4" /></span>
                         </Link>
                     }
@@ -92,7 +92,7 @@ export default function UserPage() {
 
 
                 <div className="pt-8 pb-16 border-y border-mauve-300">
-                    <div role="tabpanel" className="grid grid-cols-4 gap-4">
+                    <div role="tabpanel" className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                         {tab === 1 && (
                             workouts.length > 0 ?
                                 sortedWorkouts(workouts).map((workout) => (
@@ -110,21 +110,25 @@ export default function UserPage() {
                 </div>
 
 
-                <div className="flex justify-end gap-2 py-4">
+                <div className="flex flex-col sm:flex-row justify-end gap-2 py-4">
+                    { // se user autenticato è uguale a user in pagina
+                        userAuth.id === user.id &&
+                        <Link to="/workout/create" className="border border-indigo-600 text-xs px-4 py-2 uppercase text-indigo-600 cursor-pointer text-center">Crea Allenamento</Link>
+                    }
 
                     { // se user è nel suo profilo
                         (userAuth?.id === user.id || userAuth?.role === 'admin') &&
-                        <Link to={`/user/${user.id}/edit`} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Modifica</Link>
+                        <Link to={`/user/${user.id}/edit`} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer text-center">Modifica account</Link>
                     }
 
                     { // se user è nel suo profilo
                         userAuth?.id === user.id &&
-                        <button onClick={logoutAuth} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Logout</button>
+                        <button onClick={logoutAuth} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer text-center">Logout</button>
                     }
 
                     { // se user è nel suo profilo o è admin
                         (userAuth?.id === user.id || userAuth?.role === 'admin') &&
-                        <button onClick={() => setOpenModal(true)} className=" border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Elimina account</button>
+                        <button onClick={() => setOpenModal(true)} className=" border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer text-center">Elimina account</button>
                     }
                 </div>
 

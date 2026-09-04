@@ -96,7 +96,7 @@ export default function AdminWorkoutsPage() {
                         const { minutes, seconds } = getWorkoutPaceTime(workout.pace);
 
                         return (
-                            <div className={`grid grid-cols-24 py-2 border-b border-mauve-300 text-sm/8 ${new Date(workout.date_time) < new Date() ? 'opacity-60' : ''}`} key={workout.id}>
+                            <div className={`grid grid-cols-24 py-3 border-b border-mauve-300 text-sm ${new Date(workout.date_time) < new Date() ? 'opacity-60' : ''}`} key={workout.id}>
 
                                 <div>
                                     {workout.id}

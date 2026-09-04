@@ -47,9 +47,8 @@ export default function WorkoutsPage() {
             <div className="text-center mb-8">
                 <h2 className="font-semibold text-6xl font-zalando text-indigo-600">Allenamenti</h2>
             </div>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {
-
                     sortedWorkouts(workouts).map((workout) => (
                         <AppWorkoutCard key={workout.id} workout={workout} />
                     ))

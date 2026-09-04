@@ -8,8 +8,10 @@ export default function IndexPage() {
 
     return (
         <div className="flex-1 flex justify-center items-center">
-            <div className="w-1/2 text-center">
-                <h1 className="mb-8 font-semibold text-6xl font-zalando text-indigo-600">Allenati con altri runner pronti a condividere la tua motivazione</h1>
+            <div className="md:w-2/3 lg:w-1/2 text-center">
+                <h1 className="mb-8 font-semibold text-4xl md:text-6xl font-zalando text-indigo-600">
+                    Allenati con altri runner pronti a condividere la tua motivazione
+                </h1>
 
                 {!userAuth &&
                     <>

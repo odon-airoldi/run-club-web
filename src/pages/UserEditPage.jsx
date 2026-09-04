@@ -118,7 +118,7 @@ export default function UserEditPage() {
     return (
         <div className="">
             {editUser &&
-                <div className="w-120 mx-auto">
+                <div className="sm:w-128 mx-auto">
                     <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4 text-center">Aggiorna il profilo</h1>
                     <form onSubmit={handleSubmitUser} className="grid grid-cols-4 gap-4">
                         <div className="col-span-4 flex flex-col items-center gap-2">

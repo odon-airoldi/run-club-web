@@ -89,8 +89,8 @@ export default function WorkoutPage() {
     return (
         <div className="">
             <div className="border border-mauve-300 rounded-sm text-mauve-600">
-                <div className="grid grid-cols-2">
-                    <div className="border-r border-mauve-300">
+                <div className="grid lg:grid-cols-2">
+                    <div className="border-b lg:border-b-0 lg:border-r border-mauve-300">
                         <div className="p-4 flex gap-6 text-xl uppercase mb-2 border-b border-mauve-300">
                             <div>
                                 <span className="text-mauve-400">
@@ -197,13 +197,13 @@ export default function WorkoutPage() {
 
             { // se user è admin o è proprietario del workout
                 (userAuth?.role === 'admin' || userAuth?.id === workout.user_id) &&
-                <div className="flex justify-end gap-2 py-4">
+                <div className="flex flex-col sm:flex-row justify-end gap-2 py-4">
                     <AppLinkArrowLeft to={`/workouts`}>Tutti gli allenamenti</AppLinkArrowLeft>
 
 
-                    <Link to={`/workout/${id}/edit`} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Modifica</Link>
+                    <Link to={`/workout/${id}/edit`} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 text-center cursor-pointer">Modifica</Link>
 
-                    <button onClick={() => setOpenModal(true)} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 cursor-pointer">Elimina</button>
+                    <button onClick={() => setOpenModal(true)} className="border border-mauve-300 text-xs px-4 py-2 uppercase text-mauve-400 text-center cursor-pointer">Elimina</button>
                     {openModal &&
                         <div onClick={() => setOpenModal(false)} className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs flex items-center justify-center">
                             <AppButton onClick={deleteWorkout}>Vuoi eliminare definitivamente l'allenamento?</AppButton>

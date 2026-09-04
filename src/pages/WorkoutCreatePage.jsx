@@ -64,7 +64,7 @@ export default function WorkoutCreatePage() {
     if (!userAuth) return <Navigate to="/" replace />
 
     return (
-        <div className="w-120 mx-auto">
+        <div className="sm:w-128 mx-auto">
             <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4 text-center">Crea un allenamento</h1>
             <form onSubmit={addWorkout} className="grid grid-cols-4 gap-4">
                 <div className="col-span-4">
