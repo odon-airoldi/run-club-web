@@ -132,8 +132,8 @@ export default function AdminUsersPage() {
                                 </button>
 
                                 {itemSelected === user.id &&
-                                    <div className="absolute z-1 top-0 right-4 p-8 bg-mauve-200">
-                                        <button className="absolute top-1 end-1 cursor-pointer" onClick={() => setItemSelected(null)}><XMarkIcon className="w-[20px] h-[20px]" /></button>
+                                    <div className="absolute z-1 top-0 right-4 w-32 h-32 p-2 bg-mauve-200">
+                                        <button className="absolute top-2 end-2 cursor-pointer" onClick={() => setItemSelected(null)}><XMarkIcon className="w-[20px] h-[20px]" /></button>
                                         <ul className="flex flex-col gap-2">
                                             <li><Link to={`/user/${itemSelected}`}>Visualizza</Link></li>
                                             <li><Link to={`/user/${itemSelected}/edit`}>Modifica</Link></li>
