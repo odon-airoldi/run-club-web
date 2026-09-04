@@ -72,7 +72,7 @@ export default function AdminWorkoutsPage() {
     return (
         <div className="">
             <div className="text-center mb-8">
-                <h1 className="text-4xl text-indigo-600 font-semibold font-zalando">Allenamenti</h1>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-indigo-600 font-semibold font-zalando">Allenamenti</h1>
             </div>
 
             <div className="">

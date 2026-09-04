@@ -71,7 +71,7 @@ export default function UserPage() {
             <div className="">
                 <div className="text-center mb-8">
                     <AppUserPicture user={user} className="w-24 h-24 text-4xl mx-auto mb-4" />
-                    <h1 className="text-4xl text-indigo-600 font-semibold font-zalando">{user.first_name} {user.last_name}</h1>
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-indigo-600 font-semibold font-zalando">{user.first_name} {user.last_name}</h1>
                 </div>
                 <div role="tablist" className="flex justify-center gap-4 md:gap-8 text-xs sm:text-sm text-mauve-400">
                     <button role="tab" onClick={() => setTab(1)} className={`flex gap-2 items-center py-4 uppercase font-normal tracking-wide border-b -mb-[1px] cursor-pointer ${tab === 1 ? 'border-indigo-600' : 'border-transparent'}`}>
