@@ -116,15 +116,17 @@ export default function UserEditPage() {
     }
 
     return (
-        <div className="">
+        <>
             {editUser &&
                 <div className="sm:w-128 mx-auto">
-                    <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4 text-center">Aggiorna il profilo</h1>
+                    <div className="text-center mb-8">
+                        <h1 className="text-4xl text-indigo-600 font-semibold font-zalando">Aggiorna il profilo</h1>
+                    </div>
                     <form onSubmit={handleSubmitUser} className="grid grid-cols-4 gap-4">
                         <div className="col-span-4 flex flex-col items-center gap-2">
                             {(picturePreview || editUser.picture)
-                                ? <img className="rounded-full object-cover h-30 w-30 " src={picturePreview || editUser.picture} />
-                                : <div className="rounded-full bg-mauve-200 text-white flex items-center justify-center h-30 w-30 text-4xl">
+                                ? <img className="rounded-full h-24 w-24 object-cover" src={picturePreview || editUser.picture} />
+                                : <div className="rounded-full  h-24 w-24 flex items-center justify-center bg-mauve-200 text-white text-4xl">
                                     {user.first_name.slice(0, 1)}
                                     {user.last_name.slice(0, 1)}
                                 </div>
@@ -157,7 +159,7 @@ export default function UserEditPage() {
                     </form>
                 </div >
             }
-        </div >
+        </>
     );
 
 }

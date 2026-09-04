@@ -45,7 +45,7 @@ export default function WorkoutsPage() {
     return (
         <div className="">
             <div className="text-center mb-8">
-                <h2 className="font-semibold text-6xl font-zalando text-indigo-600">Allenamenti</h2>
+                <h1 className="text-4xl text-indigo-600 font-semibold font-zalando">Allenamenti</h1>
             </div>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {
@@ -54,10 +54,6 @@ export default function WorkoutsPage() {
                     ))
                 }
             </div>
-
-
-
-
         </div>
     );
 

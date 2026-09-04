@@ -14,8 +14,8 @@ export default function AppHeader() {
         <header>
 
             {userAuth?.role === 'admin' &&
-                <div className="px-12 py-2 bg-mauve-200">
-                    <ul className="flex justify-end gap-8 text-sm text-mauve-600 tracking-wide">
+                <div className="px-4 md:px-12 py-2 bg-mauve-200">
+                    <ul className="flex justify-center sm:justify-end gap-4 sm:gap-8 text-xs uppercase tracking-wide">
                         <li className="">Ciao Admin</li>
                         <li className=""><Link to="/admin/users">Runners</Link></li>
                         <li className=""><Link to="/admin/workouts">Allenamenti</Link></li>

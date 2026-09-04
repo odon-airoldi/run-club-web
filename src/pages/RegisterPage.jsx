@@ -68,7 +68,7 @@ export default function RegisterPage() {
 
     return (
         <div className="">
-            <div className="w-120 mx-auto">
+            <div className="sm:w-128 mx-auto">
 
                 <h1 className="text-4xl text-center font-semibold font-zalando mb-4">Registrati</h1>
 

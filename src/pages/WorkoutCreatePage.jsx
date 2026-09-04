@@ -65,7 +65,9 @@ export default function WorkoutCreatePage() {
 
     return (
         <div className="sm:w-128 mx-auto">
-            <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4 text-center">Crea un allenamento</h1>
+            <div className="text-center mb-8">
+                <h1 className="text-4xl text-indigo-600 font-semibold font-zalando">Crea un allenamento</h1>
+            </div>
             <form onSubmit={addWorkout} className="grid grid-cols-4 gap-4">
                 <div className="col-span-4">
                     <AppInput type="text" id="name" name="name" label="Titolo" required />

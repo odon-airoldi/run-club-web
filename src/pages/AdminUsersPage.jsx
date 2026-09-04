@@ -72,9 +72,8 @@ export default function AdminUsersPage() {
     return (
         <div className="">
             <div className="text-center mb-8">
-                <h1 className="font-semibold text-6xl font-zalando text-indigo-600">Runners</h1>
+                <h1 className="text-4xl text-indigo-600 font-semibold font-zalando">Runners</h1>
             </div>
-
             <div className="">
                 <div className="grid grid-cols-24 py-2 border-b border-mauve-300 text-xs uppercase text-mauve-400">
                     <div className="col-span-2 sm:col-span-1">ID</div>

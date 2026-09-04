@@ -69,11 +69,10 @@ export default function UserPage() {
 
         return (
             <div className="">
-                <div className="flex flex-col items-center gap-4 mb-8">
-                    <AppUserPicture user={user} className="w-30 h-30 text-4xl" />
-                    <h1 className="font-semibold text-6xl font-zalando text-indigo-600">{user.first_name} {user.last_name}</h1>
+                <div className="text-center mb-8">
+                    <AppUserPicture user={user} className="w-24 h-24 text-4xl mx-auto mb-4" />
+                    <h1 className="text-4xl text-indigo-600 font-semibold font-zalando">{user.first_name} {user.last_name}</h1>
                 </div>
-
                 <div role="tablist" className="flex justify-center gap-4 md:gap-8 text-xs sm:text-sm text-mauve-400">
                     <button role="tab" onClick={() => setTab(1)} className={`flex gap-2 items-center py-4 uppercase font-normal tracking-wide border-b -mb-[1px] cursor-pointer ${tab === 1 ? 'border-indigo-600' : 'border-transparent'}`}>
                         Allenamenti creati <span className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-mauve-400 flex items-center justify-center text-white text-xs">{workouts.length}</span>

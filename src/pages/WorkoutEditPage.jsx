@@ -110,10 +110,12 @@ export default function WorkoutEditPage() {
 
 
     return (
-        <div className="">
+        <>
             {editWorkout &&
                 <div className="sm:w-128 mx-auto">
-                    <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4 text-center">Aggiorna l'allenamento</h1>
+                    <div className="text-center mb-8">
+                        <h1 className="text-4xl text-indigo-600 font-semibold font-zalando">Modifica allenamento</h1>
+                    </div>
 
                     <form onSubmit={handleSubmitWorkout} className="grid grid-cols-4 gap-4">
                         <div className="col-span-4">
@@ -153,7 +155,7 @@ export default function WorkoutEditPage() {
                             </div>
                         </div >
                         <div className="col-span-4">
-                            <AppButton type="submit" className="w-full">Aggiorna</AppButton>
+                            <AppButton type="submit" className="w-full">Modifica</AppButton>
                         </div>
                         <div className="col-span-4">
                             <AppLinkArrowLeft to={`/workout/${id}`}>Torna all'allenamento</AppLinkArrowLeft>
@@ -161,7 +163,7 @@ export default function WorkoutEditPage() {
                     </form>
                 </div>
             }
-        </div>
+        </>
     );
 
 }
