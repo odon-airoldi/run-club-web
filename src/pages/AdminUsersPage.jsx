@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
+import { EllipsisHorizontalIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import AppButton from "../components/AppButton";
 import AppUserPicture from "../components/AppUserPicture";
 
@@ -132,8 +132,9 @@ export default function AdminUsersPage() {
                                 </button>
 
                                 {itemSelected === user.id &&
-                                    <div className="absolute z-1 top-0 right-4 pt-4 pe-8 pb-6 ps-4 bg-mauve-200">
-                                        <ul className="flex flex-col gap-1">
+                                    <div className="absolute z-1 top-0 right-4 p-8 bg-mauve-200">
+                                        <button className="absolute top-1 end-1 cursor-pointer" onClick={() => setItemSelected(null)}><XMarkIcon className="w-[20px] h-[20px]" /></button>
+                                        <ul className="flex flex-col gap-2">
                                             <li><Link to={`/user/${itemSelected}`}>Visualizza</Link></li>
                                             <li><Link to={`/user/${itemSelected}/edit`}>Modifica</Link></li>
                                             <li><button onClick={() => setOpenModal(itemSelected)} className="cursor-pointer">Elimina</button></li>

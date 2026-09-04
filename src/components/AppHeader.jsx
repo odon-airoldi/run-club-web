@@ -11,10 +11,10 @@ export default function AppHeader() {
     // console.log(user)
 
     return (
-        <header>
+        <header className="sticky top-0 backdrop-blur-sm">
 
             {userAuth?.role === 'admin' &&
-                <div className="px-4 md:px-12 py-2 bg-mauve-200">
+                <div className="px-4 md:px-12 py-2 bg-mauve-300/50">
                     <ul className="flex justify-center sm:justify-end gap-4 sm:gap-8 text-xs uppercase tracking-wide">
                         <li className="">Ciao Admin</li>
                         <li className=""><Link to="/admin/users">Runners</Link></li>
@@ -23,7 +23,7 @@ export default function AppHeader() {
                 </div>
             }
 
-            <div className="px-4 md:px-12 py-6 md:py-8 flex items-center relative font-zalando font-bold uppercase">
+            <div className="px-4 md:px-12 py-6 md:py-8 flex items-center relative font-zalando font-bold uppercase bg-white/50">
                 <Link to="/" className="absolute left-1/2 -translate-x-1/2 text-xl sm:text-3xl tracking-tight text-indigo-600">Run Club</Link>
                 <ul className="w-full flex justify-between items-center text-lg text-mauve-500">
                     <li>

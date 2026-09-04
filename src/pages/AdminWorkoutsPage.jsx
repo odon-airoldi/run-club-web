@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useWorkout } from "../contexts/WorkoutContext";
-import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
-import AppWorkoutCard from "../components/AppWorkoutCard";
+import { EllipsisHorizontalIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import AppLink from "../components/AppLink";
 import AppButton from "../components/AppButton";
 import axios from "axios";
@@ -147,7 +146,8 @@ export default function AdminWorkoutsPage() {
                                     </button>
 
                                     {itemSelected === workout.id &&
-                                        <div className="absolute z-1 top-0 right-4 rounded-sm pt-4 pe-8 pb-6 ps-4 bg-mauve-200">
+                                        <div className="absolute z-1 top-0 right-4 p-8 bg-mauve-200">
+                                            <button className="absolute top-1 end-1 cursor-pointer" onClick={() => setItemSelected(null)}><XMarkIcon className="w-[20px] h-[20px]" /></button>
                                             <ul className="flex flex-col gap-1">
                                                 <li><Link to={`/workout/${itemSelected}`}>Visualizza</Link></li>
                                                 <li><Link to={`/workout/${itemSelected}/edit`}>Modifica</Link></li>
