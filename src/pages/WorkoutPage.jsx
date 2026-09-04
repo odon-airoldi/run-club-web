@@ -124,7 +124,7 @@ export default function WorkoutPage() {
                             <p className="mb-6">{workout.description}</p>
 
                             <div className="flex justify-between items-end">
-                                <div onClick={() => setOpenModal(2)} >
+                                <div onClick={() => setOpenModal(2)} className="cursor-pointer">
                                     <div className="flex gap-1 text-white text-sm/[30px] mb-2">
                                         <AppUserPicture user={workout.user} className="w-8 h-8" />
                                         {
@@ -143,14 +143,26 @@ export default function WorkoutPage() {
                                     </div>
                                 </div>
                                 {openModal === 2 &&
-                                    <div onClick={() => setOpenModal(0)} className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs p-10">
-                                        <div className="sm:w-128 h-full sm:mx-auto bg-white text-center">
-                                            <h2>Partecipanti</h2>
-                                            <ul>
-                                                <li><Link to={`/user/${workout.user.id}`}>{workout.user.first_name} {workout.user.last_name}</Link></li>
+                                    <div onClick={() => setOpenModal(0)} className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs">
+                                        <div className="sm:w-128 m-8 sm:mx-auto bg-white p-8">
+                                            <div className="text-center mb-8">
+                                                <h2 className="text-2xl text-indigo-600 font-semibold font-zalando">Partecipanti</h2>
+                                            </div>
+                                            <ul className="text-sm">
+                                                <li className="border-t border-mauve-200 py-2">
+                                                    <Link to={`/user/${workout.user.id}`} className="flex items-center gap-4">
+                                                        <AppUserPicture user={workout.user} className="w-8 h-8" />
+                                                        <div>{workout.user.first_name} {workout.user.last_name}</div>
+                                                    </Link>
+                                                </li>
                                                 {
                                                     workout.users_run?.map((user) => (
-                                                        <li><Link to={`/user/${user.id}`}>{user.first_name} {user.last_name}</Link></li>
+                                                        <li className="border-t border-mauve-200 py-2">
+                                                            <Link to={`/user/${user.id}`} className="flex items-center gap-4">
+                                                                <AppUserPicture user={user} className="w-8 h-8" />
+                                                                <div>{user.first_name} {user.last_name}</div>
+                                                            </Link>
+                                                        </li>
                                                     ))
                                                 }
                                             </ul>
