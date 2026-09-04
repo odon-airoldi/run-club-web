@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { PlusIcon, FireIcon } from '@heroicons/react/20/solid'
+import { PlusIcon, FireIcon, UserIcon } from '@heroicons/react/20/solid'
 import AppUserPicture from "../components/AppUserPicture";
 
 
@@ -38,7 +38,7 @@ export default function AppHeader() {
                         <ul className="flex gap-2 sm:gap-4">
                             <li>
                                 <Link to={`/user/${userAuth.id}`} className="flex items-center gap-4">
-                                    <div className="hidden lg:block">{userAuth.first_name} {userAuth.last_name}</div>
+                                    <span className="hidden lg:block">{userAuth.first_name} {userAuth.last_name}</span>
                                     <AppUserPicture user={userAuth} className="w-8 h-8 font-normal text-sm" />
                                 </Link>
                             </li>
@@ -48,7 +48,16 @@ export default function AppHeader() {
                                 </Link>
                             </li>
                         </ul>
-                        : <li><Link to="/login">Accedi</Link></li>}
+                        :
+                        <li>
+                            <Link to="/login" className="flex items-center gap-4">
+                                <span className="hidden lg:block">Accedi</span>
+                                <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white">
+                                    <UserIcon className="size-5" />
+                                </div>
+                            </Link>
+                        </li>
+                    }
 
                 </ul>
             </div>
