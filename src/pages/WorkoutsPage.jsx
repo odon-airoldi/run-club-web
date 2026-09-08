@@ -1,12 +1,9 @@
 
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import AppWorkoutCard from "../components/AppWorkoutCard";
 import { useAuth } from "../contexts/AuthContext";
 import { useWorkout } from "../contexts/WorkoutContext";
-import AppLink from "../components/AppLink";
-
 
 export default function WorkoutsPage() {
 
@@ -14,14 +11,25 @@ export default function WorkoutsPage() {
     const { sortedWorkouts } = useWorkout();
 
     const [workouts, setWorkouts] = useState([]);
+    const [sortOption, setSortOption] = useState('date_time&asc')
 
 
     // index workouts
     async function indexWorkout() {
-        try {
-            const response = await axios.get(`http://api.run-club.test/api/workouts/`);
 
-            // setto workouts utilizzando la funzione per riordinarli
+        const [order, direction] = sortOption.split('&')
+
+        try {
+            const response = await axios.get(`http://api.run-club.test/api/workouts/`,
+                {
+                    params: {
+                        order,
+                        direction
+                    }
+                }
+
+            );
+
             setWorkouts(response.data)
 
 
@@ -35,10 +43,7 @@ export default function WorkoutsPage() {
 
         indexWorkout();
 
-
-    }, []);
-
-
+    }, [sortOption]);
 
     const now = new Date();
 
@@ -47,9 +52,23 @@ export default function WorkoutsPage() {
             <div className="text-center mb-8">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-indigo-600 font-semibold font-zalando">Allenamenti</h1>
             </div>
+
+            <div>
+                <div>Ordina per</div>
+                <select value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
+                    <option value="date_time&asc">Data: Crescente</option>
+                    <option value="date_time&desc">Data: Descrescente</option>
+                    <option value="distance&asc">Km: Crescente</option>
+                    <option value="distance&desc">Km: Descrescente</option>
+                    <option value="pace&asc">Min/Km: Crescente</option>
+                    <option value="pace&desc">Min/Km: Decrescente</option>
+                </select>
+            </div>
+
             <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {
-                    sortedWorkouts(workouts).map((workout) => (
+                    workouts.map((workout) => (
+                        // sortedWorkouts(workouts).map((workout) => (
                         <AppWorkoutCard key={workout.id} workout={workout} />
                     ))
                 }
