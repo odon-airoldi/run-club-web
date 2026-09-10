@@ -17,7 +17,12 @@ function WorkoutProvider({ children }) {
     // show workout
     async function showWorkout(id) {
         try {
-            const response = await axios.get(`http://api.run-club.test/api/workouts/${id}`);
+            const response = await axios.get(`http://api.run-club.test/api/workouts/${id}`,
+                {
+                    withCredentials: true,
+                    withXSRFToken: true
+                }
+            );
             setWorkout(response.data);
 
         } catch (error) {

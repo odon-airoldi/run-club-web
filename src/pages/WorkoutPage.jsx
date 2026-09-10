@@ -83,6 +83,8 @@ export default function WorkoutPage() {
 
     }
 
+    console.log(workout)
+
 
     return (
         <div className="">
@@ -123,25 +125,29 @@ export default function WorkoutPage() {
                             <h1 className="text-4xl font-semibold font-zalando text-indigo-600 mb-4">{workout.name}</h1>
                             <p className="mb-6">{workout.description}</p>
 
+
                             <div className="flex justify-between items-end">
-                                <div onClick={() => setOpenModal(2)} className="cursor-pointer">
-                                    <div className="flex gap-1 text-white text-sm/[30px] mb-2">
-                                        <AppUserPicture user={workout.user} className="w-8 h-8" />
-                                        {
-                                            workout.users_run?.map((user) => (
-                                                <AppUserPicture user={user} className="w-8 h-8" />
-                                            ))
-                                        }
+                                {userAuth &&
+                                    <div onClick={() => setOpenModal(2)} className="cursor-pointer">
+                                        <div className="flex gap-1 text-white text-sm/[30px] mb-2">
+                                            <AppUserPicture user={workout.user} className="w-8 h-8" />
+                                            {
+                                                workout.users_run?.map((user) => (
+                                                    <AppUserPicture user={user} className="w-8 h-8" />
+                                                ))
+                                            }
+                                        </div>
+                                        <div className="text-xs uppercase text-mauve-400">
+                                            {workout.users_run?.length + 1}
+                                            {
+                                                new Date(workout.date_time) > now
+                                                    ? (workout.users_run?.length + 1 > 1 ? ' persone parteciperanno' : ' persona parteciperà')
+                                                    : (workout.users_run?.length + 1 > 1 ? ' persone hanno partecipato' : ' persona ha partecipato')
+                                            }
+                                        </div>
                                     </div>
-                                    <div className="text-xs uppercase text-mauve-400">
-                                        {workout.users_run?.length + 1}
-                                        {
-                                            new Date(workout.date_time) > now
-                                                ? (workout.users_run?.length + 1 > 1 ? ' persone parteciperanno' : ' persona parteciperà')
-                                                : (workout.users_run?.length + 1 > 1 ? ' persone hanno partecipato' : ' persona ha partecipato')
-                                        }
-                                    </div>
-                                </div>
+                                }
+
                                 {openModal === 2 &&
                                     <div onClick={() => setOpenModal(0)} className="fixed inset-0 bg-mauve-200/50 backdrop-blur-xs">
                                         <div className="sm:w-128 m-8 sm:mx-auto bg-white p-8">
@@ -169,7 +175,7 @@ export default function WorkoutPage() {
                                         </div>
                                     </div >
                                 }
-                                <div>
+                                <div className="ms-auto">
                                     { // se la data del workout è maggiore rispetto alla data attuale
                                         new Date(workout.date_time) > now ?
                                             (!userAuth ? // se user non è autenticato
