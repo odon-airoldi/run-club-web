@@ -30,11 +30,10 @@ export default function WorkoutCreatePage() {
                 place_address: e.target.place_address.value,
                 buffer_time: e.target.buffer_time.value,
                 distance: e.target.distance.value,
-                pace: Number(e.target.pace_m.value) * 60 + Number(e.target.pace_s.value),
-                user_id: userAuth?.id
+                pace: Number(e.target.pace_m.value) * 60 + Number(e.target.pace_s.value)
             }
 
-            const response = await axios.post('http://api.run-club.test/api/workouts',
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/workouts`,
 
                 newWorkout,
 
