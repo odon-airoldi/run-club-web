@@ -19,7 +19,7 @@ function UserProvider({ children }) {
     // user
     async function showUser(id) {
         try {
-            const response = await axios.get(`http://api.run-club.test/api/users/${id}`,
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/${id}`,
                 {
                     withCredentials: true
                 }
@@ -39,7 +39,7 @@ function UserProvider({ children }) {
     // workout di user
     async function userWorkouts(id) {
         try {
-            const response = await axios.get(`http://api.run-club.test/api/user/${id}/workouts`, {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/user/${id}/workouts`, {
                 withCredentials: true
             });
             setWorkouts(response.data)
@@ -51,7 +51,7 @@ function UserProvider({ children }) {
     // workout a cui partecipa
     async function userRunsWorkouts(id) {
         try {
-            const response = await axios.get(`http://api.run-club.test/api/user/${id}/runs/workouts`, {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/user/${id}/runs/workouts`, {
                 withCredentials: true
             });
             setRunsWorkouts(response.data)

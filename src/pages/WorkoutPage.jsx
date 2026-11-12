@@ -43,7 +43,7 @@ export default function WorkoutPage() {
     // user runs workouts
     const userJoinWorkout = async () => {
         try {
-            const response = await axios.post(`http://api.run-club.test/api/user/runs/workouts/${id}`,
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/runs/workouts/${id}`,
                 {
                 },
                 {
@@ -66,7 +66,7 @@ export default function WorkoutPage() {
     async function deleteWorkout() {
 
         try {
-            const response = await axios.delete(`http://api.run-club.test/api/workouts/${id}`,
+            const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/workouts/${id}`,
                 {
                     withCredentials: true,
                     withXSRFToken: true,

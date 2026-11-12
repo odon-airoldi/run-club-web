@@ -17,7 +17,7 @@ function AuthProvider({ children }) {
     async function checkAuth() {
         try {
             // richiesta se la sessione è autenticata ricevo come risposta i dati user loggato
-            const response = await axios.get('http://api.run-club.test/api/user',
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/user`,
                 {
                     // includi cookie di sessione autenticato
                     withCredentials: true
@@ -45,7 +45,7 @@ function AuthProvider({ children }) {
 
         try {
 
-            await axios.post('http://api.run-club.test/logout',
+            await axios.post(`${import.meta.env.VITE_API_URL}/logout`,
                 {
                     // data non necessari
                 },

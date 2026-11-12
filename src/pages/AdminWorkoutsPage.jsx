@@ -23,7 +23,7 @@ export default function AdminWorkoutsPage() {
     // index workouts
     async function indexWorkout() {
         try {
-            const response = await axios.get(`http://api.run-club.test/api/workouts/`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/workouts/`);
 
             // setto workouts utilizzando la funzione per riordinarli
             setWorkouts(response.data)
@@ -38,7 +38,7 @@ export default function AdminWorkoutsPage() {
     async function deleteWorkout(id) {
 
         try {
-            const response = await axios.delete(`http://api.run-club.test/api/workouts/${id}`,
+            const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/workouts/${id}`,
                 {
                     withCredentials: true,
                     withXSRFToken: true,

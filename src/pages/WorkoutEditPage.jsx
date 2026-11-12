@@ -76,7 +76,7 @@ export default function WorkoutEditPage() {
                 pace: Number(editWorkout.pace_m) * 60 + Number(editWorkout.pace_s)
             }
 
-            const response = await axios.put(`http://api.run-club.test/api/workouts/${id}`,
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/workouts/${id}`,
 
                 updateWorkout,
 

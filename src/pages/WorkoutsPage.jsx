@@ -20,7 +20,7 @@ export default function WorkoutsPage() {
         const [order, direction] = sortOption.split('&')
 
         try {
-            const response = await axios.get(`http://api.run-club.test/api/workouts/`,
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/workouts/`,
                 {
                     params: {
                         order,

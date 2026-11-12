@@ -17,7 +17,7 @@ export default function AdminUsersPage() {
 
     async function indexUsers() {
         try {
-            const response = await axios.get('http://api.run-club.test/api/users',
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/users`,
                 {
                     withCredentials: true
                 }
@@ -34,7 +34,7 @@ export default function AdminUsersPage() {
     async function handleDeleteUser(id) {
 
         try {
-            const response = await axios.delete(`http://api.run-club.test/api/users/${id}`,
+            const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/users/${id}`,
                 {
                     withCredentials: true,
                     withXSRFToken: true,

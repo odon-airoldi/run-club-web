@@ -54,7 +54,7 @@ export default function UserEditPage() {
                 formData.append('picture', pictureFile);
             }
 
-            const response = await axios.post(`http://api.run-club.test/api/users/${id}/edit`,
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/users/${id}/edit`,
 
                 formData,
 

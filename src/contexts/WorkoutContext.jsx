@@ -17,7 +17,7 @@ function WorkoutProvider({ children }) {
     // show workout
     async function showWorkout(id) {
         try {
-            const response = await axios.get(`http://api.run-club.test/api/workouts/${id}`,
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/workouts/${id}`,
                 {
                     withCredentials: true,
                     withXSRFToken: true

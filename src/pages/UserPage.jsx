@@ -39,7 +39,7 @@ export default function UserPage() {
     async function handleDeleteUser() {
 
         try {
-            const response = await axios.delete(`http://api.run-club.test/api/users/${id}`,
+            const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/users/${id}`,
                 {
                     withCredentials: true,
                     withXSRFToken: true,

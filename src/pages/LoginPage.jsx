@@ -18,14 +18,14 @@ export default function LoginPage() {
 
         try {
             // richiesta a laravel sanctum di genereare un cookie (token CSRF) XSRF-TOKEN e uno di sessione in anonimo
-            await axios.get('http://api.run-club.test/sanctum/csrf-cookie',
+            await axios.get(`${import.meta.env.VITE_API_URL}/sanctum/csrf-cookie`,
                 {
                     // includi cookie( XSRF-TOKEN, laravel-session) mandati dal server come risposta e salva nel browser
                     withCredentials: true
                 }
             );
             // invio credenziali al backend, se corrette laravel autentica l'utente e rigenere il cookie di sessione in autenticato
-            await axios.post('http://api.run-club.test/login',
+            await axios.post(`${import.meta.env.VITE_API_URL}/login`,
                 {
                     email: e.target.email.value,
                     password: e.target.password.value
